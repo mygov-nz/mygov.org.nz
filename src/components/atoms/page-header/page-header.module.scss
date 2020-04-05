@@ -1,0 +1,18 @@
+.pageHeader {
+  border-bottom: 1px solid var(--border-colour);
+  margin: 0 0 1.5rem;
+  padding: 1.3125rem 0 .625rem;
+
+  h1 {
+    color: var(--heading-colour);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin: 0 0 0.5rem;
+
+    @media (min-width: 576px) {
+      font-size: 3.5rem;
+    }
+  }
+
+}

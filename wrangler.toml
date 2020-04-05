@@ -1,0 +1,13 @@
+account_id = "6d998c93aecb3f4fc33141c526f3a31f"
+zone_id = "f6c7f4b0c4336ad3bf57d7cbe24c9022"
+name = "mygov"
+type = "webpack"
+workers_dev = true
+
+[site]
+bucket = "./build/public"
+entry-point = "./build/worker"
+
+[env.production]
+route = "mygov.org.nz/*"
+workers_dev = false

@@ -1,0 +1,11 @@
+{
+  "name": "@mygov/mygov-webworker",
+  "description": "MyGov.org.nz WebWorker",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mygov-nz/mygov.org.nz.git"
+  },
+  "main": "index.js"
+}

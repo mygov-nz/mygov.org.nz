@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+
+  mygov:
+    container_name: mygov
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - 8787:8787
+    volumes:
+      - .:/usr/src/app
