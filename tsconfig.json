@@ -7,9 +7,9 @@
     "jsx": "react",
     "jsxFactory": "h",
     "lib": [
-      "dom",
-      "esnext",
-      "webworker"
+      "DOM",
+      "ESNext",
+      "WebWorker"
     ],
     "module": "commonjs",
     "moduleResolution": "node",
@@ -22,16 +22,13 @@
     "strict": true,
     "target": "esnext",
     "typeRoots": [
+      "src/types",
       "node_modules/@types",
       "node_modules/@cloudflare/workers-types",
       "node_modules/types-cloudflare-worker"
     ]
   },
   "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "build",
-    "node_modules"
+    "src"
   ]
 }

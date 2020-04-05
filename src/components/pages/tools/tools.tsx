@@ -10,8 +10,8 @@ interface ToolsProps {
  *
  */
 export const Tools: FC<ToolsProps> = (props): JSX.Element => (
-  <Layout { ...props.layout }>
-    <PageHeader title='Tools' />
+  <Layout {...props.layout}>
+    <PageHeader title="Tools" />
     <ul>
       <li>
         <a href="/tools/mmp-review">MMP Review Tool</a>

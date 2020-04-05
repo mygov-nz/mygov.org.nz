@@ -40,38 +40,53 @@ export interface LayoutProps {
 export const Layout: FC<LayoutProps> = (props): JSX.Element => (
   <html lang="en-NZ">
     <head>
-      <title>{ props.title }</title>
+      <title>{props.title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width,initial-scale=1" />
       <meta name="theme-color" content="#eb811a" />
-      { props.meta.map((meta): JSX.Element => (
-        <meta key={ meta.name || meta.property } { ...meta } />
-      )) }
-      { props.links.map((link): JSX.Element => (
-        <link key={ link.href } { ...link } href={ (assets as any)[link.href] } />
-      )) }
+      {props.meta.map(
+        (meta): JSX.Element => (
+          <meta {...meta} key={meta.name || meta.property} />
+        )
+      )}
+      <link rel="manifest" href="/manifest.json" />
+      {props.links.map(
+        (link): JSX.Element => (
+          <link {...link} key={link.href} href={(assets as any)[link.href]} />
+        )
+      )}
     </head>
     <body>
-      <a href="#content" class={ styles.skipToContent }>Skip to the content</a>
-      <header class={ styles.header }>
-        <nav class={ styles.container }>
-          <a href='/' class={ styles.brand } rel='home'>MyGov</a>
+      <a href="#content" className={styles.skipToContent}>
+        Skip to the content
+      </a>
+      <header className={styles.header}>
+        <nav className={styles.container}>
+          <a href="/" className={styles.brand} rel="home">
+            MyGov
+          </a>
           <ul>
             <li>
-              <a href='/tools'>Tools</a>
+              <a href="/tools">Tools</a>
             </li>
           </ul>
         </nav>
       </header>
-      <main id="content" class={ styles.container } role="main">
-        { props.children }
+      <main id="content" className={styles.container} role="main">
+        {props.children}
       </main>
-      <footer class={ styles.footer }>
+      <footer className={styles.footer}>
         <a href="https://mygov.org.nz">mygov.org.nz</a>
       </footer>
-      { props.scripts.map((script): JSX.Element => (
-        <script key={ script.src } { ...script } src={ (assets as any)[script.src] } />
-      )) }
+      {props.scripts.map(
+        (script): JSX.Element => (
+          <script
+            {...script}
+            key={script.src}
+            src={(assets as any)[script.src]}
+          />
+        )
+      )}
     </body>
   </html>
 );

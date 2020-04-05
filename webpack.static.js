@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const os = require('os');
 const path = require('path');
+const PWAManifestPlugin = require('webpack-pwa-manifest');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const common = require('./webpack.common.js');
@@ -184,6 +185,42 @@ module.exports = merge(common, {
           }
         ]
       }
+    }),
+    new PWAManifestPlugin({
+      background_color: '#fff',
+      crossorigin: null,
+      default_locale: 'en_NZ',
+      description: 'MyGov.org.nz',
+      display: 'standalone',
+      fingerprints: false,
+      icons: [
+        {
+          sizes: 48,
+          src: path.resolve('src/public/images/launcher-icon.png'),
+          type: 'image/png'
+        },
+        {
+          sizes: 96,
+          src: path.resolve('src/public/images/launcher-icon@2x.png'),
+          type: 'image/png'
+        },
+        {
+          sizes: 144,
+          src: path.resolve('src/public/images/launcher-icon@3x.png'),
+          type: 'image/png'
+        },
+        {
+          sizes: 192,
+          src: path.resolve('src/public/images/launcher-icon@4x.png'),
+          type: 'image/png'
+        }
+      ],
+      inject: false,
+      name: 'MyGov',
+      offline_enabled: true,
+      short_name: 'MyGov',
+      start_url: '/?utm_source=homescreen',
+      theme_color: '#f89828'
     })
   ],
 

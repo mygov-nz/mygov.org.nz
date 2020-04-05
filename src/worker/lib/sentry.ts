@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 // From: https://github.com/bustle/cf-sentry/blob/master/sentry.js
 
 interface StackFrame {
@@ -6,38 +8,6 @@ interface StackFrame {
   function?: string;
   in_app?: boolean;
   lineno?: number;
-}
-
-/**
- * 
- * @param err
- * @param req
- */
-export async function log(err: Error, req: Request): Promise<void> {
-  const body = JSON.stringify(toSentryEvent(err, req));
-  const headers = {
-    'Content-Type': 'application/json',
-    'X-Sentry-Auth': [
-      'Sentry sentry_version=7',
-      `sentry_client=mygov.org.nz/${RELEASE}`,
-      `sentry_key=5188487`,
-    ].join(', '),
-  };
-
-  for (let i: number = 0; i <= 5; i = i + 1) {
-    const res = await fetch(
-      `https://sentry.io/api/dccdb69d4ce642a79486340d9857a0b8/store/`,
-      { body, headers, method: 'POST' }
-    );
-
-    if (res.status === 200) {
-      return;
-    }
-
-    // We couldn't send to Sentry, try to log the response at least
-    // eslint-disable-next-line no-console
-    console.error({ httpStatus: res.status, ...(await res.json()) });
-  }
 }
 
 /**
@@ -54,11 +24,16 @@ function parse(err: Error): StackFrame[] {
       }
 
       // From: https://github.com/felixge/node-stack-trace/blob/1ec9ba43eece124526c273c917104b4226898932/lib/stack-trace.js#L42
-      const lineMatch = line.match(/at (?:(.+)\s+\()?(?:(.+?):(\d+)(?::(\d+))?|([^)]+))\)?/);
+      /* eslint-disable security/detect-unsafe-regex */
+      const lineMatch = line.match(
+        /at (?:(.+)\s+\()?(?:(.+?):(\d+)(?::(\d+))?|([^)]+))\)?/
+      );
 
       if (!lineMatch) {
         return;
       }
+
+      /* eslint-disable @typescript-eslint/camelcase */
 
       return {
         colno: +lineMatch[4] || undefined,
@@ -68,7 +43,7 @@ function parse(err: Error): StackFrame[] {
         lineno: +lineMatch[3] || undefined
       };
     })
-    .filter((frame: StackFrame | void): frame is StackFrame => !!frame)
+    .filter((frame: StackFrame | void): frame is StackFrame => !!frame);
 }
 
 /**
@@ -90,11 +65,14 @@ function uuid(): string {
  * @param err
  * @param req
  */
-function toSentryEvent(err: any, req: Request) {
+function toSentryEvent(err: any, req: any): any {
   const errType = err.name || (err.contructor || {}).name;
   const frames = parse(err);
-  const extraKeys = Object.keys(err)
-    .filter((key: string) => !['name', 'message', 'stack'].includes(key));
+  const extraKeys = Object.keys(err).filter(
+    (key: string) => !['name', 'message', 'stack'].includes(key)
+  );
+
+  /* eslint-disable security/detect-object-injection */
 
   return {
     environment: ENVIRONMENT || 'development',
@@ -102,11 +80,11 @@ function toSentryEvent(err: any, req: Request) {
     exception: {
       values: [
         {
+          stacktrace: frames.length ? { frames: frames.reverse() } : undefined,
           type: errType,
-          value: err.message,
-          stacktrace: frames.length ? { frames: frames.reverse() } : undefined
+          value: err.message
         }
-      ],
+      ]
     },
     extra: extraKeys.length
       ? {
@@ -136,4 +114,36 @@ function toSentryEvent(err: any, req: Request) {
     },
     timestamp: Date.now() / 1000
   };
+}
+
+/**
+ *
+ * @param err
+ * @param req
+ */
+export async function log(err: Error, req: Request): Promise<void> {
+  const body = JSON.stringify(toSentryEvent(err, req));
+  const headers = {
+    'Content-Type': 'application/json',
+    'X-Sentry-Auth': [
+      'Sentry sentry_version=7',
+      `sentry_client=mygov.org.nz/${RELEASE}`,
+      `sentry_key=5188487`
+    ].join(', ')
+  };
+
+  for (let i = 0; i <= 5; i = i + 1) {
+    const res = await fetch(
+      `https://sentry.io/api/dccdb69d4ce642a79486340d9857a0b8/store/`,
+      { body, headers, method: 'POST' }
+    );
+
+    if (res.status === 200) {
+      return;
+    }
+
+    // We couldn't send to Sentry, try to log the response at least
+    // eslint-disable-next-line no-console
+    console.error({ httpStatus: res.status, ...(await res.json()) });
+  }
 }

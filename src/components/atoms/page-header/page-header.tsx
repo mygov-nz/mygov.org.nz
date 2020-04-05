@@ -10,7 +10,7 @@ interface PageHeaderProps {
  *
  */
 export const PageHeader: FC<PageHeaderProps> = (props): JSX.Element => (
-  <header className={ styles.pageHeader }>
-    <h1>{ props.title }</h1>
+  <header className={styles.pageHeader}>
+    <h1>{props.title}</h1>
   </header>
 );

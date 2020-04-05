@@ -1,10 +1,10 @@
 import { error } from './error';
 import { homepage } from './homepage';
+import { notFound } from './notFound';
 import { Router } from './router';
 import { getMMPReview, postMMPReview } from './tools/mmpReview';
 import { getNonVoters, postNonVoters } from './tools/nonVoters';
 import { tools } from './tools/tools';
-import { notFound } from './notFound';
 
 export const routes = new Router({ error, notFound });
 routes.get(/^\/$/, homepage);

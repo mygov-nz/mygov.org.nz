@@ -23,13 +23,16 @@ export async function getMMPReview(
         meta: [
           {
             name: 'description',
-            content: 'The MMP Review Tool allows users to evaluate the effects of possible changes to rules determining the outcome of a New Zealand General Election.'
+            content:
+              'The MMP Review Tool allows users to evaluate the effects of possible changes to rules determining the outcome of a New Zealand General Election.'
           }
         ],
         scripts: [],
         title: 'MMP Review Tool - MyGov'
       },
-      tool: {}
+      tool: {
+        year: '2017'
+      }
     },
     {}
   );
@@ -40,15 +43,13 @@ export async function getMMPReview(
  * @param req
  */
 export async function postMMPReview(req: Request): Promise<Response> {
-  const data = await req.formData()
-    .then((formData: FormData) => Object.fromEntries(
+  const data = await req.formData().then((formData: FormData) => {
+    return Object.fromEntries(
       ((formData as unknown) as Map<string, string>).entries()
-    ));
+    );
+  });
 
-  const url = [
-    'tools',
-    'mmp-review'
-  ];
+  const url = ['tools', 'mmp-review'];
 
   return Response.redirect('/' + url.join('/'), 302);
 }

@@ -20,12 +20,12 @@ interface RouterOptions {
  */
 export class Router {
   /**
-   * 
+   *
    */
   private _error: Handler;
 
   /**
-   * 
+   *
    */
   private _notFound: Handler;
 
@@ -35,7 +35,7 @@ export class Router {
   private _routes: Route[];
 
   /**
-   * 
+   *
    */
   constructor(options: RouterOptions) {
     this._error = options.error;
@@ -44,36 +44,36 @@ export class Router {
   }
 
   /**
-   * 
-   * @param path 
-   * @param handler 
+   *
+   * @param path
+   * @param handler
    */
   get(path: RegExp, handler: Handler): void {
     this._addRoute('GET', path, handler);
   }
 
   /**
-   * 
+   *
    * @param path
-   * @param handler 
+   * @param handler
    */
   head(path: RegExp, handler: Handler): void {
     this._addRoute('HEAD', path, handler);
   }
 
   /**
-   * 
+   *
    * @param path
-   * @param handler 
+   * @param handler
    */
   options(path: RegExp, handler: Handler): void {
     this._addRoute('OPTIONS', path, handler);
   }
 
   /**
-   * 
+   *
    * @param path
-   * @param handler 
+   * @param handler
    */
   post(path: RegExp, handler: Handler): void {
     this._addRoute('POST', path, handler);
@@ -87,9 +87,9 @@ export class Router {
   route(req: Request, ctx: Context): Promise<Response> {
     const method = req.method.toUpperCase() as Method;
 
-    const route = this._routes.find<Route>(
-      (route: Route): route is Route => route.test(method, ctx.url.pathname)
-    );
+    const route = this._routes.find<Route>((route: Route): route is Route => {
+      return route.test(method, ctx.url.pathname);
+    });
 
     if (route) {
       try {
@@ -105,16 +105,12 @@ export class Router {
   }
 
   /**
-   * 
+   *
    * @param method
    * @param path
    * @param handler
    */
-  private _addRoute(
-    method: Method,
-    path: RegExp,
-    handler: Handler
-  ): void {
+  private _addRoute(method: Method, path: RegExp, handler: Handler): void {
     const test = mem<[Method, string], boolean, string>(
       (m: Method, p: string): boolean => {
         if (m !== method) {

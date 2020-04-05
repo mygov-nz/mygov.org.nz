@@ -1,0 +1,60 @@
+.comparisonTable {
+  border-collapse: collapse;
+
+  td {
+    text-align: right;
+  }
+
+  tfoot,
+  th {
+    font-weight: 600;
+  }
+
+  td,
+  th {
+    padding: 0.75rem;
+  }
+
+  tbody td,
+  tbody th,
+  tfoot td,
+  tfoot th {
+    border-top: 1px solid var(--border-colour);
+  }
+
+  tfoot tr:first-child td,
+  tfoot tr:first-child th {
+    border-top-width: 2px;
+  }
+
+  tbody th {
+    text-align: left;
+  }
+
+  thead span {
+    display: none;
+  }
+
+}
+
+.detailsColumn {
+  display: none;
+}
+
+@media (min-width: 576px) {
+
+  .detailsColumn {
+    display: table-column;
+  }
+
+}
+
+@media (min-width: 992px) {
+
+  .comparisonTable thead span {
+    display: inline;
+  }
+
+}
+
+

@@ -11,12 +11,17 @@ function hash(value: string): PromiseLike<string> {
   const view = new Uint16Array(buffer);
 
   for (let i = 0; i < length; i = i + 1) {
+    // eslint-disable-next-line security/detect-object-injection
     view[i] = value.charCodeAt(i);
   }
 
-  return crypto.subtle.digest('SHA-1', buffer)
+  return crypto.subtle
+    .digest('SHA-1', buffer)
     .then((result: ArrayBuffer): string => {
-      const s = String.fromCharCode.apply(null, result as unknown as number[]);
+      const s = String.fromCharCode.apply(
+        null,
+        (result as unknown) as number[]
+      );
 
       return [
         parseInt(s.slice(0, 10), 16).toString(36),
@@ -37,51 +42,47 @@ export async function render<P>(
   props: (Attributes & P) | null,
   headers: Record<string, string>
 ): Promise<Response> {
-  const body = toString(
-    h<P>(type, props),
-    null,
-    {
-      pretty: ENVIRONMENT === 'production' ? '' : '    ',
-      xml: true
-    }
-  );
+  const body = toString(h<P>(type, props), null, {
+    pretty: ENVIRONMENT === 'production' ? '' : '    ',
+    xml: true
+  });
 
   const defaultHeaders: Record<string, string> = ENVIRONMENT === 'production'
     ? {
-      'Cache-Control': 'max-age=3600',
-      'Content-Security-Policy': [
-        "default-src 'none'",
-        "img-src 'self'",
-        "manifest-src 'self'",
-        "prefetch-src 'self'",
-        "script-src 'self'",
-        "style-src 'self'",
-        "worker-src 'self'",
-        "sandbox allow-forms allow-scripts"
-      ].join('; '),
-      'Content-Type': 'text/html; charset="UTF-8"',
-      'ETag': await hash(body),
-      'Feature-Policy': [
-        "autoplay 'none'",
-        "camera 'none'",
-        "geolocation 'none'",
-        "microphone 'none'",
-        "notifications 'none'",
-        "payment 'none'"
-      ].join('; '),
-      'Strict-Transport-Security': [
-        'max-age=15778800',
-        'includeSubDomains',
-        'preload'
-      ].join('; '),
-      'X-Content-Type-Options': 'nosniff',
-      'X-Frame-Options': 'DENY',
-      'X-XSS-Protection': '1; mode=block'
-    }
-    : {
-      'Content-Type': 'text/html; charset="UTF-8"',
-      'X-Robots-Tag': 'noarchive, nofollow, noindex'
-    };
+        'Cache-Control': 'max-age=3600',
+        'Content-Security-Policy': [
+          "default-src 'none'",
+          "img-src 'self'",
+          "manifest-src 'self'",
+          "prefetch-src 'self'",
+          "script-src 'self'",
+          "style-src 'self'",
+          "worker-src 'self'",
+          "sandbox allow-forms allow-scripts"
+        ].join('; '),
+        'Content-Type': 'text/html; charset="UTF-8"',
+        'ETag': await hash(body),
+        'Feature-Policy': [
+          "autoplay 'none'",
+          "camera 'none'",
+          "geolocation 'none'",
+          "microphone 'none'",
+          "notifications 'none'",
+          "payment 'none'"
+        ].join('; '),
+        'Strict-Transport-Security': [
+          'max-age=15778800',
+          'includeSubDomains',
+          'preload'
+        ].join('; '),
+        'X-Content-Type-Options': 'nosniff',
+        'X-Frame-Options': 'DENY',
+        'X-XSS-Protection': '1; mode=block'
+      }
+      : {
+        'Content-Type': 'text/html; charset="UTF-8"',
+        'X-Robots-Tag': 'noarchive, nofollow, noindex'
+      };
 
   return new Response('<!DOCTYPE html>' + body, {
     headers: {
