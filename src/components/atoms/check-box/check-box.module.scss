@@ -1,0 +1,82 @@
+.checkBox {
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 1rem;
+  margin-right: 0;
+  padding: 0 1rem;
+  position: relative;
+
+  input {
+    box-sizing: border-box;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    z-index: -1;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3125rem;
+  }
+
+  label:after {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' v…M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 50% 50%;
+    content: "";
+    cursor: pointer;
+    display: block;
+    height: 1rem;
+    left: 0;
+    position: absolute;
+    top: .25rem;
+    width: 1rem;
+
+    @media (min-width: 576px) {
+      height: 2.375rem;
+      left: 1rem;
+      top: 1.8125rem;
+      width: 2.375rem;
+    }
+  }
+
+  label:before {
+    background-color: #28a745;
+    border-radius: .25rem;
+    color: #fff;
+    content: "";
+    cursor: pointer;
+    display: block;
+    height: 1rem;
+    left: 0;
+    position: absolute;
+    top: 0.25rem;
+    width: 1rem;
+
+    @media (min-width: 576px) {
+      height: 2.375rem;
+      left: 1rem;
+      top: 1.8125rem;
+      width: 2.375rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
+
+  @media (min-width: 576px) {
+    flex: 0 0 50%;
+    max-width: 50%;
+    min-height: 4.1875rem;
+  }
+}

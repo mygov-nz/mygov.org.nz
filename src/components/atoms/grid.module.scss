@@ -1,0 +1,31 @@
+.grid1 {
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 1rem;
+  margin-right: 0;
+  padding: 0 1rem;
+  position: relative;
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3125rem;
+  }
+
+  @media (min-width: 1200px) {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
+
+  @media (min-width: 576px) {
+    flex: 0 0 50%;
+    max-width: 50%;
+    min-height: 4.1875rem;
+  }
+}
