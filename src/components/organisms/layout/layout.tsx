@@ -52,16 +52,21 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
       )) }
     </head>
     <body>
-      <a href="#content" className={ styles.skipToContent }>Skip to the content</a>
-      <header>
+      <a href="#content" class={ styles.skipToContent }>Skip to the content</a>
+      <header class={ styles.header }>
         <nav class={ styles.container }>
-          //
+          <a href='/' class={ styles.brand } rel='home'>MyGov</a>
+          <ul>
+            <li>
+              <a href='/tools'>Tools</a>
+            </li>
+          </ul>
         </nav>
       </header>
       <main id="content" class={ styles.container } role="main">
         { props.children }
       </main>
-      <footer>
+      <footer class={ styles.footer }>
         <a href="https://mygov.org.nz">mygov.org.nz</a>
       </footer>
       { props.scripts.map((script): JSX.Element => (
