@@ -2,4 +2,4 @@ build
 coverage
 dist
 node_modules
-src/worker/assets.json
+src/worker/data/assets.json

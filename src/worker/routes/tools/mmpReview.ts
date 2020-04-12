@@ -1,5 +1,22 @@
 import { MMPReview } from '../../../components/pages';
+import { encode } from '../../../components/pages/mmp-review/mmp-review-tool/state';
+import { resolve } from '../../lib/assets';
 import { render } from '../../lib/render';
+
+/**
+ *
+ * @param _req
+ * @param ctx
+ */
+export async function baseMMPReview(
+  _req: Request,
+  ctx: Context
+): Promise<Response> {
+  return Response.redirect(
+    `${ctx.url.protocol}//${ctx.url.hostname}/tools/mmp-review/2017/5-percent-threshold/overhang/1-seat-tagalong`,
+    302
+  );
+}
 
 /**
  *
@@ -17,7 +34,11 @@ export async function getMMPReview(
         links: [
           {
             rel: 'stylesheet',
-            href: 'main.css'
+            href: resolve('main.css')
+          },
+          {
+            rel: 'canonical',
+            href: `${ctx.url.protocol}//${ctx.url.hostname}/tools/mmp-review`
           }
         ],
         meta: [
@@ -27,11 +48,15 @@ export async function getMMPReview(
               'The MMP Review Tool allows users to evaluate the effects of possible changes to rules determining the outcome of a New Zealand General Election.'
           }
         ],
-        scripts: [],
-        title: 'MMP Review Tool - MyGov'
+        scripts: [
+          {
+            src: resolve('mmp-review.js')
+          }
+        ],
+        title: 'MMP Review Tool - MyGov.org.nz'
       },
       tool: {
-        year: '2017'
+        pathname: ctx.url.pathname
       }
     },
     {}
@@ -49,7 +74,7 @@ export async function postMMPReview(req: Request): Promise<Response> {
     );
   });
 
-  const url = ['tools', 'mmp-review'];
+  console.log(JSON.stringify(data, null, 4));
 
-  return Response.redirect('/' + url.join('/'), 302);
+  return Response.redirect(encode(data as any), 302);
 }

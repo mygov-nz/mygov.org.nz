@@ -1,5 +1,5 @@
 export const names: Readonly<Record<string, string>> = {
-  _nn: 'A new party with no List MPs',
+  _nn: 'A new party (with no MPs)',
   _nw: 'A new party',
   act: 'ACT New Zealand',
   alc: 'Aotearoa Legalise Cannabis Party',

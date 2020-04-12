@@ -1,19 +1,18 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
 import { PageHeader } from '../../atoms';
-import { Layout, LayoutProps } from '../../organisms';
+import { Layout, RenderProps } from '../../organisms';
 
 import {
   NonVotersTool,
   NonVotersToolProps
 } from './non-voters-tool/non-voters-tool';
 
-interface NonVotersProps {
-  layout: LayoutProps;
-  tool: NonVotersToolProps;
-}
+type NonVotersProps = RenderProps<{ tool: NonVotersToolProps }>;
+
 /**
  *
+ * @param props
  */
 export const NonVoters: FC<NonVotersProps> = (props): JSX.Element => (
   <Layout {...props.layout}>

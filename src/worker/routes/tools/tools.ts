@@ -1,4 +1,5 @@
 import { Tools } from '../../../components/pages';
+import { resolve } from '../../lib/assets';
 import { render } from '../../lib/render';
 
 /**
@@ -12,12 +13,12 @@ export async function tools(): Promise<Response> {
         links: [
           {
             rel: 'stylesheet',
-            href: 'main.css'
+            href: resolve('main.css')
           }
         ],
         meta: [],
         scripts: [],
-        title: 'MyGov Tools'
+        title: 'MyGov.org.nz Tools'
       }
     },
     {}

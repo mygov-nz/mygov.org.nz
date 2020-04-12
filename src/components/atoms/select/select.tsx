@@ -1,24 +1,50 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
-import { field } from '../form/form.module.scss';
+import form from '../form/form.module.scss';
 
 import styles from './select.module.scss';
 
-interface OptionProps {
-  label: string;
-  selected: boolean;
-  value: string;
+export enum OptType {
+  OPTGROUP,
+  OPTION
+}
+
+export interface OptGroup {
+  readonly type: OptType.OPTGROUP;
+  readonly label: string;
+  readonly options: ReadonlyArray<Option>;
+}
+
+export interface Option {
+  readonly type: OptType.OPTION;
+  readonly label: string;
+  readonly value: string;
+}
+
+interface OptGroupProps {
+  readonly label: string;
+}
+
+interface OptionProps extends Option {
+  readonly selected: boolean;
 }
 
 interface SelectProps {
-  readonly checked: boolean;
   readonly id: string;
   readonly label: string;
   readonly onChange: (event: Event) => void;
-  readonly options: Readonly<Record<string, string>>;
+  readonly options: ReadonlyArray<OptGroup | Option>;
   readonly required?: boolean;
   readonly value?: string;
 }
+
+/**
+ *
+ * @param props
+ */
+const OptGroup: FC<OptGroupProps> = (props): JSX.Element => (
+  <optgroup label={props.label}>{props.children}</optgroup>
+);
 
 /**
  *
@@ -32,30 +58,44 @@ const Option: FC<OptionProps> = (props): JSX.Element => (
 
 /**
  *
- * @param props
+ * @param item
+ * @param value
  */
-export const Select: FC<SelectProps> = (props): JSX.Element => {
-  /* eslint-disable security/detect-object-injection */
+function renderItem(item: OptGroup | Option, value?: string): JSX.Element {
+  if (item.type === OptType.OPTION) {
+    return (
+      <option
+        key={item.value}
+        value={item.value}
+        selected={item.value === value}
+      >
+        {item.label}
+      </option>
+    );
+  }
 
   return (
-    <label className={field} htmlFor={props.id}>
-      <select
-        className={styles.select}
-        name={props.id}
-        id={props.id}
-        onChange={props.onChange}
-        require={props.required}
-      >
-        {Object.keys(props.options).map((value) => (
-          <Option
-            key={value}
-            value={value}
-            selected={value === props.value}
-            label={props.options[value]}
-          />
-        ))}
-      </select>
-      <span>{props.label}</span>
-    </label>
+    <OptGroup key={item.label} label={item.label}>
+      {item.options.map((item) => renderItem(item, value))}
+    </OptGroup>
   );
-};
+}
+
+/**
+ *
+ * @param props
+ */
+export const Select: FC<SelectProps> = (props): JSX.Element => (
+  <label className={form.field} htmlFor={props.id}>
+    <span>{props.label}</span>
+    <select
+      className={styles.select}
+      name={props.id}
+      id={props.id}
+      onChange={props.onChange}
+      required={props.required}
+    >
+      {props.options.map((item) => renderItem(item, props.value))}
+    </select>
+  </label>
+);

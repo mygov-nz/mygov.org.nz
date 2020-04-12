@@ -169,7 +169,7 @@ module.exports = merge(common, {
       ignore: [ '*.scss', '*.ts' ]
     }]),
     new ManifestPlugin({
-      fileName: path.resolve('src/worker/assets.json')
+      fileName: path.resolve('src/worker/data/assets.json')
     }),
     new MiniCssExtractPlugin({
       chunkFilename: 'css/[id]-[chunkhash:6].css',

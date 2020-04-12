@@ -4,7 +4,7 @@ import styles from './form.module.scss';
 
 interface FormProps {
   readonly action: string;
-  readonly onSubmit: (event: Event) => void;
+  readonly className: string;
 }
 
 /**
@@ -12,10 +12,9 @@ interface FormProps {
  */
 export const Form: FC<FormProps> = (props): JSX.Element => (
   <form
-    className={styles.form}
+    className={[styles.form, props.className].join(' ')}
     method="post"
     action={props.action}
-    onSubmit={props.onSubmit}
   >
     {props.children}
   </form>

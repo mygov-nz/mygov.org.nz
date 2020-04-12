@@ -1,7 +1,5 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
-import assets from '../../../worker/assets.json';
-
 import styles from './layout.module.scss';
 
 interface Link {
@@ -27,15 +25,20 @@ interface Script {
   type?: 'module';
 }
 
-export interface LayoutProps {
+interface LayoutProps {
   links: Link[];
   meta: Meta[];
   scripts: Script[];
   title: string;
 }
 
+export type RenderProps<T = { [key: string]: any }> = T & {
+  layout: LayoutProps;
+};
+
 /**
  *
+ * @param props
  */
 export const Layout: FC<LayoutProps> = (props): JSX.Element => (
   <html lang="en-NZ">
@@ -52,7 +55,7 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
       <link rel="manifest" href="/manifest.json" />
       {props.links.map(
         (link): JSX.Element => (
-          <link {...link} key={link.href} href={(assets as any)[link.href]} />
+          <link {...link} key={link.href} href={link.href} />
         )
       )}
     </head>
@@ -80,11 +83,9 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
       </footer>
       {props.scripts.map(
         (script): JSX.Element => (
-          <script
-            {...script}
-            key={script.src}
-            src={(assets as any)[script.src]}
-          />
+          <script {...script} key={script.src} src={script.src}>
+            /* */
+          </script>
         )
       )}
     </body>

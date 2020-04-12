@@ -108,8 +108,8 @@ module.exports = merge(common, {
   plugins: [
     new CopyPlugin([{
       from: 'src/worker',
-      ignore: ['*.ts'],
-      test: '*.json',
+      ignore: ['assets.json', '*.ts'],
+      test: '_*.json',
       transformPath(targetPath) {
         return targetPath.replace('_package', 'package');
       }

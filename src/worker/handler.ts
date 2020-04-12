@@ -9,7 +9,7 @@ import { routes } from './routes';
 export async function handleEvent(event: FetchEvent): Promise<Response> {
   const ctx: Context = { url: new URL(event.request.url) };
 
-  console.log(ctx.url.hostname);
+  console.log(JSON.stringify(ctx.url, null, 4));
 
   // Redirect if domain isn't mygov.org.nz
   if (!['mygov.org.nz', 'example.com'].includes(ctx.url.hostname)) {

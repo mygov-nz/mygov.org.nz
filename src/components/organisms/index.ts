@@ -1,1 +1,1 @@
-export { Layout, LayoutProps } from './layout/layout';
+export { Layout, RenderProps } from './layout/layout';

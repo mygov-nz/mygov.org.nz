@@ -1,6 +1,6 @@
 export {};
 
-declare module '*.json' {
+declare module 'assets.json' {
   const value: Record<string, string>;
 
   export = value;
