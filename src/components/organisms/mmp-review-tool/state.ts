@@ -67,9 +67,8 @@ export function encode(state: MMPReviewToolState): string {
 export function usePathnameState(
   initialPathname: string
 ): [MMPReviewToolState, MMPReviewToolActions] {
-  const [pathname, setPathname] = useState<string>(initialPathname);
   const [state, setState] = useState<MMPReviewToolState>(() => {
-    return decode(pathname);
+    return decode(initialPathname);
   });
 
   useEffect(() => {
@@ -77,11 +76,6 @@ export function usePathnameState(
      *
      */
     function onPopState(event: PopStateEvent): void {
-      if (location.pathname === pathname) {
-        return;
-      }
-
-      setPathname(location.pathname);
       setState(event.state || decode(location.pathname));
     }
 
@@ -98,6 +92,7 @@ export function usePathnameState(
     const newState: MMPReviewToolState = { ...state, ...update };
 
     history.pushState(newState, document.title, encode(newState));
+    setState(newState);
   }
 
   return [

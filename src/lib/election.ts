@@ -46,7 +46,12 @@ export function getResult(
 
   return {
     electorates: results.reduce((a: number, b: any) => a + b.electorates, 0),
-    gallagher: calculateGallagherIndex(results),
+    gallagher: calculateGallagherIndex(
+      results.map((row: ElectionResultRow) => ({
+        seats: row.electorates + row.lists,
+        votes: row.votes
+      }))
+    ),
     listSeats: results.reduce((a: number, b: any) => a + b.lists, 0),
     rows: results,
     totalSeats: results.reduce(

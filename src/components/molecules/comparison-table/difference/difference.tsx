@@ -4,6 +4,7 @@ import styles from './difference.module.scss';
 
 interface DifferenceProps {
   readonly inverse?: boolean;
+  readonly suffix?: string;
   readonly value: number;
 }
 
@@ -23,5 +24,5 @@ export const Difference: FC<DifferenceProps> = (
       ? styles.positiveDifference
       : styles.negativeDifference;
 
-  return <td className={className}>{value}</td>;
+  return <td className={className}>{value + (props.suffix || '')}</td>;
 };

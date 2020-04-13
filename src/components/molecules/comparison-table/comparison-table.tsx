@@ -54,7 +54,7 @@ export const ComparisonTable: FC<ComparisonTableProps> = (
           <Value value={data.electorates} />
           <Value value={data.listSeats} />
           <Value value={data.totalSeats} />
-          <Difference value={data.totalSeats} />
+          <Difference value={data.totalSeatDiff} />
         </tr>
         <tr>
           <td colSpan={2} />
@@ -62,7 +62,7 @@ export const ComparisonTable: FC<ComparisonTableProps> = (
             Gallagher index
           </th>
           <Value value={data.gallagher} />
-          <Difference inverse={true} value={data.gallagher} />
+          <Difference inverse={true} suffix="%" value={data.gallagherDiff} />
         </tr>
       </tfoot>
       <tbody>

@@ -23,17 +23,22 @@ export function compare(
 
   return {
     ...b,
-    gallagherDiff: b.gallagher - a.gallagher,
-    rows: b.rows.map(
-      (row: ElectionResultRow, i: number): ComparisonRow => ({
-        ...row,
-        difference:
-          b.rows[i].electorates +
-          b.rows[i].lists -
-          a.rows[i].electorates -
-          a.rows[i].lists
+    gallagherDiff: ((b.gallagher - a.gallagher) / a.gallagher) * 100,
+    rows: b.rows
+      .slice()
+      .sort((a: ElectionResultRow, b: ElectionResultRow) => {
+        return b.votes - a.votes;
       })
-    ),
+      .map(
+        (row: ElectionResultRow, i: number): ComparisonRow => ({
+          ...row,
+          difference:
+            b.rows[i].electorates +
+            b.rows[i].lists -
+            a.rows[i].electorates -
+            a.rows[i].lists
+        })
+      ),
     totalSeatDiff: b.totalSeats - a.totalSeats
   };
 }

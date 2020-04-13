@@ -58,9 +58,8 @@ export function encode(props: NonVotersToolState): string {
 export function usePathnameState(
   initialPathname: string
 ): [NonVotersToolState, NonVotersToolActions] {
-  const [pathname, setPathname] = useState<string>(initialPathname);
   const [state, setState] = useState<NonVotersToolState>(() => {
-    return decode(pathname);
+    return decode(initialPathname);
   });
 
   useEffect(() => {
@@ -68,11 +67,6 @@ export function usePathnameState(
      *
      */
     function onPopState(event: PopStateEvent): void {
-      if (location.pathname === pathname) {
-        return;
-      }
-
-      setPathname(location.pathname);
       setState(event.state || decode(location.pathname));
     }
 
@@ -89,6 +83,7 @@ export function usePathnameState(
     const newState: NonVotersToolState = { ...state, ...update };
 
     history.pushState(newState, document.title, encode(newState));
+    setState(newState);
   }
 
   return [

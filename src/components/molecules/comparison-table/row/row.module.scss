@@ -1,3 +1,8 @@
 .hasSeats {
   background-color: var(--success-colour);
+
+  // table tbody &:nth-child(odd) td,
+  // table tbody &:nth-child(odd) th {
+  //   background-color: var(--success-colour);
+  // }
 }
