@@ -20,6 +20,7 @@
   td,
   th {
     padding: 0.75rem;
+    padding-left: 0;
   }
 
   tbody td,
@@ -34,10 +35,6 @@
     border-top-width: 2px;
   }
 
-  tbody th {
-    text-align: left;
-  }
-
   // tbody tr:nth-child(odd) td,
   // tbody tr:nth-child(odd) th {
   //   background-color: #f8f8f8;
@@ -49,20 +46,20 @@
   display: none;
 }
 
-// @media (min-width: 576px) {
+@media (min-width: 576px) {
 
-//   .detailsColumn {
-//     display: table-column;
-//   }
+  .detailsColumn {
+    display: table-column;
+  }
 
-// }
+}
 
-// @media (min-width: 992px) {
+@media (min-width: 992px) {
 
-//   .comparisonTable thead span {
-//     display: inline;
-//   }
+  .comparisonTable thead span {
+    display: inline;
+  }
 
-// }
+}
 
 

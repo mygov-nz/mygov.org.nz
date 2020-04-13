@@ -1,5 +1,5 @@
 import { ComponentType, h } from 'preact';
-import { render as toString } from 'preact-render-to-string';
+import { render as renderToString } from 'preact-render-to-string';
 
 import { RenderProps } from '../../components/organisms';
 
@@ -25,7 +25,7 @@ export async function render<P>(
 ): Promise<Response> {
   /* eslint-disable security/detect-object-injection */
 
-  const body = toString(h<P>(type, props), null, {
+  const body = renderToString(h<P>(type, props), null, {
     pretty: ENVIRONMENT === 'production' ? '' : '    '
   });
 
