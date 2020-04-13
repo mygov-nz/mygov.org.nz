@@ -32,11 +32,10 @@ export const NonVotersTool: FC<NonVotersToolProps> = (props): JSX.Element => {
 
   /**
    *
-   * @param event
+   * @param value
    */
-  function onChangePercentage(event: Event): void {
-    event.preventDefault();
-    actions.setPercentage(parseFloat((event.target as HTMLInputElement).value));
+  function onChangePercentage(value: number): void {
+    actions.setPercentage(value);
   }
 
   /**

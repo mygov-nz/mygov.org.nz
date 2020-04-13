@@ -134,7 +134,7 @@ module.exports = merge(common, {
       new TerserPlugin({
         extractComments: false,
         parallel: os.cpus().length,
-        sourceMap: false,
+        sourceMap: true,
         terserOptions: {
           ecma: 5,
           ie8: false,
@@ -145,11 +145,18 @@ module.exports = merge(common, {
     ],
     splitChunks: {
       cacheGroups: {
+        common: {
+          chunks: 'all',
+          name: 'common',
+          priority: 50,
+          test: /\/src\/(components\/atoms|components\/molecules|data|lib)\//,
+          reuseExistingChunk: true
+        },
         vendor: {
           chunks: 'all',
           name: 'vendor',
           priority: 100,
-          test: /[\\/]node_modules[\\/]/,
+          test: /\/node_modules\//,
           reuseExistingChunk: true
         }
       },

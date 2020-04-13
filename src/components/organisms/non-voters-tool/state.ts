@@ -1,7 +1,8 @@
 import mem from 'mem';
 import { useEffect, useState } from 'preact/hooks';
 
-import { ElectionYear } from '../../../data/types';
+import { elections } from '../../../data/elections';
+import { ElectionYear, ElectionDataRow } from '../../../data/types';
 
 interface NonVotersToolActions {
   setParty: (party: string) => void;
@@ -91,7 +92,20 @@ export function usePathnameState(
     {
       setParty: (party: string): void => pushState({ party }),
       setPercentage: (percentage: number): void => pushState({ percentage }),
-      setYear: (year: ElectionYear): void => pushState({ year })
+      setYear: (year: ElectionYear): void => {
+        if (state.party.slice(0, 1) === '_') {
+          return pushState({ year });
+        }
+
+        // eslint-disable-next-line security/detect-object-injection
+        const parties = elections[year].r.map((row: ElectionDataRow) => row[0]);
+
+        if (parties.includes(state.party)) {
+          return pushState({ year });
+        }
+
+        pushState({ party: '_no', year });
+      }
     }
   ];
 }

@@ -29,8 +29,8 @@ const getOptions = mem(
 
     return [
       { label: 'Nobody', type: OptType.OPTION, value: '_no' },
-      { label: names._nn, type: OptType.OPTION, value: '_nn' },
       { label: names._nw, type: OptType.OPTION, value: '_nw' },
+      { label: names._nn, type: OptType.OPTION, value: '_nn' },
       { label: 'Political parties', options: parties, type: OptType.OPTGROUP }
     ];
   }

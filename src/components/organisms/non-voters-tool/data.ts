@@ -22,14 +22,16 @@ export const getData = mem<[NonVotersToolState], ElectionResult, string>(
       (row: ElectionDataRow): DataRow => [row[0], row[1], row[2] || 0]
     );
 
-    const i = rows.findIndex((row: DataRow): row is DataRow => {
-      return row[0] === state.party;
-    });
+    if (state.party !== '_no') {
+      const i = rows.findIndex((row: DataRow): row is DataRow => {
+        return row[0] === state.party;
+      });
 
-    if (i > -1) {
-      rows[i][1] = rows[i][1] + votes;
-    } else {
-      rows.push([state.party, votes, 0]);
+      if (i > -1) {
+        rows[i][1] = rows[i][1] + votes;
+      } else {
+        rows.push([state.party, votes, 0]);
+      }
     }
 
     return getResult(rows, {

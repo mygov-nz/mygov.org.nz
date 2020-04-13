@@ -3,7 +3,6 @@ import { FunctionalComponent as FC, h, JSX } from 'preact';
 
 import { names } from '../../../../data/parties';
 
-import styles from './name.module.scss';
 import { swatches } from './swatches';
 
 interface NameProps {
@@ -16,11 +15,7 @@ interface NameProps {
  */
 export const Name: FC<NameProps> = mem<[NameProps], JSX.Element, string>(
   (props: NameProps): JSX.Element => (
-    <th
-      scope="row"
-      className={styles.name}
-      style={`--swatch:#${swatches[props.id]}`}
-    >
+    <th scope="row" style={`--swatch:#${swatches[props.id]}`}>
       {names[props.id]}
     </th>
   ),

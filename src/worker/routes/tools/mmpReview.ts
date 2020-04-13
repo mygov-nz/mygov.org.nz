@@ -35,12 +35,16 @@ export async function getMMPReview(
       layout: {
         links: [
           {
+            rel: 'canonical',
+            href: `${ctx.url.protocol}//${ctx.url.hostname}/tools/mmp-review`
+          },
+          {
             rel: 'stylesheet',
             href: resolve('main.css')
           },
           {
-            rel: 'canonical',
-            href: `${ctx.url.protocol}//${ctx.url.hostname}/tools/mmp-review`
+            rel: 'stylesheet',
+            href: resolve('common.css')
           }
         ],
         meta: [
@@ -53,6 +57,9 @@ export async function getMMPReview(
         scripts: [
           {
             src: resolve('vendor.js')
+          },
+          {
+            src: resolve('common.js')
           },
           {
             src: resolve('mmp-review.js')

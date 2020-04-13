@@ -35,12 +35,16 @@ export async function getNonVoters(
       layout: {
         links: [
           {
+            rel: 'canonical',
+            href: `${ctx.url.protocol}//${ctx.url.hostname}/tools/non-voters`
+          },
+          {
             rel: 'stylesheet',
             href: resolve('main.css')
           },
           {
-            rel: 'canonical',
-            href: `${ctx.url.protocol}//${ctx.url.hostname}/tools/non-voters`
+            rel: 'stylesheet',
+            href: resolve('common.css')
           }
         ],
         meta: [
@@ -53,6 +57,9 @@ export async function getNonVoters(
         scripts: [
           {
             src: resolve('vendor.js')
+          },
+          {
+            src: resolve('common.js')
           },
           {
             src: resolve('non-voters.js')

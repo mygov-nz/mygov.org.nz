@@ -35,8 +35,8 @@ export function compare(
           difference:
             b.rows[i].electorates +
             b.rows[i].lists -
-            a.rows[i].electorates -
-            a.rows[i].lists
+            ((a.rows[i] && a.rows[i].electorates) || 0) -
+            ((a.rows[i] && a.rows[i].lists) || 0)
         })
       ),
     totalSeatDiff: b.totalSeats - a.totalSeats
