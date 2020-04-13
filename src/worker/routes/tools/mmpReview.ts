@@ -1,7 +1,9 @@
+import { encode } from '../../../components/organisms/mmp-review-tool/state';
 import { MMPReview } from '../../../components/pages';
-import { encode } from '../../../components/pages/mmp-review/mmp-review-tool/state';
+import { ElectionYear } from '../../../data/types';
 import { resolve } from '../../lib/assets';
 import { render } from '../../lib/render';
+import { Context } from '../../types';
 
 /**
  *
@@ -50,6 +52,9 @@ export async function getMMPReview(
         ],
         scripts: [
           {
+            src: resolve('vendor.js')
+          },
+          {
             src: resolve('mmp-review.js')
           }
         ],
@@ -60,6 +65,29 @@ export async function getMMPReview(
       }
     },
     {}
+  );
+}
+
+/**
+ *
+ * @param _req
+ * @param ctx
+ */
+export async function legacyMMPReview(
+  _req: Request,
+  ctx: Context
+): Promise<Response> {
+  const bits = atob(ctx.url.pathname.slice(18)).split(',');
+  const state = {
+    overhang: bits[2] === '1',
+    tagAlong: bits[3] === '1' ? parseInt(bits[4], 10) : 0,
+    threshold: parseFloat(bits[1]),
+    year: bits[0] as ElectionYear
+  };
+
+  return Response.redirect(
+    `${ctx.url.protocol}//${ctx.url.hostname}${encode(state)}`,
+    301
   );
 }
 

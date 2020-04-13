@@ -1,11 +1,11 @@
 import { h, render } from 'preact';
 
-import { MMPReviewTool } from '../../components/pages/mmp-review/mmp-review-tool/mmp-review-tool';
+import { MMPReviewTool } from '../../components/organisms';
 
-const root = document.getElementById('mmp-review') as HTMLElement;
+const root = document.getElementById('mmp-review-tool') as HTMLElement;
 
 while (root.firstChild) {
   root.removeChild(root.lastChild as Node);
 }
 
-render(h(MMPReviewTool, null), root);
+render(h(MMPReviewTool, { pathname: location.pathname }), root);

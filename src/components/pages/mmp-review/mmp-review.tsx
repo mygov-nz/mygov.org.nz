@@ -1,12 +1,12 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
 import { PageHeader } from '../../atoms';
-import { Layout, RenderProps } from '../../organisms';
-
 import {
+  Layout,
   MMPReviewTool,
-  MMPReviewToolProps
-} from './mmp-review-tool/mmp-review-tool';
+  MMPReviewToolProps,
+  RenderProps
+} from '../../organisms';
 
 type MMPReviewProps = RenderProps<{ tool: MMPReviewToolProps }>;
 

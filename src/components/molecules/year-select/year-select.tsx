@@ -1,5 +1,6 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
+import { ElectionYear } from '../../../data/types';
 import { years } from '../../../data/years';
 import { Option, OptType, Select } from '../../atoms';
 

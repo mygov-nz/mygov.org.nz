@@ -1,7 +1,9 @@
+import { encode } from '../../../components/organisms/non-voters-tool/state';
 import { NonVoters } from '../../../components/pages';
-import { encode } from '../../../components/pages/non-voters/non-voters-tool/state';
+import { ElectionYear } from '../../../data/types';
 import { resolve } from '../../lib/assets';
 import { render } from '../../lib/render';
+import { Context } from '../../types';
 
 /**
  *
@@ -50,6 +52,9 @@ export async function getNonVoters(
         ],
         scripts: [
           {
+            src: resolve('vendor.js')
+          },
+          {
             src: resolve('non-voters.js')
           }
         ],
@@ -60,6 +65,28 @@ export async function getNonVoters(
       }
     },
     {}
+  );
+}
+
+/**
+ *
+ * @param _req
+ * @param ctx
+ */
+export async function legacyNonVoters(
+  _req: Request,
+  ctx: Context
+): Promise<Response> {
+  const bits = atob(ctx.url.pathname.slice(18)).split(',');
+  const state = {
+    party: bits[1].replace('@', '_'),
+    percentage: parseFloat(bits[2]),
+    year: bits[0] as ElectionYear
+  };
+
+  return Response.redirect(
+    `${ctx.url.protocol}//${ctx.url.hostname}${encode(state)}`,
+    301
   );
 }
 

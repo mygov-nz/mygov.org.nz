@@ -1,6 +1,8 @@
 .comparisonTable {
   border-collapse: collapse;
+  width: 100%;
 
+  thead th,
   td {
     text-align: right;
   }

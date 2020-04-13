@@ -26,8 +26,7 @@ export async function render<P>(
   /* eslint-disable security/detect-object-injection */
 
   const body = toString(h<P>(type, props), null, {
-    pretty: ENVIRONMENT === 'production' ? '' : '    ',
-    xml: true
+    pretty: ENVIRONMENT === 'production' ? '' : '    '
   });
 
   const defaultHeaders: Record<string, string> =

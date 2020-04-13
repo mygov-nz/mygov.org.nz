@@ -1,3 +1,5 @@
+import { ElectionYear } from './types';
+
 export const years: ReadonlyArray<ElectionYear> = [
   '2017',
   '2014',

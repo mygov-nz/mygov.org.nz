@@ -83,9 +83,7 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
       </footer>
       {props.scripts.map(
         (script): JSX.Element => (
-          <script {...script} key={script.src} src={script.src}>
-            /* */
-          </script>
+          <script {...script} key={script.src} src={script.src}></script>
         )
       )}
     </body>

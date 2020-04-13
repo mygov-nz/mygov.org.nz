@@ -1,5 +1,5 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
-import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 
 import form from '../form/form.module.scss';
 
@@ -25,45 +25,46 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
   const [knobOffset, setKnobOffset] = useState<number>(0);
 
   const onMouseDown = (event: MouseEvent): void => {
-    console.log('onMouseDown');
-
     if (!knob.current) {
+      console.log(knob.current);
       return;
     }
 
-    setKnobOffset(event.clientX - knob.current.offsetLeft);
     setDragging(true);
+    setKnobOffset(event.clientX - knob.current.offsetLeft);
   };
-
-  const onMouseMove = (event: MouseEvent): void => {
-    console.log('onMouseMove');
-
-    if (!dragging || !track.current || !knob.current) {
-      return;
-    }
-
-    const maxRight = track.current.offsetWidth - knob.current.offsetWidth;
-    let offset: number = event.clientX - track.current.offsetLeft - knobOffset;
-
-    if (offset < 0) {
-      offset = 0;
-    } else if (offset > maxRight) {
-      offset = maxRight;
-    }
-
-    console.log(offset);
-  };
-
-  /**
-   *
-   * @param event
-   */
-  function onMouseUp(event: MouseEvent): void {
-    setDragging(false);
-  }
 
   useEffect(() => {
-    console.log('test');
+    /**
+     *
+     * @param event
+     */
+    function onMouseMove(event: MouseEvent): void {
+      if (!dragging || !track.current || !knob.current) {
+        return;
+      }
+
+      const maxRight = track.current.offsetWidth - knob.current.offsetWidth;
+      let offset: number =
+        event.clientX - track.current.offsetLeft - knobOffset;
+
+      if (offset < 0) {
+        offset = 0;
+      } else if (offset > maxRight) {
+        offset = maxRight;
+      }
+
+      console.log(offset);
+    }
+
+    /**
+     *
+     * @param event
+     */
+    function onMouseUp(): void {
+      setDragging(false);
+    }
+
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup', onMouseUp);
 

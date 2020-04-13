@@ -1,6 +1,7 @@
 import mem from 'mem';
 
 import { log } from '../lib/sentry';
+import { Context } from '../types';
 
 type Handler = (req: Request, ctx: Context) => Promise<Response>;
 type Method = 'GET' | 'HEAD' | 'OPTIONS' | 'POST';

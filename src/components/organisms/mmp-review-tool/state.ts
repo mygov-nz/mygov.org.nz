@@ -1,6 +1,8 @@
 import mem from 'mem';
 import { useEffect, useState } from 'preact/hooks';
 
+import { ElectionYear } from '../../../data/types';
+
 interface MMPReviewToolActions {
   setOverhang: (overhang: boolean) => void;
   setTagAlong: (tagAlong: number) => void;
@@ -8,14 +10,14 @@ interface MMPReviewToolActions {
   setYear: (year: ElectionYear) => void;
 }
 
-interface MMPReviewToolState {
-  overhang: boolean;
-  tagAlong: number;
-  threshold: number;
-  year: ElectionYear;
+export interface MMPReviewToolState {
+  readonly overhang: boolean;
+  readonly tagAlong: number;
+  readonly threshold: number;
+  readonly year: ElectionYear;
 }
 
-export const matcher = /^\/tools\/mmp-review\/(19|20[0-9]{2})\/([0-9.]+)-percent-threshold\/(no-)?overhang\/(no|([0-9]+)-seat)-tagalong$/;
+export const matcher = /^\/tools\/mmp-review\/([0-9]{4})\/([0-9.]+)-percent-threshold\/(no-)?overhang\/(no|([0-9]+)-seat)-tagalong$/;
 
 /**
  *

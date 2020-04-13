@@ -1,19 +1,21 @@
 import mem from 'mem';
 import { useEffect, useState } from 'preact/hooks';
 
+import { ElectionYear } from '../../../data/types';
+
 interface NonVotersToolActions {
   setParty: (party: string) => void;
   setPercentage: (percentage: number) => void;
   setYear: (year: ElectionYear) => void;
 }
 
-interface NonVotersToolState {
-  party: string;
-  percentage: number;
-  year: ElectionYear;
+export interface NonVotersToolState {
+  readonly party: string;
+  readonly percentage: number;
+  readonly year: ElectionYear;
 }
 
-export const matcher = /^\/tools\/non-voters\/(19|20[0-9]{2})\/([_a-z]{3})\/([0-9.]+)-percent$/;
+export const matcher = /^\/tools\/non-voters\/([0-9]{4})\/([a-z_]{3})\/([0-9.]+)-percent$/;
 
 /**
  *

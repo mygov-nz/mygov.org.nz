@@ -1,6 +1,7 @@
 import { NotFound } from '../../components/pages';
 import { resolve } from '../lib/assets';
 import { render } from '../lib/render';
+import { Context } from '../types';
 
 /**
  *

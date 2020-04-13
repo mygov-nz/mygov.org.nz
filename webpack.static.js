@@ -121,7 +121,8 @@ module.exports = merge(common, {
                 useBuiltIns: 'usage'
               }
             ]
-          ]
+          ],
+          sourceMaps: isDev ? 'inline' : true
         },
         test: /\.tsx?$/
       }

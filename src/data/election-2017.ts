@@ -1,3 +1,5 @@
+import { ElectionData } from './types';
+
 export const election2017: ElectionData = {
   e: 3298009,
   r: [

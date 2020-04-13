@@ -1,12 +1,12 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
 import { PageHeader } from '../../atoms';
-import { Layout, RenderProps } from '../../organisms';
-
 import {
+  Layout,
   NonVotersTool,
-  NonVotersToolProps
-} from './non-voters-tool/non-voters-tool';
+  NonVotersToolProps,
+  RenderProps
+} from '../../organisms';
 
 type NonVotersProps = RenderProps<{ tool: NonVotersToolProps }>;
 

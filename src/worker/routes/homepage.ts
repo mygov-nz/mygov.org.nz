@@ -1,3 +1,5 @@
+import { Context } from '../types';
+
 /**
  *
  * @param _req
