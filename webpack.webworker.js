@@ -41,8 +41,9 @@ module.exports = merge(common, {
             [
               'css-modules-transform',
               {
+                camelCase: true,
                 devMode: isDev,
-                extensions: [ '.scss' ],
+                extensions: [ '.module.scss', '.scss' ],
                 generateScopedName: isDev
                   ? '[local]_[md5:hash:base62:4]'
                   : '_[md5:hash:base62:4]'

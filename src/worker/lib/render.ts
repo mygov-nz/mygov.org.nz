@@ -1,5 +1,5 @@
 import { ComponentType, h } from 'preact';
-import { render as renderToString } from 'preact-render-to-string';
+import { renderToString } from 'preact-render-to-string';
 
 import { RenderProps } from '../../components/organisms';
 
@@ -25,9 +25,11 @@ export async function render<P>(
 ): Promise<Response> {
   /* eslint-disable security/detect-object-injection */
 
-  const body = renderToString(h<P>(type, props), null, {
-    pretty: ENVIRONMENT === 'production' ? '' : '    '
-  });
+  const body = renderToString(
+    h<P>(type, props),
+    {},
+    { pretty: ENVIRONMENT === 'production' ? '' : '    ' }
+  );
 
   const defaultHeaders: Record<string, string> =
     ENVIRONMENT === 'production'
