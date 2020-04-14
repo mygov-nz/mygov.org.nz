@@ -35,13 +35,15 @@ export async function render<P>(
           'Cache-Control': 'max-age=3600',
           'Content-Security-Policy': [
             "default-src 'none'",
-            "img-src 'self'",
+            "img-src 'self' data:",
+            "font-src 'self'",
             "manifest-src 'self'",
-            "prefetch-src 'self'",
+            // "prefetch-src 'self'",
             "script-src 'self'",
-            "style-src 'self'",
+            "style-src 'self' 'unsafe-inline'",
             "worker-src 'self'",
-            'sandbox allow-forms allow-scripts'
+            'sandbox allow-forms allow-scripts',
+            'report-uri https://o372929.ingest.sentry.io/api/5188487/security/?sentry_key=dccdb69d4ce642a79486340d9857a0b8'
           ].join('; '),
           'Content-Type': 'text/html; charset="UTF-8"',
           ETag: await hash(body),
@@ -70,7 +72,9 @@ export async function render<P>(
   const links = [];
 
   for (const link of props.layout.links) {
-    links.push(`<${link.href}>; rel=preload; as=style`);
+    if (link.rel === 'stylesheet') {
+      links.push(`<${link.href}>; rel=preload; as=style`);
+    }
   }
 
   for (const script of props.layout.scripts) {

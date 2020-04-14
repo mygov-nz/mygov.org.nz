@@ -41,12 +41,16 @@ module.exports = merge(common, {
             [
               'css-modules-transform',
               {
+                devMode: isDev,
                 extensions: [ '.scss' ],
                 generateScopedName: isDev
                   ? '[local]_[md5:hash:base62:4]'
                   : '_[md5:hash:base62:4]'
               }
-            ]
+            ],
+            'babel-plugin-console-source',
+            'babel-plugin-transform-react-constant-elements',
+            'module:faster.js'
           ],
           presets: [
             [
@@ -73,7 +77,8 @@ module.exports = merge(common, {
                 useBuiltIns: 'usage'
               }
             ]
-          ]
+          ],
+          sourceMaps: isDev ? 'inline' : true
         },
         test: /\.tsx?$/
       }
@@ -85,7 +90,7 @@ module.exports = merge(common, {
       new TerserPlugin({
         extractComments: false,
         parallel: os.cpus().length,
-        sourceMap: false,
+        sourceMap: isDev,
         terserOptions: {
           ecma: 8,
           ie8: false,
@@ -108,8 +113,7 @@ module.exports = merge(common, {
   plugins: [
     new CopyPlugin([{
       from: 'src/worker',
-      ignore: ['assets.json', '*.ts'],
-      test: '_*.json',
+      ignore: ['.gitignore', 'assets.json', '*.ts'],
       transformPath(targetPath) {
         return targetPath.replace('_package', 'package');
       }

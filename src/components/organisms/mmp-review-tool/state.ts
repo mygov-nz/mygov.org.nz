@@ -2,6 +2,7 @@ import mem from 'mem';
 import { useEffect, useState } from 'preact/hooks';
 
 import { ElectionYear } from '../../../data/types';
+import { debounce } from '../../../lib/debounce';
 
 interface MMPReviewToolActions {
   setOverhang: (overhang: boolean) => void;
@@ -52,9 +53,10 @@ const decode = mem(
 export function encode(state: MMPReviewToolState): string {
   const bits = [
     state.year,
-    state.threshold + '-percent-threshold',
+    state.threshold.toLocaleString() + '-percent-threshold',
     (state.overhang ? '' : 'no-') + 'overhang',
-    (state.tagAlong ? state.tagAlong + '-seat' : 'no') + '-tagalong'
+    (state.tagAlong ? state.tagAlong.toLocaleString() + '-seat' : 'no') +
+      '-tagalong'
   ];
 
   return '/tools/mmp-review/' + bits.join('/');
@@ -88,20 +90,19 @@ export function usePathnameState(
    *
    * @param update
    */
-  function pushState(update: Partial<MMPReviewToolState>): void {
+  function updateState(update: Partial<MMPReviewToolState>): void {
     const newState: MMPReviewToolState = { ...state, ...update };
-
-    history.pushState(newState, document.title, encode(newState));
     setState(newState);
+    history.pushState(newState, document.title, encode(newState));
   }
 
   return [
     state,
     {
-      setOverhang: (overhang: boolean): void => pushState({ overhang }),
-      setTagAlong: (tagAlong: number): void => pushState({ tagAlong }),
-      setThreshold: (threshold: number): void => pushState({ threshold }),
-      setYear: (year: ElectionYear): void => pushState({ year })
+      setOverhang: (overhang: boolean): void => updateState({ overhang }),
+      setTagAlong: (tagAlong: number): void => updateState({ tagAlong }),
+      setThreshold: (threshold: number): void => updateState({ threshold }),
+      setYear: (year: ElectionYear): void => updateState({ year })
     }
   ];
 }

@@ -2,8 +2,7 @@ import mem from 'mem';
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
 import { names } from '../../../../data/parties';
-
-import { swatches } from './swatches';
+import { swatches } from '../../../../data/swatches';
 
 interface NameProps {
   readonly id: string;

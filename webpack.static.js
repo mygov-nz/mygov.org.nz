@@ -1,6 +1,7 @@
 'use strict';
 
 const CopyPlugin = require('copy-webpack-plugin');
+const crypto = require('crypto');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -13,6 +14,24 @@ const TerserPlugin = require('terser-webpack-plugin');
 const common = require('./webpack.common.js');
 
 const isDev = common.mode === 'development';
+
+class CreateHash {
+
+  constructor () {
+    this.hash = crypto.createHash('sha1');
+  }
+
+  digest () {
+    return this.hash.digest('base64')
+      .replace(/\W/gi, '')
+      .slice(0, 4);
+  }
+
+  update (data, inputEncoding) {
+    this.hash.update(data, inputEncoding);
+  }
+
+}
 
 module.exports = merge(common, {
 
@@ -33,6 +52,7 @@ module.exports = merge(common, {
           /\.module\.scss$/,
           /node_modules/
         ],
+        sideEffects: true,
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -54,6 +74,7 @@ module.exports = merge(common, {
       },
       {
         exclude: /node_modules/,
+        sideEffects: true,
         test: /\.module\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -94,7 +115,11 @@ module.exports = merge(common, {
                 pragmaFrag: 'Preact.Fragment',
                 throwIfNamespace: false
               }
-            ]
+            ],
+            'babel-plugin-console-source',
+            'babel-plugin-transform-react-constant-elements',
+            // 'babel-plugin-transform-react-inline-elements',
+            'module:faster.js'
           ],
           presets: [
             [
@@ -134,10 +159,13 @@ module.exports = merge(common, {
       new TerserPlugin({
         extractComments: false,
         parallel: os.cpus().length,
-        sourceMap: true,
+        sourceMap: isDev,
         terserOptions: {
           ecma: 5,
           ie8: false,
+          keep_classnames: undefined,
+          keep_fnames: false,
+          mangle: true,
           output: { comments: false },
           safari10: false
         }
@@ -149,7 +177,14 @@ module.exports = merge(common, {
           chunks: 'all',
           name: 'common',
           priority: 50,
-          test: /\/src\/(components\/atoms|components\/molecules|data|lib)\//,
+          test: /\/src\/(components\/atoms|components\/molecules|lib)\//,
+          reuseExistingChunk: true
+        },
+        data: {
+          chunks: 'all',
+          name: 'data',
+          priority: 75,
+          test: /\/src\/data\//,
           reuseExistingChunk: true
         },
         vendor: {
@@ -166,7 +201,9 @@ module.exports = merge(common, {
   },
 
   output: {
-    filename: isDev ? 'js/[name].js' : 'js/[name]-[chunkhash:6].js',
+    filename: isDev ? 'js/[name].js' : 'js/[name]-[chunkhash].js',
+    hashFunction: CreateHash,
+    jsonpFunction: '_wp',
     path: path.resolve('build/public'),
     publicPath: '/'
   },
@@ -180,8 +217,8 @@ module.exports = merge(common, {
       fileName: path.resolve('src/worker/data/assets.json')
     }),
     new MiniCssExtractPlugin({
-      chunkFilename: 'css/[id]-[chunkhash:6].css',
-      filename: 'css/[name]-[chunkhash:6].css'
+      chunkFilename: isDev ? 'css/[id].css' : 'css/[id]-[chunkhash:6].css',
+      filename: isDev ? 'css/[name].css' : 'css/[name]-[chunkhash:6].css'
     }),
     new OptimizeCssAssetsPlugin({
       cssProcessor: require('cssnano'),

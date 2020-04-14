@@ -3,6 +3,7 @@ import { useEffect, useState } from 'preact/hooks';
 
 import { elections } from '../../../data/elections';
 import { ElectionYear, ElectionDataRow } from '../../../data/types';
+import { debounce } from '../../../lib/debounce';
 
 interface NonVotersToolActions {
   setParty: (party: string) => void;
@@ -47,7 +48,11 @@ const decode = mem(
  * @param props
  */
 export function encode(props: NonVotersToolState): string {
-  const bits = [props.year, props.party, props.percentage + '-percent'];
+  const bits = [
+    props.year,
+    props.party,
+    props.percentage.toLocaleString() + '-percent'
+  ];
 
   return '/tools/non-voters/' + bits.join('/');
 }
@@ -80,31 +85,30 @@ export function usePathnameState(
    *
    * @param update
    */
-  function pushState(update: Partial<NonVotersToolState>): void {
+  function updateState(update: Partial<NonVotersToolState>): void {
     const newState: NonVotersToolState = { ...state, ...update };
-
-    history.pushState(newState, document.title, encode(newState));
     setState(newState);
+    history.pushState(newState, document.title, encode(newState));
   }
 
   return [
     state,
     {
-      setParty: (party: string): void => pushState({ party }),
-      setPercentage: (percentage: number): void => pushState({ percentage }),
+      setParty: (party: string): void => updateState({ party }),
+      setPercentage: (percentage: number): void => updateState({ percentage }),
       setYear: (year: ElectionYear): void => {
         if (state.party.slice(0, 1) === '_') {
-          return pushState({ year });
+          return updateState({ year });
         }
 
         // eslint-disable-next-line security/detect-object-injection
         const parties = elections[year].r.map((row: ElectionDataRow) => row[0]);
 
         if (parties.includes(state.party)) {
-          return pushState({ year });
+          return updateState({ year });
         }
 
-        pushState({ party: '_no', year });
+        updateState({ party: '_no', year });
       }
     }
   ];
