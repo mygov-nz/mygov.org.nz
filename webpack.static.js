@@ -190,16 +190,17 @@ module.exports = merge(common, {
         common: {
           chunks: 'all',
           name: 'common',
-          priority: 75,
-          test: /\/src\/(components\/atoms|components\/molecules|data|lib)\//,
-          reuseExistingChunk: true
-        },
-        vendor: {
-          chunks: 'all',
-          name: 'vendor',
           priority: 100,
-          test: /\/node_modules\//,
-          reuseExistingChunk: true
+          reuseExistingChunk: true,
+          test: (module) => {
+            return module.resource && (
+              module.resource.includes('/node_modules/') ||
+              module.resource.includes('/src/components/atoms/') ||
+              module.resource.includes('/src/components/molecules/') ||
+              module.resource.includes('/src/data/') ||
+              module.resource.includes('/src/lib/')
+            );
+          }
         }
       },
       name: true

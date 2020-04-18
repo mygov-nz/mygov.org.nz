@@ -31,6 +31,18 @@ module.exports = merge(common, {
           ],
           plugins: [
             [
+              'babel-plugin-css-modules-transform',
+              {
+                camelCase: true,
+                devMode: isDev,
+                extensions: [ '.module.scss', '.scss' ],
+                generateScopedName: isDev
+                  ? '[local]_[md5:hash:base62:4]'
+                  : '_[md5:hash:base62:4]',
+                preprocessCss: './src/worker/lib/css-modules/preprocess.js'
+              }
+            ],
+            [
               '@babel/plugin-transform-react-jsx',
               {
                 pragma: 'h',
@@ -50,17 +62,6 @@ module.exports = merge(common, {
                     }
                   }
                 ]
-              }
-            ],
-            [
-              'css-modules-transform',
-              {
-                camelCase: true,
-                devMode: isDev,
-                extensions: [ '.module.scss', '.scss' ],
-                generateScopedName: isDev
-                  ? '[local]_[md5:hash:base62:4]'
-                  : '_[md5:hash:base62:4]'
               }
             ],
             'module:faster.js',

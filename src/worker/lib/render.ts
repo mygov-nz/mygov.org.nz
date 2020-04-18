@@ -3,7 +3,6 @@ import { renderToString } from 'preact-render-to-string';
 
 import { RenderProps } from '../../components/organisms';
 
-import { moochi } from './moochi';
 import { hash } from './utils';
 
 const statusText: Record<number, string> = {

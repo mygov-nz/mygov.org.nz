@@ -41,11 +41,11 @@ export async function getMMPReview(
           {
             rel: 'stylesheet',
             href: resolve('main.css')
-          },
-          {
-            rel: 'stylesheet',
-            href: resolve('common.css')
           }
+          // {
+          //   rel: 'stylesheet',
+          //   href: resolve('common.css')
+          // }
         ],
         meta: [
           {
@@ -55,9 +55,6 @@ export async function getMMPReview(
           }
         ],
         scripts: [
-          {
-            src: resolve('vendor.js')
-          },
           {
             src: resolve('common.js')
           },
