@@ -131,8 +131,8 @@ module.exports = merge(common, {
               }
             ],
             'module:faster.js',
-            'babel-plugin-transform-react-constant-elements',
-            'babel-plugin-console-source'
+            'babel-plugin-transform-react-constant-elements'
+            // 'babel-plugin-console-source'
 
           ],
           presets: [
@@ -219,7 +219,7 @@ module.exports = merge(common, {
   plugins: [
     new CopyPlugin([{
       from: 'src/public',
-      ignore: [ '*.scss', '*.ts' ]
+      ignore: [ '.DS_Store', '*.scss', '*.ts' ]
     }]),
     new ManifestPlugin({
       fileName: path.resolve('src/worker/data/assets.json')

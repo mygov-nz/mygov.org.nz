@@ -1,15 +1,16 @@
 /**
  *
  * @param fn
+ * @param wait
  */
-export function debounce(fn: Function): Function {
+export function debounce(fn: Function, wait: number): Function {
   let timeout: number | null = null;
 
   return function (...args: any[]): void {
     if (timeout) {
-			window.cancelAnimationFrame(timeout);
+      window.clearTimeout(timeout);
     }
 
-    timeout = window.requestAnimationFrame(() => fn(...args));
+    timeout = window.setTimeout(() => fn(...args), wait);
   };
 }

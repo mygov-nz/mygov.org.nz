@@ -1,5 +1,5 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
-import { useEffect, useRef } from 'preact/hooks';
+import { useCallback, useRef, useState } from 'preact/hooks';
 
 import form from '../form/form.module.scss';
 
@@ -20,60 +20,45 @@ interface SliderProps {
  */
 export const Slider: FC<SliderProps> = (props): JSX.Element => {
   const slider = useRef<HTMLDivElement>(null);
-  const knob = useRef<HTMLDivElement>(null);
-  const left = useRef<HTMLDivElement>(null);
-  const right = useRef<HTMLDivElement>(null);
-
-  let x = 0;
-  let y = 0;
-  let leftWidth = 0;
-
-  const mouseMoveHandler = (event: MouseEvent): void => {
-    if (!slider.current || !knob.current || !left.current || !right.current) {
-      return;
-    }
-
-    const dx = event.clientX - x;
-
-    const containerWidth = slider.current.getBoundingClientRect().width;
-    let newLeftWidth = ((leftWidth + dx) * 100) / containerWidth;
-    newLeftWidth = Math.max(newLeftWidth, 0);
-    newLeftWidth = Math.min(newLeftWidth, 100);
-
-    console.log(newLeftWidth);
-
-    left.current.style.width = newLeftWidth + '%';
-
-    left.current.style.userSelect = 'none';
-    left.current.style.pointerEvents = 'none';
-
-    right.current.style.userSelect = 'none';
-    right.current.style.pointerEvents = 'none';
-  };
-
-  const mouseUpHandler = (): void => {
-    if (!left.current || !right.current) {
-      return;
-    }
-
-    left.current.style.removeProperty('user-select');
-    left.current.style.removeProperty('pointer-events');
-
-    right.current.style.removeProperty('user-select');
-    right.current.style.removeProperty('pointer-events');
-
-    document.removeEventListener('mousemove', mouseMoveHandler);
-    document.removeEventListener('mouseup', mouseUpHandler);
-  };
+  const [value, setValue] = useState<number>(props.value);
 
   const mouseDownHandler = (event: MouseEvent): void => {
-    if (!left.current) {
-      return;
-    }
+    event.preventDefault();
+    event.stopPropagation();
 
-    x = event.clientX;
-    y = event.clientY;
-    leftWidth = left.current.getBoundingClientRect().width;
+    const mouseMoveHandler = (event: MouseEvent): void => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!slider.current) {
+        return;
+      }
+
+      const rect = slider.current.getBoundingClientRect();
+      const val = Math.round(((event.clientX - rect.left) / rect.width) * 100);
+      const result = Math.max(Math.min(val, 100), 0);
+
+      setValue(result);
+    };
+
+    const mouseUpHandler = (event: MouseEvent): void => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler);
+
+      if (!slider.current) {
+        return;
+      }
+
+      const rect = slider.current.getBoundingClientRect();
+      const val = Math.round(((event.clientX - rect.left) / rect.width) * 100);
+      const result = Math.max(Math.min(val, 100), 0);
+
+      setValue(result);
+      props.onChange(result);
+    };
 
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
@@ -90,10 +75,11 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
         aria-valuemin={props.min}
         aria-valuenow={props.value}
         onMouseDown={mouseDownHandler}
+        ref={slider}
       >
-        <div className={styles.left} ref={left} />
-        <div className={styles.knob} ref={knob} />
-        <div className={styles.right} ref={right} />
+        <div className={styles.left} style={{ width: value + '%' }} />
+        <div className={styles.knob} />
+        <div className={styles.right} />
       </div>
     </label>
   );

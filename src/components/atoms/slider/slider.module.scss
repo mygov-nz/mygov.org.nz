@@ -20,18 +20,15 @@
   }
 }
 
-.left,
-.right {
-  flex: 1;
-  height: 0.125rem;
-}
-
 .left {
   background-color: #28a745;
   border-radius: 1px 0 0 1px;
+  height: 0.125rem;
 }
 
 .right {
   background-color: #ced4da;
   border-radius: 0 1px 1px 0;
+  flex: 1;
+  height: 0.125rem;
 }
