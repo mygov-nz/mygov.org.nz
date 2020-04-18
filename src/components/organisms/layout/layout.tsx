@@ -52,7 +52,8 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
           <meta {...meta} key={meta.name || meta.property} />
         )
       )}
-      <link rel="manifest" href="/manifest.json" />
+      <link rel="manifest" href="/manifest.webmanifest" />
+      <link rel="apple-touch-icon" href="/images/icon-192.png" />
       {props.links.map(
         (link): JSX.Element => (
           <link {...link} key={link.href} href={link.href} />

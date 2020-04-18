@@ -116,10 +116,24 @@ module.exports = merge(common, {
                 throwIfNamespace: false
               }
             ],
-            'babel-plugin-console-source',
+            [
+              'babel-plugin-minify-replace',
+              {
+                replacements: [
+                  {
+                    identifierName: "ENVIRONMENT",
+                    replacement: {
+                      type: "stringLiteral",
+                      value: process.env.NODE_ENV,
+                    }
+                  }
+                ]
+              }
+            ],
+            'module:faster.js',
             'babel-plugin-transform-react-constant-elements',
-            // 'babel-plugin-transform-react-inline-elements',
-            'module:faster.js'
+            'babel-plugin-console-source'
+
           ],
           presets: [
             [
@@ -176,15 +190,8 @@ module.exports = merge(common, {
         common: {
           chunks: 'all',
           name: 'common',
-          priority: 50,
-          test: /\/src\/(components\/atoms|components\/molecules|lib)\//,
-          reuseExistingChunk: true
-        },
-        data: {
-          chunks: 'all',
-          name: 'data',
           priority: 75,
-          test: /\/src\/data\//,
+          test: /\/src\/(components\/atoms|components\/molecules|data|lib)\//,
           reuseExistingChunk: true
         },
         vendor: {
@@ -236,27 +243,26 @@ module.exports = merge(common, {
       crossorigin: null,
       default_locale: 'en_NZ',
       description: 'MyGov.org.nz',
-      display: 'standalone',
+      display: 'minimal-ui',
+      filename: 'manifest.webmanifest',
       fingerprints: false,
       icons: [
         {
+          purpose: 'any maskable',
           sizes: 48,
-          src: path.resolve('src/public/images/launcher-icon.png'),
+          src: path.resolve('src/public/images/icon-48.png'),
           type: 'image/png'
         },
         {
-          sizes: 96,
-          src: path.resolve('src/public/images/launcher-icon@2x.png'),
-          type: 'image/png'
-        },
-        {
-          sizes: 144,
-          src: path.resolve('src/public/images/launcher-icon@3x.png'),
-          type: 'image/png'
-        },
-        {
+          purpose: 'any maskable',
           sizes: 192,
-          src: path.resolve('src/public/images/launcher-icon@4x.png'),
+          src: path.resolve('src/public/images/icon-192.png'),
+          type: 'image/png'
+        },
+        {
+          purpose: 'any maskable',
+          sizes: 512,
+          src: path.resolve('src/public/images/icon-512.png'),
           type: 'image/png'
         }
       ],

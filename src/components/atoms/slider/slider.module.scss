@@ -1,53 +1,37 @@
 .slider {
-  cursor: pointer;
+  align-items: center;
+  display: flex;
   height: 2.25rem;
-  position: relative;
-  touch-action: none;
   width: 100%;
 }
 
-.track {
-  background-color: #ced4da;
-  border-radius: 1px;
-  bottom: 0;
-  height: 0.125rem;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 1.0625rem;
-}
-
-.fill {
-  background-color: #28a745;
-  height: 100%;
-}
-
 .knob {
+  background-color: #28a745;
   border-radius: 50%;
   box-sizing: border-box;
-  height: 2.25rem;
-  margin-left: -1.125rem;
-  padding: 0.75rem;
-  position: absolute;
-  top: 0;
-  width: 2.25rem;
+  height: 0.75rem;
+  transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  width: 0.75rem;
 
   &:hover,
   &:focus {
+    box-shadow: 0 0 0 0.5rem rgba(0, 123, 255, 0.25);
     outline: 0;
   }
+}
 
-  div {
-    background-color: #28a745;
-    border-radius: 50%;
-    height: 0.75rem;
-    position: absolute;
-    transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    width: 0.75rem;
-  }
+.left,
+.right {
+  flex: 1;
+  height: 0.125rem;
+}
 
-  &:hover div,
-  &:focus div {
-    box-shadow: 0 0 0 0.5rem rgba(0, 123, 255, 0.25);
-  }
+.left {
+  background-color: #28a745;
+  border-radius: 1px 0 0 1px;
+}
+
+.right {
+  background-color: #ced4da;
+  border-radius: 0 1px 1px 0;
 }

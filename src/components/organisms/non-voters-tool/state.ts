@@ -3,7 +3,6 @@ import { useEffect, useState } from 'preact/hooks';
 
 import { elections } from '../../../data/elections';
 import { ElectionYear, ElectionDataRow } from '../../../data/types';
-import { debounce } from '../../../lib/debounce';
 
 interface NonVotersToolActions {
   setParty: (party: string) => void;

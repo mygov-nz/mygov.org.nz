@@ -2,10 +2,10 @@ import { FunctionalComponent as FC, Fragment, h, JSX } from 'preact';
 
 import { ElectionYear } from '../../../data/types';
 import { Form, Slider } from '../../atoms';
-import { ComparisonTable, PartySelect, YearSelect } from '../../molecules';
+import { PartySelect, YearSelect } from '../../molecules';
 
-import { getData } from './data';
 import styles from './non-voters-tool.module.scss';
+import { Results } from './results';
 import { usePathnameState } from './state';
 
 export interface NonVotersToolProps {
@@ -17,9 +17,6 @@ export interface NonVotersToolProps {
  */
 export const NonVotersTool: FC<NonVotersToolProps> = (props): JSX.Element => {
   const [state, actions] = usePathnameState(props.pathname);
-
-  const current = getData(state);
-  const original = getData({ party: '_no', percentage: 0, year: state.year });
 
   /**
    *
@@ -68,7 +65,7 @@ export const NonVotersTool: FC<NonVotersToolProps> = (props): JSX.Element => {
           value={state.percentage}
         />
       </Form>
-      <ComparisonTable a={original} b={current} />
+      <Results {...state} />
     </Fragment>
   );
 };

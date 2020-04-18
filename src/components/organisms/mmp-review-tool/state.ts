@@ -2,7 +2,6 @@ import mem from 'mem';
 import { useEffect, useState } from 'preact/hooks';
 
 import { ElectionYear } from '../../../data/types';
-import { debounce } from '../../../lib/debounce';
 
 interface MMPReviewToolActions {
   setOverhang: (overhang: boolean) => void;

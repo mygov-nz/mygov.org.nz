@@ -8,10 +8,31 @@ import { Difference } from './difference/difference';
 import { Row } from './row/row';
 import { Value } from './value/value';
 
+interface ColumnProps {
+  className?: string;
+  width?: string;
+}
+
 interface ComparisonTableProps {
   a: ElectionResult;
   b: ElectionResult;
 }
+
+/**
+ *
+ * @param props
+ */
+const Column: FC<ColumnProps> = (props): JSX.Element => (
+  <col width="12.5%" {...props} />
+);
+
+/**
+ *
+ * @param props
+ */
+const Header: FC = (props): JSX.Element => (
+  <th scope="col">{props.children}</th>
+);
 
 /**
  *
@@ -24,27 +45,27 @@ export const ComparisonTable: FC<ComparisonTableProps> = (
   return (
     <table className={styles.comparisonTable}>
       <colgroup>
-        <col width="35.0%" />
-        <col width="15.0%" className={styles.detailsColumn} />
-        <col width="12.5%" className={styles.detailsColumn} />
-        <col width="12.5%" />
-        <col width="12.5%" />
-        <col width="12.5%" />
+        <Column width="35.0%" />
+        <Column width="15.0%" />
+        <Column />
+        <Column />
+        <Column />
+        <Column />
       </colgroup>
       <thead>
         <tr>
           <th />
-          <th scope="col">Votes</th>
-          <th scope="col">Electorates</th>
-          <th scope="col">
+          <Header>Votes</Header>
+          <Header>Electorates</Header>
+          <Header>
             List <span>seats</span>
-          </th>
-          <th scope="col">
+          </Header>
+          <Header>
             Total <span>seats</span>
-          </th>
-          <th scope="col">
+          </Header>
+          <Header>
             Diff<span>erence</span>
-          </th>
+          </Header>
         </tr>
       </thead>
       <tfoot>

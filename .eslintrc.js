@@ -49,7 +49,7 @@ module.exports = {
       {
         default: [
           'signature',
-    
+
           // Fields
           'public-static-field',
           'protected-static-field',
@@ -60,12 +60,12 @@ module.exports = {
           'public-abstract-field',
           'protected-abstract-field',
           'private-abstract-field',
-    
+
           // Constructors
           'public-constructor',
           'protected-constructor',
           'private-constructor',
-    
+
           // Methods
           'public-static-method',
           'protected-static-method',

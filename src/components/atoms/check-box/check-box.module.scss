@@ -10,24 +10,22 @@
     z-index: -1;
   }
 
+  span {
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+  }
+
   span::after,
   span::before {
     content: "";
     cursor: pointer;
     display: block;
     height: 1rem;
-    left: 0;
+    left: 0.75rem;
     position: absolute;
-    top: .25rem;
+    top: 0.25rem;
     user-select: none;
     width: 1rem;
-
-    @media (min-width: 576px) {
-      height: 2.375rem;
-      left: 1rem;
-      top: 1.8125rem;
-      width: 2.375rem;
-    }
   }
 
   span::after {
@@ -56,5 +54,20 @@
   input:focus~span::before {
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  @media (min-width: 576px) {
+    min-height: 4.1875rem;
+
+    span {
+      padding-left: 0;
+    }
+
+    span::after,
+    span::before {
+      height: 2.375rem;
+      top: 1.8125rem;
+      width: 2.375rem;
+    }
   }
 }

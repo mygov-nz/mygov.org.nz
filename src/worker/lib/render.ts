@@ -3,6 +3,7 @@ import { renderToString } from 'preact-render-to-string';
 
 import { RenderProps } from '../../components/organisms';
 
+import { moochi } from './moochi';
 import { hash } from './utils';
 
 const statusText: Record<number, string> = {
@@ -25,8 +26,10 @@ export async function render<P>(
 ): Promise<Response> {
   /* eslint-disable security/detect-object-injection */
 
+  const vnode = h<P>(type, props);
+
   const body = renderToString(
-    h<P>(type, props),
+    vnode,
     {},
     { pretty: ENVIRONMENT === 'production' ? '' : '    ' }
   );

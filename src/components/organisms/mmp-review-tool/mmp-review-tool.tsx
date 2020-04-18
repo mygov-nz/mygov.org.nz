@@ -2,10 +2,10 @@ import { FunctionalComponent as FC, Fragment, h, JSX } from 'preact';
 
 import { ElectionYear } from '../../../data/types';
 import { CheckBox, Form, NumberInput } from '../../atoms';
-import { ComparisonTable, YearSelect } from '../../molecules';
+import { YearSelect } from '../../molecules';
 
-import { getData } from './data';
 import styles from './mmp-review-tool.module.scss';
+import { Results } from './results';
 import { usePathnameState } from './state';
 
 export interface MMPReviewToolProps {
@@ -17,14 +17,6 @@ export interface MMPReviewToolProps {
  */
 export const MMPReviewTool: FC<MMPReviewToolProps> = (props): JSX.Element => {
   const [state, actions] = usePathnameState(props.pathname);
-
-  const current = getData(state);
-  const original = getData({
-    overhang: true,
-    tagAlong: 1,
-    threshold: 5,
-    year: state.year
-  });
 
   /**
    *
@@ -110,7 +102,7 @@ export const MMPReviewTool: FC<MMPReviewToolProps> = (props): JSX.Element => {
           onChange={onChangeTagAlongSeats}
         />
       </Form>
-      <ComparisonTable a={original} b={current} />
+      <Results {...state} />
     </Fragment>
   );
 };

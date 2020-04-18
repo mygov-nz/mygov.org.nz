@@ -39,6 +39,20 @@ module.exports = merge(common, {
               }
             ],
             [
+              'babel-plugin-minify-replace',
+              {
+                replacements: [
+                  {
+                    identifierName: "ENVIRONMENT",
+                    replacement: {
+                      type: "stringLiteral",
+                      value: process.env.NODE_ENV,
+                    }
+                  }
+                ]
+              }
+            ],
+            [
               'css-modules-transform',
               {
                 camelCase: true,
@@ -49,9 +63,9 @@ module.exports = merge(common, {
                   : '_[md5:hash:base62:4]'
               }
             ],
-            'babel-plugin-console-source',
+            'module:faster.js',
             'babel-plugin-transform-react-constant-elements',
-            'module:faster.js'
+            'babel-plugin-console-source'
           ],
           presets: [
             [

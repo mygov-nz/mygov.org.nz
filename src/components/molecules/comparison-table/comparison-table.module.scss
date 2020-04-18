@@ -1,5 +1,6 @@
 .comparisonTable {
   border-collapse: collapse;
+  max-width: 100%;
   width: 100%;
 
   thead th,
@@ -10,6 +11,10 @@
 
   thead span {
     display: none;
+
+    @media (min-width: 992px) {
+      display: inline;
+    }
   }
 
   tfoot,
@@ -36,21 +41,28 @@
   }
 
   tbody th {
-    padding-left: 2.5rem;
+    padding: 0.75rem;
     position: relative;
     text-align: left;
   }
 
-  tbody th::before {
-    background: var(--swatch) linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(255,255,255,0.05) 100%);
-    border-radius: 0.375rem;
-    content: " ";
-    height: 0.75rem;
-    left: 1rem;
-    margin-top: -0.375rem;
-    position: absolute;
-    top: 50%;
-    width: 0.75rem;
+  @media (min-width: 576px) {
+    tbody th {
+      padding-left: 2.5rem;
+    }
+
+    tbody th::before {
+      background: var(--swatch) linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+      border-radius: 0.375rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      content: " ";
+      height: 0.75rem;
+      left: 1rem;
+      margin-top: -0.375rem;
+      position: absolute;
+      top: 50%;
+      width: 0.75rem;
+    }
   }
 
   // tbody tr:nth-child(odd) td,
@@ -58,26 +70,27 @@
   //   background-color: #f8f8f8;
   // }
 
-}
+  col:nth-child(2),
+  col:nth-child(3) {
+    display: none;
 
-.detailsColumn {
-  display: none;
-}
+    @media (min-width: 576px) {
+      display: table-column;
+    }
+  }
 
-@media (min-width: 576px) {
+  thead tr th:nth-child(2),
+  thead tr th:nth-child(3),
+  tbody tr td:nth-child(2),
+  tbody tr td:nth-child(3),
+  tfoot tr:first-child td:nth-child(2),
+  tfoot tr:first-child td:nth-child(3),
+  tfoot tr:nth-child(2) td:first-child {
+    display: none;
 
-  .detailsColumn {
-    display: table-column;
+    @media (min-width: 576px) {
+      display: table-cell;
+    }
   }
 
 }
-
-@media (min-width: 992px) {
-
-  .comparisonTable thead span {
-    display: inline;
-  }
-
-}
-
-
