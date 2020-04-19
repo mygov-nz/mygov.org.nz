@@ -41,6 +41,7 @@ export const ComparisonTable: FC<ComparisonTableProps> = (
   props
 ): JSX.Element => {
   const data = compare(props.a, props.b);
+  const seatDiff = data.totalSeatDiff;
 
   return (
     <table className={styles.comparisonTable}>
@@ -75,7 +76,9 @@ export const ComparisonTable: FC<ComparisonTableProps> = (
           <Value value={data.electorates} />
           <Value value={data.listSeats} />
           <Value value={data.totalSeats} />
-          <td>{(data.totalSeatDiff > 0 ? '+' : '') + data.totalSeatDiff}</td>
+          <td>
+            {(seatDiff > 0 ? '+' : '') + (seatDiff === 0 ? '' : seatDiff)}
+          </td>
         </tr>
         <tr>
           <td colSpan={2} />

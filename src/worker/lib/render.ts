@@ -36,15 +36,15 @@ export async function render<P>(
   const defaultHeaders: Record<string, string> =
     ENVIRONMENT === 'production'
       ? {
-          'Cache-Control': 'max-age=3600',
+          'Cache-Control': 'public, max-age=3600, s-maxage=86400, immutable',
           'Content-Security-Policy': [
             "default-src 'none'",
             "img-src 'self' data:",
             "font-src 'self'",
             "frame-ancestors 'self'",
             "manifest-src 'self'",
-            // "prefetch-src 'self'",
-            "script-src 'self' www.googletagmanager.com",
+            "prefetch-src 'self'",
+            "script-src 'self' www.google-analytics.com www.googletagmanager.com 'sha256-ODU3OTczMjlkYjU3ZDc4ZjU0NWMzZWQ5NWEyOTNmNTkzZGFiOTRkODNjMDYwZmM4M2JjZTZlNTU2ODYxM2I5NA=='",
             "style-src 'self' 'unsafe-inline'",
             "worker-src 'self'",
             'sandbox allow-forms allow-scripts',

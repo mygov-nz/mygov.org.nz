@@ -16,7 +16,15 @@ export async function handleEvent(event: FetchEvent): Promise<Response> {
   }
 
   try {
-    return await getAssetFromKV(event);
+    const asset = await getAssetFromKV(event);
+
+    const response = new Response(asset.body, asset);
+    response.headers.set(
+      'Cache-Control',
+      'public, max-age=31566240, immutable'
+    );
+
+    return response;
   } catch (err) {
     return routes.route(event.request, ctx);
   }

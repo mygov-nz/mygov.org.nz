@@ -85,7 +85,11 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
       >
         <div className={styles.left} style={{ width: value + '%' }} />
         <div className={styles.right} />
-        <div className={styles.knob} style={{ left: value + '%' }} />
+        <div
+          className={styles.knob}
+          style={{ left: value + '%' }}
+          tabIndex={0}
+        />
         <div className={styles.label} style={{ left: value + '%' }}>
           {value + '%'}
         </div>
