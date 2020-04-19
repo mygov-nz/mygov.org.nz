@@ -42,10 +42,6 @@ export async function getMMPReview(
             rel: 'stylesheet',
             href: resolve('main.css')
           }
-          // {
-          //   rel: 'stylesheet',
-          //   href: resolve('common.css')
-          // }
         ],
         meta: [
           {

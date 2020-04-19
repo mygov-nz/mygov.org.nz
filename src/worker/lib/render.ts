@@ -3,7 +3,7 @@ import { renderToString } from 'preact-render-to-string';
 
 import { RenderProps } from '../../components/organisms';
 
-import { hash } from './utils';
+// import { hash } from './utils';
 
 const statusText: Record<number, string> = {
   200: 'OK',

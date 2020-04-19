@@ -39,7 +39,7 @@
 }
 
 .header {
-  background-color: var(--primary-colour);
+  background-color: var(--header-background-colour);
   font-weight: 600;
 
   nav {
@@ -99,13 +99,16 @@
 }
 
 .footer {
-  background-color: #231f20;
+  align-items: center;
+  background-color: var(--footer-background-colour);
+  display: flex;
+  height: 4rem;
+  justify-content: center;
   margin-top: 1.5rem;
-  padding: 2rem;
   text-align: center;
 
   a, a:hover {
-    color: #999;
+    color: var(--footer-text-colour);
     text-decoration: none;
   }
 }

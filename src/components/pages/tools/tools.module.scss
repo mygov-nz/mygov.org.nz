@@ -15,8 +15,8 @@
   }
 
   a {
-    background-color: #ffc050;
-    color: #2d292a;
+    background-color: var(--cta-background-colour);
+    color: var(--cta-text-colour);
     display: block;
     font-size: 1.875rem;
     font-weight: 800;
@@ -30,8 +30,8 @@
   }
 
   a:hover {
-    background-color: #2d292a;
-    color: #f89828;
+    background-color: var(--cta-hover-background-colour);
+    color: var(--cta-hover-text-colour);
     text-decoration: none;
   }
 }

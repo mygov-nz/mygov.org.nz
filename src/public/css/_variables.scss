@@ -1,16 +1,33 @@
 :root {
   --background-color: #fff;
-  --border-colour: #eee;
+  --text-colour: #212529;
   --heading-colour: #d43900;
   --link-colour: #d43900;
-  --primary-colour: #eb811a;
-  --text-colour: #212529;
+  --border-colour: #eee;
+
+  --header-background-colour: #eb811a;
   --header-text-colour: #fff;
-  --form-background-color: #f8f8f8;
+  --footer-background-colour: #231f20;
+  --footer-text-colour: #999;
 
-  --success-colour: rgba(40, 167, 69, .1);
+  --form-background-colour: #f8f8f8;
+  --input-background-colour: #fff;
+  --input-border-colour: #ced4da;
+  --input-suffix-colour: #e9ecef;
+  --input-suffix-background-colour: #e9ecef;
+  --input-focused-border-colour: #80bdff;
+  --input-active-background-colour: #28a745;
+  --input-inactive-background-colour: #dee2e6;
 
-  // Difference
+  --table-row-colour: #fff;
+  --table-row-alt-colour: #fcfcfc;
+  --success-colour: #eaf6ec;
+  --success-alt-colour: #e7f4ea;
   --negative-difference-colour: #dc3545;
   --positive-difference-colour: #28a745;
+
+  --cta-background-colour: #ffc050;
+  --cta-text-colour: #2d292a;
+  --cta-hover-background-colour: #2d292a;
+  --cta-hover-text-colour: #f89828;
 }

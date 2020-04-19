@@ -46,6 +46,16 @@
     text-align: left;
   }
 
+  tbody tr td,
+  tbody tr th {
+    background-color: var(--table-row-colour);
+  }
+
+  tbody tr:nth-child(odd) td,
+  tbody tr:nth-child(odd) th {
+    background-color: var(--table-row-alt-colour);
+  }
+
   @media (min-width: 576px) {
     tbody th {
       padding-left: 2.5rem;
@@ -64,11 +74,6 @@
       width: 0.75rem;
     }
   }
-
-  // tbody tr:nth-child(odd) td,
-  // tbody tr:nth-child(odd) th {
-  //   background-color: #f8f8f8;
-  // }
 
   col:nth-child(2),
   col:nth-child(3) {

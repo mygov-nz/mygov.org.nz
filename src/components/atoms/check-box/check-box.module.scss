@@ -38,7 +38,7 @@
   }
 
   span::before {
-    background-color: #dee2e6;
+    background-color: var(--input-inactive-background-colour);
     border-radius: 0.25rem;
     transition: background-color 0.25s;
   }
@@ -48,11 +48,11 @@
   }
 
   input:checked~span::before {
-    background-color: #28a745;
+    background-color: var(--input-active-background-colour);
   }
 
   input:focus~span::before {
-    border-color: #80bdff;
+    border-color: var(--input-focused-border-colour);
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
 

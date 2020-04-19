@@ -1,26 +1,35 @@
 .form {
-  background-color: var(--form-background-color);
+  background-color: var(--form-background-colour);
   border: 1px solid var(--border-colour);
   border-radius: 0.25rem;
   box-shadow: inset 0 2px 1px -1px rgba(0, 0, 0, 0.04),
               inset 0 1px 1px 0 rgba(0, 0, 0, 0.028),
               inset 0 1px 3px 0 rgba(0, 0, 0, 0.024);
-  flex-direction: column;
+  display: grid;
   margin: 0 0 0.75rem;
   padding: 1.1875rem 0.75rem 0;
   word-wrap: break-word;
+
+  @media (min-width: 576px) {
+    margin: 0 0 0.5rem;
+    padding: 1.1625rem 0.5rem 0;
+  }
 }
 
 .field {
   box-sizing: border-box;
   display: block;
   margin: 0;
-  padding: 0 0.75rem 1.5rem;
+  padding: 0 0.5rem 1rem;
   position: relative;
 
   span {
     display: block;
     font-weight: 600;
     margin-bottom: 0.3125rem;
+  }
+
+  @media (min-width: 576px) {
+    padding: 0 0.75rem 1.5rem;
   }
 }
