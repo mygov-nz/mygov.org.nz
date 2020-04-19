@@ -59,6 +59,26 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
           <link {...link} key={link.href} href={link.href} />
         )
       )}
+      <script
+        dangerouslySetInnerHTML={{
+          __html:
+            'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","UA-45926000-1")'
+        }}
+      ></script>
+      {props.scripts.map(
+        (script): JSX.Element => (
+          <script
+            defer={true}
+            {...script}
+            key={script.src}
+            src={script.src}
+          ></script>
+        )
+      )}
+      <script
+        async={true}
+        src="https://www.googletagmanager.com/gtag/js?id=UA-45926000-1"
+      ></script>
     </head>
     <body>
       <a href="#content" className={styles.skipToContent}>
@@ -82,11 +102,6 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
       <footer className={styles.footer}>
         <a href="https://mygov.org.nz">mygov.org.nz</a>
       </footer>
-      {props.scripts.map(
-        (script): JSX.Element => (
-          <script {...script} key={script.src} src={script.src}></script>
-        )
-      )}
     </body>
   </html>
 );
