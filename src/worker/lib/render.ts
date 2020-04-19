@@ -44,7 +44,7 @@ export async function render<P>(
             "frame-ancestors 'self'",
             "manifest-src 'self'",
             // "prefetch-src 'self'",
-            "script-src 'self'",
+            "script-src 'self' www.googletagmanager.com",
             "style-src 'self' 'unsafe-inline'",
             "worker-src 'self'",
             'sandbox allow-forms allow-scripts',

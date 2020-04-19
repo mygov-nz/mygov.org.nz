@@ -13,7 +13,7 @@ export const getData = mem<[MMPReviewToolState], ElectionResult, string>(
   (state: MMPReviewToolState): ElectionResult => {
     return getResult(elections[state.year].r, {
       seats: 120,
-      threshold: state.threshold / 100,
+      threshold: state.threshold,
       overhang: state.overhang,
       tagAlong: !!state.tagAlong,
       tagAlongSeats: state.tagAlong

@@ -39,10 +39,14 @@ export function getResult(
   const parties = rows.map((row) => ({
     electorates: row[2] || 0,
     id: row[0],
-    votes: row[1]
+    votes: row[1],
+    listSize: row[0] === '_nn' ? 0 : undefined
   }));
 
-  const results = saintLague(parties, options);
+  const results = saintLague(parties, {
+    ...options,
+    threshold: options.threshold / 100
+  });
 
   return {
     electorates: results.reduce((a: number, b: any) => a + b.electorates, 0),
@@ -53,9 +57,7 @@ export function getResult(
       }))
     ),
     listSeats: results.reduce((a: number, b: any) => a + b.lists, 0),
-    rows: results.sort((x: ElectionResultRow, y: ElectionResultRow) => {
-      return y.votes - x.votes;
-    }),
+    rows: results,
     totalSeats: results.reduce(
       (a: number, b: any) => a + b.electorates + b.lists,
       0

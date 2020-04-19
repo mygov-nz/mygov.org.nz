@@ -22,7 +22,7 @@ export async function tools(): Promise<Response> {
           },
           {
             rel: 'prefetch',
-            href: '/tools/non-voters/2017/_no/0-percent'
+            href: '/tools/non-voters/2017/_no/50-percent'
           }
         ],
         meta: [],

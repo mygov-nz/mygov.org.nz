@@ -24,16 +24,21 @@ export function compare(
   return {
     ...b,
     gallagherDiff: ((b.gallagher - a.gallagher) / a.gallagher) * 100,
-    rows: b.rows.slice().map(
-      (row: ElectionResultRow, i: number): ComparisonRow => ({
-        ...row,
-        difference:
-          b.rows[i].electorates +
-          b.rows[i].lists -
-          ((a.rows[i] && a.rows[i].electorates) || 0) -
-          ((a.rows[i] && a.rows[i].lists) || 0)
-      })
-    ),
+    rows: b.rows
+      .slice()
+      .map(
+        (row: ElectionResultRow, i: number): ComparisonRow => ({
+          ...row,
+          difference:
+            b.rows[i].electorates +
+            b.rows[i].lists -
+            ((a.rows[i] && a.rows[i].electorates) || 0) -
+            ((a.rows[i] && a.rows[i].lists) || 0)
+        })
+      )
+      .sort((x: ElectionResultRow, y: ElectionResultRow) => {
+        return y.votes - x.votes;
+      }),
     totalSeatDiff: b.totalSeats - a.totalSeats
   };
 }

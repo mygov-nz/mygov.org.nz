@@ -21,6 +21,7 @@ interface SliderProps {
 export const Slider: FC<SliderProps> = (props): JSX.Element => {
   const slider = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState<number>(props.value);
+  const [dragging, setDragging] = useState<boolean>(false);
 
   const mouseDownHandler = useCallback(
     (event: MouseEvent): void => {
@@ -58,11 +59,13 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
         const value = Math.max(Math.min(x, 100), 0);
 
         setValue(value);
+        setDragging(false);
         props.onChange(value);
       };
 
       document.addEventListener('mousemove', mouseMoveHandler);
       document.addEventListener('mouseup', mouseUpHandler);
+      setDragging(true);
     },
     [slider.current]
   );
@@ -72,7 +75,7 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
       <input type="hidden" name={props.id} id={props.id} value={props.value} />
       <span>{props.label}</span>
       <div
-        className={styles.slider}
+        className={styles.slider + ' ' + (dragging ? styles.dragging : '')}
         aria-orientation="horizontal"
         aria-valuemax={props.max}
         aria-valuemin={props.min}
@@ -81,8 +84,11 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
         ref={slider}
       >
         <div className={styles.left} style={{ width: value + '%' }} />
-        <div className={styles.knob} />
         <div className={styles.right} />
+        <div className={styles.knob} style={{ left: value + '%' }} />
+        <div className={styles.label} style={{ left: value + '%' }}>
+          {value + '%'}
+        </div>
       </div>
     </label>
   );

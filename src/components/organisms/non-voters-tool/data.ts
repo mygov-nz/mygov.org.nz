@@ -16,25 +16,30 @@ export const getData = mem<[NonVotersToolState], ElectionResult, string>(
   (state: NonVotersToolState): ElectionResult => {
     /* eslint-disable security/detect-object-injection */
 
-    const data = elections[state.year];
-    const votes = (data.e - data.v) * (state.percentage / 100);
-    const rows = data.r.map(
-      (row: ElectionDataRow): DataRow => [row[0], row[1], row[2] || 0]
-    );
+    const data = {
+      ...elections[state.year],
+      r: elections[state.year].r.map(
+        (row: ElectionDataRow): DataRow => [row[0], row[1], row[2] || 0]
+      )
+    };
+
+    const votes = Math.round((data.e - data.v) * (state.percentage / 100));
+    data.e = data.e - votes;
+    data.v = data.v + votes;
 
     if (state.party !== '_no') {
-      const i = rows.findIndex((row: DataRow): row is DataRow => {
+      const i = data.r.findIndex((row: DataRow): row is DataRow => {
         return row[0] === state.party;
       });
 
       if (i > -1) {
-        rows[i][1] = rows[i][1] + votes;
+        data.r[i][1] = data.r[i][1] + votes;
       } else {
-        rows.push([state.party, votes, 0]);
+        data.r.push([state.party, votes, 0]);
       }
     }
 
-    return getResult(rows, {
+    return getResult(data.r, {
       seats: 120,
       threshold: 5,
       overhang: true,
