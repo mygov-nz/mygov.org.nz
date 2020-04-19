@@ -22,47 +22,50 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
   const slider = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState<number>(props.value);
 
-  const mouseDownHandler = (event: MouseEvent): void => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const mouseMoveHandler = (event: MouseEvent): void => {
+  const mouseDownHandler = useCallback(
+    (event: MouseEvent): void => {
       event.preventDefault();
       event.stopPropagation();
 
-      if (!slider.current) {
-        return;
-      }
+      const mouseMoveHandler = (event: MouseEvent): void => {
+        event.preventDefault();
+        event.stopPropagation();
 
-      const rect = slider.current.getBoundingClientRect();
-      const val = Math.round(((event.clientX - rect.left) / rect.width) * 100);
-      const result = Math.max(Math.min(val, 100), 0);
+        if (!slider.current) {
+          return;
+        }
 
-      setValue(result);
-    };
+        const rect = slider.current.getBoundingClientRect();
+        const x = Math.round(((event.clientX - rect.left) / rect.width) * 100);
+        const value = Math.max(Math.min(x, 100), 0);
 
-    const mouseUpHandler = (event: MouseEvent): void => {
-      event.preventDefault();
-      event.stopPropagation();
+        setValue(value);
+      };
 
-      document.removeEventListener('mousemove', mouseMoveHandler);
-      document.removeEventListener('mouseup', mouseUpHandler);
+      const mouseUpHandler = (event: MouseEvent): void => {
+        event.preventDefault();
+        event.stopPropagation();
 
-      if (!slider.current) {
-        return;
-      }
+        document.removeEventListener('mousemove', mouseMoveHandler);
+        document.removeEventListener('mouseup', mouseUpHandler);
 
-      const rect = slider.current.getBoundingClientRect();
-      const val = Math.round(((event.clientX - rect.left) / rect.width) * 100);
-      const result = Math.max(Math.min(val, 100), 0);
+        if (!slider.current) {
+          return;
+        }
 
-      setValue(result);
-      props.onChange(result);
-    };
+        const rect = slider.current.getBoundingClientRect();
+        const x = Math.round(((event.clientX - rect.left) / rect.width) * 100);
+        const value = Math.max(Math.min(x, 100), 0);
 
-    document.addEventListener('mousemove', mouseMoveHandler);
-    document.addEventListener('mouseup', mouseUpHandler);
-  };
+        setValue(value);
+        props.onChange(value);
+      };
+
+      document.addEventListener('mousemove', mouseMoveHandler);
+      document.addEventListener('mouseup', mouseUpHandler);
+    },
+    [slider.current]
+  );
 
   return (
     <label className={form.field} htmlFor={props.id}>

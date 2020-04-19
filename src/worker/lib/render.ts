@@ -41,6 +41,7 @@ export async function render<P>(
             "default-src 'none'",
             "img-src 'self' data:",
             "font-src 'self'",
+            "frame-ancestors 'self'",
             "manifest-src 'self'",
             // "prefetch-src 'self'",
             "script-src 'self'",
@@ -50,15 +51,23 @@ export async function render<P>(
             'report-uri https://o372929.ingest.sentry.io/api/5188487/security/?sentry_key=dccdb69d4ce642a79486340d9857a0b8'
           ].join('; '),
           'Content-Type': 'text/html; charset="UTF-8"',
-          ETag: await hash(body),
+          // ETag: await hash(body),
           'Feature-Policy': [
             "autoplay 'none'",
             "camera 'none'",
             "geolocation 'none'",
+            "gyroscope 'none'",
+            "magnetometer 'none'",
             "microphone 'none'",
+            "midi 'none'",
             "notifications 'none'",
-            "payment 'none'"
+            "payment 'none'",
+            "push 'none'",
+            "speaker 'none'",
+            "sync-xhr 'none'",
+            "vibrate 'none'"
           ].join('; '),
+          'Referrer-Policy': 'no-referrer-when-downgrade',
           'Strict-Transport-Security': [
             'max-age=15778800',
             'includeSubDomains',
@@ -73,7 +82,10 @@ export async function render<P>(
           'X-Robots-Tag': 'noarchive, nofollow, noindex'
         };
 
-  const links = [];
+  const links = [
+    // '</fonts/open-sans-regular.woff2>; rel=preload; as=font',
+    // '</fonts/open-sans-semibold.woff2>; rel=preload; as=font'
+  ];
 
   for (const link of props.layout.links) {
     if (link.rel === 'stylesheet') {

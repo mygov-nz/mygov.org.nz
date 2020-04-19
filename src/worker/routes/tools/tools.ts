@@ -14,6 +14,15 @@ export async function tools(): Promise<Response> {
           {
             rel: 'stylesheet',
             href: resolve('main.css')
+          },
+          {
+            rel: 'prefetch',
+            href:
+              '/tools/mmp-review/2017/5-percent-threshold/overhang/1-seat-tagalong'
+          },
+          {
+            rel: 'prefetch',
+            href: '/tools/non-voters/2017/_no/0-percent'
           }
         ],
         meta: [],

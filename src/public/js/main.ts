@@ -13,3 +13,4 @@ import '../../components/molecules/comparison-table/row/row.module.scss';
 import '../../components/organisms/layout/layout.module.scss';
 import '../../components/organisms/mmp-review-tool/mmp-review-tool.module.scss';
 import '../../components/organisms/non-voters-tool/non-voters-tool.module.scss';
+import '../../components/pages/tools/tools.module.scss';

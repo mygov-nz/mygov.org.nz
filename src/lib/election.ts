@@ -53,7 +53,9 @@ export function getResult(
       }))
     ),
     listSeats: results.reduce((a: number, b: any) => a + b.lists, 0),
-    rows: results,
+    rows: results.sort((x: ElectionResultRow, y: ElectionResultRow) => {
+      return y.votes - x.votes;
+    }),
     totalSeats: results.reduce(
       (a: number, b: any) => a + b.electorates + b.lists,
       0

@@ -75,7 +75,7 @@ export const ComparisonTable: FC<ComparisonTableProps> = (
           <Value value={data.electorates} />
           <Value value={data.listSeats} />
           <Value value={data.totalSeats} />
-          <Difference value={data.totalSeatDiff} />
+          <td>{(data.totalSeatDiff > 0 ? '+' : '') + data.totalSeatDiff}</td>
         </tr>
         <tr>
           <td colSpan={2} />

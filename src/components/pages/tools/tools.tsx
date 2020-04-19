@@ -3,6 +3,8 @@ import { FunctionalComponent as FC, h, JSX } from 'preact';
 import { PageHeader } from '../../atoms';
 import { Layout, RenderProps } from '../../organisms';
 
+import styles from './tools.module.scss';
+
 /**
  *
  * @param props
@@ -10,7 +12,7 @@ import { Layout, RenderProps } from '../../organisms';
 export const Tools: FC<RenderProps> = (props): JSX.Element => (
   <Layout {...props.layout}>
     <PageHeader title="Tools" />
-    <ul>
+    <ul className={styles.toolList}>
       <li>
         <a href="/tools/mmp-review/2017/5-percent-threshold/overhang/1-seat-tagalong">
           MMP Review Tool
