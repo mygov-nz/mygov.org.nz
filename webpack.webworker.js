@@ -108,7 +108,7 @@ module.exports = merge(common, {
         parallel: os.cpus().length,
         sourceMap: isDev,
         terserOptions: {
-          ecma: 8,
+          ecma: 10,
           ie8: false,
           output: { comments: false },
           safari10: false
@@ -135,6 +135,13 @@ module.exports = merge(common, {
       }
     }])
   ],
+
+  resolve: {
+    alias: {
+      'history': path.resolve(__dirname, 'src/worker/lib/alias/history.ts'),
+      'preact/hooks': path.resolve(__dirname, 'src/worker/lib/alias/preact-hooks.ts')
+    }
+  },
 
   target: 'webworker'
 

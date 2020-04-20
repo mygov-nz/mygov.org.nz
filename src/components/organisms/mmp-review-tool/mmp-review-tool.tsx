@@ -65,42 +65,44 @@ export const MMPReviewTool: FC<MMPReviewToolProps> = (props): JSX.Element => {
 
   return (
     <Fragment>
-      <Form action="/tools/mmp-review" className={styles.form}>
-        <YearSelect value={state.year} onChange={onChangeYear} />
-        <NumberInput
-          id="threshold"
-          label="Party vote threshold"
-          min={0}
-          max={100}
-          step={1}
-          required={true}
-          suffix="%"
-          value={state.threshold}
-          onChange={onChangeThreshold}
-        />
-        <CheckBox
-          id="overhang"
-          label="Allow overhang seats"
-          checked={state.overhang}
-          onChange={onChangeOverhang}
-        />
-        <CheckBox
-          id="tagAlong"
-          label="Electorate tag-along"
-          checked={!!state.tagAlong}
-          onChange={onChangeTagAlong}
-        />
-        <NumberInput
-          id="tagAlongSeats"
-          label="Seats for tag-along"
-          readOnly={!state.tagAlong}
-          min={1}
-          max={120}
-          step={1}
-          required={true}
-          value={state.tagAlong || 1}
-          onChange={onChangeTagAlongSeats}
-        />
+      <Form action="/tools/mmp-review">
+        <div className={styles.form}>
+          <YearSelect value={state.year} onChange={onChangeYear} />
+          <NumberInput
+            id="threshold"
+            label="Party vote threshold"
+            min={0}
+            max={100}
+            step={1}
+            required={true}
+            suffix="%"
+            value={state.threshold}
+            onChange={onChangeThreshold}
+          />
+          <CheckBox
+            id="overhang"
+            label="Allow overhang seats"
+            checked={state.overhang}
+            onChange={onChangeOverhang}
+          />
+          <CheckBox
+            id="tagAlong"
+            label="Electorate tag-along"
+            checked={!!state.tagAlong}
+            onChange={onChangeTagAlong}
+          />
+          <NumberInput
+            id="tagAlongSeats"
+            label="Seats for tag-along"
+            readOnly={!state.tagAlong}
+            min={1}
+            max={120}
+            step={1}
+            required={true}
+            value={state.tagAlong || 1}
+            onChange={onChangeTagAlongSeats}
+          />
+        </div>
       </Form>
       <Results {...state} />
     </Fragment>

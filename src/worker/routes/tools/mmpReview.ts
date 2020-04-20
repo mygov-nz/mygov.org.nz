@@ -1,4 +1,7 @@
-import { encode } from '../../../components/organisms/mmp-review-tool/state';
+import {
+  encode,
+  MMPReviewToolState
+} from '../../../components/organisms/mmp-review-tool/state';
 import { MMPReview } from '../../../components/pages';
 import { ElectionYear } from '../../../data/types';
 import { resolve } from '../../lib/assets';
@@ -78,7 +81,7 @@ export async function legacyMMPReview(
   ctx: Context
 ): Promise<Response> {
   const bits = atob(ctx.url.pathname.slice(18)).split(',');
-  const state = {
+  const state: MMPReviewToolState = {
     overhang: bits[2] === '1',
     tagAlong: bits[3] === '1' ? parseInt(bits[4], 10) : 0,
     threshold: parseFloat(bits[1]),
@@ -94,15 +97,27 @@ export async function legacyMMPReview(
 /**
  *
  * @param req
+ * @param ctx
  */
-export async function postMMPReview(req: Request): Promise<Response> {
+export async function postMMPReview(
+  req: Request,
+  ctx: Context
+): Promise<Response> {
   const data = await req.formData().then((formData: FormData) => {
     return Object.fromEntries(
       ((formData as unknown) as Map<string, string>).entries()
     );
   });
 
-  console.log(JSON.stringify(data, null, 4));
+  const state: MMPReviewToolState = {
+    overhang: data.overhang === 'on',
+    tagAlong: data.overhang === 'on' ? parseInt(data.tagAlongSeats, 10) : 0,
+    threshold: parseFloat(data.threshold),
+    year: data.year as ElectionYear
+  };
 
-  return Response.redirect(encode(data as any), 302);
+  return Response.redirect(
+    `${ctx.url.protocol}//${ctx.url.hostname}${encode(state)}`,
+    302
+  );
 }

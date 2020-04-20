@@ -19,7 +19,7 @@ export const Tools: FC<RenderProps> = (props): JSX.Element => (
         </a>
       </li>
       <li>
-        <a href="/tools/non-voters/2017/_no/0-percent">Non-voters Tool</a>
+        <a href="/tools/non-voters/2017/_no/50-percent">Non-voters Tool</a>
       </li>
     </ul>
   </Layout>

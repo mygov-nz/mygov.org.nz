@@ -4,7 +4,14 @@ import styles from './form.module.scss';
 
 interface FormProps {
   readonly action: string;
-  readonly className: string;
+}
+
+/**
+ *
+ * @param event
+ */
+function onSubmit(event: Event): void {
+  event.preventDefault();
 }
 
 /**
@@ -12,10 +19,16 @@ interface FormProps {
  */
 export const Form: FC<FormProps> = (props): JSX.Element => (
   <form
-    className={[styles.form, props.className].join(' ')}
+    className={styles.form}
     method="post"
     action={props.action}
+    onSubmit={onSubmit}
   >
     {props.children}
+    <noscript>
+      <div className={styles.buttons}>
+        <button type="submit">Update</button>
+      </div>
+    </noscript>
   </form>
 );

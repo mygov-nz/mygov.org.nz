@@ -1,5 +1,5 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
-import { useCallback, useRef, useState } from 'preact/hooks';
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
 
 import form from '../form/form.module.scss';
 
@@ -20,8 +20,29 @@ interface SliderProps {
  */
 export const Slider: FC<SliderProps> = (props): JSX.Element => {
   const slider = useRef<HTMLDivElement>(null);
+  const knob = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState<number>(props.value);
   const [dragging, setDragging] = useState<boolean>(false);
+
+  useEffect(() => {
+    const keyDownHandler = (event: KeyboardEvent): void => {
+      if (!knob.current || knob.current !== document.activeElement) {
+        return;
+      }
+
+      if (![37, 39].includes(event.keyCode)) {
+        return;
+      }
+
+      setValue((value) => value + (event.keyCode === 39 ? -1 : 1));
+    };
+
+    document.addEventListener('keydown', keyDownHandler);
+
+    return (): void => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, []);
 
   const mouseDownHandler = useCallback(
     (event: MouseEvent): void => {
@@ -89,6 +110,7 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
           className={styles.knob}
           style={{ left: value + '%' }}
           tabIndex={0}
+          ref={knob}
         />
         <div className={styles.label} style={{ left: value + '%' }}>
           {value + '%'}

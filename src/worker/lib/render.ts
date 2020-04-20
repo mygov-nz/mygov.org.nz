@@ -36,18 +36,22 @@ export async function render<P>(
   const defaultHeaders: Record<string, string> =
     ENVIRONMENT === 'production'
       ? {
+          'Access-Control-Allow-Origin': 'https://mygov.org.nz',
           'Cache-Control': 'public, max-age=3600, s-maxage=86400, immutable',
           'Content-Security-Policy': [
-            "default-src 'none'",
-            "img-src 'self' data:",
+            "base-uri 'self'",
+            'connect-src google-analytics.com',
+            "default-src 'self'",
+            "img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net",
             "font-src 'self'",
+            "form-action 'self'",
             "frame-ancestors 'self'",
             "manifest-src 'self'",
             "prefetch-src 'self'",
-            "script-src 'self' www.google-analytics.com www.googletagmanager.com 'sha256-ODU3OTczMjlkYjU3ZDc4ZjU0NWMzZWQ5NWEyOTNmNTkzZGFiOTRkODNjMDYwZmM4M2JjZTZlNTU2ODYxM2I5NA=='",
+            "script-src 'self' 'unsafe-inline' data: https://www.googletagmanager.com https://www.google-analytics.com 'sha256-hXlzKdtX149UXD7ZWik/WT2rlNg8Bg/IO85uVWhhO5Q='",
             "style-src 'self' 'unsafe-inline'",
             "worker-src 'self'",
-            'sandbox allow-forms allow-scripts',
+            'sandbox allow-forms allow-same-origin allow-scripts',
             'report-uri https://o372929.ingest.sentry.io/api/5188487/security/?sentry_key=dccdb69d4ce642a79486340d9857a0b8'
           ].join('; '),
           'Content-Type': 'text/html; charset="UTF-8"',

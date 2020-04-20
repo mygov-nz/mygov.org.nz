@@ -1,3 +1,4 @@
+import { createBrowserHistory } from 'history';
 import mem from 'mem';
 import { useEffect, useState } from 'preact/hooks';
 
@@ -72,17 +73,14 @@ export function usePathnameState(
     return decode(initialPathname);
   });
 
+  const history = createBrowserHistory<MMPReviewToolState>();
+
   useEffect(() => {
-    /**
-     *
-     */
-    function onPopState(event: PopStateEvent): void {
-      setState(event.state || decode(location.pathname));
-    }
+    const unlisten = history.listen((location): void => {
+      setState(location.state || decode(location.pathname));
+    });
 
-    window.addEventListener('popstate', onPopState);
-
-    return (): void => window.removeEventListener('popstate', onPopState);
+    return (): void => unlisten();
   }, []);
 
   /**
@@ -92,7 +90,7 @@ export function usePathnameState(
   function updateState(update: Partial<MMPReviewToolState>): void {
     const newState: MMPReviewToolState = { ...state, ...update };
     setState(newState);
-    history.pushState(newState, document.title, encode(newState));
+    history.push(encode(newState), newState);
   }
 
   return [

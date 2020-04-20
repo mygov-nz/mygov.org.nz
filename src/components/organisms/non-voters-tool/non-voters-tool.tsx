@@ -46,24 +46,26 @@ export const NonVotersTool: FC<NonVotersToolProps> = (props): JSX.Element => {
 
   return (
     <Fragment>
-      <Form action="/tools/non-voters" className={styles.form}>
-        <YearSelect value={state.year} onChange={onChangeYear} />
-        <PartySelect
-          id="party"
-          label="Assign votes to"
-          required={true}
-          year={state.year}
-          value={state.party}
-          onChange={onChangeParty}
-        />
-        <Slider
-          id="percentage"
-          label="Percentage"
-          min={0}
-          max={100}
-          onChange={onChangePercentage}
-          value={state.percentage}
-        />
+      <Form action="/tools/non-voters">
+        <div className={styles.form}>
+          <YearSelect value={state.year} onChange={onChangeYear} />
+          <PartySelect
+            id="party"
+            label="Assign votes to"
+            required={true}
+            year={state.year}
+            value={state.party}
+            onChange={onChangeParty}
+          />
+          <Slider
+            id="percentage"
+            label="Percentage"
+            min={0}
+            max={100}
+            onChange={onChangePercentage}
+            value={state.percentage}
+          />
+        </div>
       </Form>
       <Results {...state} />
     </Fragment>

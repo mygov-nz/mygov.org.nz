@@ -1,4 +1,7 @@
-import { encode } from '../../../components/organisms/non-voters-tool/state';
+import {
+  encode,
+  NonVotersToolState
+} from '../../../components/organisms/non-voters-tool/state';
 import { NonVoters } from '../../../components/pages';
 import { ElectionYear } from '../../../data/types';
 import { resolve } from '../../lib/assets';
@@ -78,7 +81,7 @@ export async function legacyNonVoters(
   ctx: Context
 ): Promise<Response> {
   const bits = atob(ctx.url.pathname.slice(18)).split(',');
-  const state = {
+  const state: NonVotersToolState = {
     party: bits[1].replace('@', '_'),
     percentage: parseFloat(bits[2]),
     year: bits[0] as ElectionYear
@@ -93,15 +96,26 @@ export async function legacyNonVoters(
 /**
  *
  * @param req
+ * @param ctx
  */
-export async function postNonVoters(req: Request): Promise<Response> {
+export async function postNonVoters(
+  req: Request,
+  ctx: Context
+): Promise<Response> {
   const data = await req.formData().then((formData: FormData) => {
     return Object.fromEntries(
       ((formData as unknown) as Map<string, string>).entries()
     );
   });
 
-  console.log(JSON.stringify(data, null, 4));
+  const state: NonVotersToolState = {
+    party: data.party,
+    percentage: parseFloat(data.percentage),
+    year: data.year as ElectionYear
+  };
 
-  return Response.redirect(encode(data as any), 302);
+  return Response.redirect(
+    `${ctx.url.protocol}//${ctx.url.hostname}${encode(state)}`,
+    302
+  );
 }
