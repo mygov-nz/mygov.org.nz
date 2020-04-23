@@ -32,6 +32,11 @@ export async function getNonVoters(
   _req: Request,
   ctx: Context
 ): Promise<Response> {
+  const description = [
+    'The Non-voters Tool allows users to evaluate the effects of hypothetical',
+    'situations where non-voters had instead chosen to vote.'
+  ].join(' ');
+
   return render(
     NonVoters,
     {
@@ -49,8 +54,67 @@ export async function getNonVoters(
         meta: [
           {
             name: 'description',
-            content:
-              'The Non-voters Tool allows users to evaluate the effects of hypothetical situations where non-voters had instead chosen to vote.'
+            content: description
+          },
+          {
+            property: 'og:type',
+            content: 'website'
+          },
+          {
+            property: 'og:url',
+            content: ctx.url.href
+          },
+          {
+            property: 'og:title',
+            content: 'Non-voters Tool'
+          },
+          {
+            property: 'og:description',
+            content: description
+          },
+          {
+            property: 'og:image',
+            content: 'https://mygov.org.nz/images/non-voters.png'
+          },
+          {
+            property: 'og:image:type',
+            content: 'image/png'
+          },
+          {
+            property: 'og:image:width',
+            content: '1146'
+          },
+          {
+            property: 'og:image:height',
+            content: '600'
+          },
+          {
+            property: 'og:site_name',
+            content: 'MyGov.org.nz'
+          },
+          {
+            property: 'twitter:card',
+            content: 'summary'
+          },
+          {
+            property: 'twitter:url',
+            content: ctx.url.href
+          },
+          {
+            property: 'twitter:title',
+            content: 'Non-voters Tool — MyGov.org.nz'
+          },
+          {
+            property: 'twitter:description',
+            content: description
+          },
+          {
+            property: 'twitter:image',
+            content: 'https://mygov.org.nz/images/non-voter.png'
+          },
+          {
+            property: 'twitter:image:alt',
+            content: 'Non-voters Tool'
           }
         ],
         scripts: [

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'preact/hooks';
 
 import { elections } from '../../../data/elections';
 import { ElectionYear, ElectionDataRow } from '../../../data/types';
+import { getUrlMeta } from '../../../lib/get-url-meta';
 
 interface NonVotersToolActions {
   setParty: (party: string) => void;
@@ -69,11 +70,16 @@ export function usePathnameState(
   });
 
   const history = createBrowserHistory<NonVotersToolState>();
+  const urls = getUrlMeta();
 
   useEffect(() => {
     const unlisten = history.listen((location): void => {
       setState(location.state || decode(location.pathname));
     });
+
+    for (const url of urls) {
+      url.content = `${location.protocol}//${location.hostname}${initialPathname}`;
+    }
 
     return (): void => unlisten();
   }, []);
@@ -85,7 +91,14 @@ export function usePathnameState(
   function updateState(update: Partial<NonVotersToolState>): void {
     setState((prevState) => {
       const nextState: NonVotersToolState = { ...prevState, ...update };
-      history.push(encode(nextState), nextState);
+      const pathname = encode(nextState);
+
+      history.push(pathname, nextState);
+
+      for (const url of urls) {
+        url.content = `${location.protocol}//${location.hostname}${pathname}`;
+      }
+
       return nextState;
     });
   }

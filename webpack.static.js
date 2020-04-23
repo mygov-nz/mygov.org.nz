@@ -123,8 +123,15 @@ module.exports = merge(common, {
                   {
                     identifierName: 'ENVIRONMENT',
                     replacement: {
-                      type: 'stringLiteral',
+                      type: 'StringLiteral',
                       value: process.env.NODE_ENV,
+                    }
+                  },
+                  {
+                    identifierName: '__DOCUMENT__',
+                    replacement: {
+                      type: 'Identifier',
+                      value: 'document'
                     }
                   }
                 ]

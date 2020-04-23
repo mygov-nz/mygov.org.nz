@@ -32,6 +32,12 @@ export async function getMMPReview(
   _req: Request,
   ctx: Context
 ): Promise<Response> {
+  const description = [
+    'The MMP Review Tool allows users to evaluate the effects of',
+    'possible changes to rules determining the outcome of a',
+    'New Zealand General Election.'
+  ].join(' ');
+
   return render(
     MMPReview,
     {
@@ -49,8 +55,67 @@ export async function getMMPReview(
         meta: [
           {
             name: 'description',
-            content:
-              'The MMP Review Tool allows users to evaluate the effects of possible changes to rules determining the outcome of a New Zealand General Election.'
+            content: description
+          },
+          {
+            property: 'og:type',
+            content: 'website'
+          },
+          {
+            property: 'og:url',
+            content: ctx.url.href
+          },
+          {
+            property: 'og:title',
+            content: 'MMP Review Tool'
+          },
+          {
+            property: 'og:description',
+            content: description
+          },
+          {
+            property: 'og:image',
+            content: 'https://mygov.org.nz/images/mmp-review.png'
+          },
+          {
+            property: 'og:image:type',
+            content: 'image/png'
+          },
+          {
+            property: 'og:image:width',
+            content: '1146'
+          },
+          {
+            property: 'og:image:height',
+            content: '600'
+          },
+          {
+            property: 'og:site_name',
+            content: 'MyGov.org.nz'
+          },
+          {
+            property: 'twitter:card',
+            content: 'summary'
+          },
+          {
+            property: 'twitter:url',
+            content: ctx.url.href
+          },
+          {
+            property: 'twitter:title',
+            content: 'MMP Review Tool — MyGov.org.nz'
+          },
+          {
+            property: 'twitter:description',
+            content: description
+          },
+          {
+            property: 'twitter:image',
+            content: 'https://mygov.org.nz/images/mmp-review.png'
+          },
+          {
+            property: 'twitter:image:alt',
+            content: 'MMP Review Tool'
           }
         ],
         scripts: [

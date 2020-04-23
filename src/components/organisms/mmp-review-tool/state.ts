@@ -3,6 +3,7 @@ import mem from 'mem';
 import { useEffect, useState } from 'preact/hooks';
 
 import { ElectionYear } from '../../../data/types';
+import { getUrlMeta } from '../../../lib/get-url-meta';
 
 interface MMPReviewToolActions {
   setOverhang: (overhang: boolean) => void;
@@ -74,11 +75,16 @@ export function usePathnameState(
   });
 
   const history = createBrowserHistory<MMPReviewToolState>();
+  const urls = getUrlMeta();
 
   useEffect(() => {
     const unlisten = history.listen((location): void => {
       setState(location.state || decode(location.pathname));
     });
+
+    for (const url of urls) {
+      url.content = `${location.protocol}//${location.hostname}${initialPathname}`;
+    }
 
     return (): void => unlisten();
   }, []);
@@ -90,7 +96,14 @@ export function usePathnameState(
   function updateState(update: Partial<MMPReviewToolState>): void {
     setState((prevState) => {
       const nextState: MMPReviewToolState = { ...prevState, ...update };
-      history.push(encode(nextState), nextState);
+      const pathname = encode(nextState);
+
+      history.push(pathname, nextState);
+
+      for (const url of urls) {
+        url.content = `${location.protocol}//${location.hostname}${pathname}`;
+      }
+
       return nextState;
     });
   }

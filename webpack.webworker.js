@@ -60,6 +60,13 @@ module.exports = merge(common, {
                       type: "stringLiteral",
                       value: process.env.NODE_ENV,
                     }
+                  },
+                  {
+                    identifierName: '__DOCUMENT__',
+                    replacement: {
+                      type: 'BooleanLiteral',
+                      value: false
+                    }
                   }
                 ]
               }
