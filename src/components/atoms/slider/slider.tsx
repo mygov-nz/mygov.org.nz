@@ -100,6 +100,70 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
     [slider.current, props.readOnly]
   );
 
+  const touchStartHandler = useCallback(
+    (event: TouchEvent): void => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (props.readOnly) {
+        return;
+      }
+
+      let timeout: NodeJS.Timeout | null = null;
+
+      const touchMoveHandler = (event: TouchEvent): void => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (!slider.current) {
+          return;
+        }
+
+        const rect = slider.current.getBoundingClientRect();
+        const x = Math.round(
+          ((event.touches[0].clientX - rect.left) / rect.width) * 100
+        );
+        const value = Math.max(Math.min(x, 100), 0);
+
+        setValue(value);
+
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        timeout = setTimeout(() => touchEndHandler(event), 1000);
+      };
+
+      const touchEndHandler = (event: TouchEvent): void => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        document.removeEventListener('touchmove', touchMoveHandler);
+
+        if (!slider.current) {
+          return;
+        }
+
+        const rect = slider.current.getBoundingClientRect();
+        const x = Math.round(
+          ((event.touches[event.touches.length - 1].clientX - rect.left) /
+            rect.width) *
+            100
+        );
+        const value = Math.max(Math.min(x, 100), 0);
+
+        setValue(value);
+        setDragging(false);
+        props.onChange(value);
+      };
+
+      document.addEventListener('touchmove', touchMoveHandler);
+      setDragging(true);
+    },
+    [slider.current, props.readOnly]
+  );
+
   return (
     <label className={form.field} htmlFor={props.id}>
       <input type="hidden" name={props.id} id={props.id} value={props.value} />
@@ -111,6 +175,7 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
         aria-valuemin={props.min}
         aria-valuenow={props.value}
         onMouseDown={mouseDownHandler}
+        onTouchStart={touchStartHandler}
         ref={slider}
       >
         <div className={styles.left} style={{ width: value + '%' }} />
