@@ -83,9 +83,11 @@ export function usePathnameState(
    * @param update
    */
   function updateState(update: Partial<NonVotersToolState>): void {
-    const newState: NonVotersToolState = { ...state, ...update };
-    setState(newState);
-    history.push(encode(newState), newState);
+    setState((prevState) => {
+      const nextState: NonVotersToolState = { ...prevState, ...update };
+      history.push(encode(nextState), nextState);
+      return nextState;
+    });
   }
 
   return [

@@ -88,9 +88,11 @@ export function usePathnameState(
    * @param update
    */
   function updateState(update: Partial<MMPReviewToolState>): void {
-    const newState: MMPReviewToolState = { ...state, ...update };
-    setState(newState);
-    history.push(encode(newState), newState);
+    setState((prevState) => {
+      const nextState: MMPReviewToolState = { ...prevState, ...update };
+      history.push(encode(nextState), nextState);
+      return nextState;
+    });
   }
 
   return [
