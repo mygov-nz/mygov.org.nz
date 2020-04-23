@@ -2,7 +2,11 @@ import { FunctionalComponent as FC, Fragment, h, JSX } from 'preact';
 
 import { ElectionYear } from '../../../data/types';
 import { Form, Slider } from '../../atoms';
-import { PartySelect, YearSelect } from '../../molecules';
+import {
+  ComparisonTablePlaceholder,
+  PartySelect,
+  YearSelect
+} from '../../molecules';
 
 import styles from './non-voters-tool.module.scss';
 import { Results } from './results';
@@ -10,6 +14,7 @@ import { usePathnameState } from './state';
 
 export interface NonVotersToolProps {
   pathname: string;
+  placeholder: boolean;
 }
 
 /**
@@ -48,11 +53,15 @@ export const NonVotersTool: FC<NonVotersToolProps> = (props): JSX.Element => {
     <Fragment>
       <Form action="/tools/non-voters">
         <div className={styles.form}>
-          <YearSelect value={state.year} onChange={onChangeYear} />
+          <YearSelect
+            value={state.year}
+            readOnly={props.placeholder}
+            onChange={onChangeYear}
+          />
           <PartySelect
             id="party"
             label="Assign votes to"
-            required={true}
+            readOnly={props.placeholder}
             year={state.year}
             value={state.party}
             onChange={onChangeParty}
@@ -63,11 +72,16 @@ export const NonVotersTool: FC<NonVotersToolProps> = (props): JSX.Element => {
             min={0}
             max={100}
             onChange={onChangePercentage}
+            readOnly={props.placeholder}
             value={state.percentage}
           />
         </div>
       </Form>
-      <Results {...state} />
+      {props.placeholder ? (
+        <ComparisonTablePlaceholder />
+      ) : (
+        <Results {...state} />
+      )}
     </Fragment>
   );
 };

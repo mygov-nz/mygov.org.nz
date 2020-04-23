@@ -19,6 +19,10 @@
   width: 100%;
   -webkit-appearance: none;
 
+  &:disabled {
+    opacity: 0.5;
+  }
+
   &:focus {
     border-color: var(--input-focused-border-colour);
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);

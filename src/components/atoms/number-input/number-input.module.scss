@@ -55,4 +55,9 @@
     background-color: var(--input-focused-suffix-colour);
     border-color: var(--input-focused-border-colour);
   }
+
+  input:read-only~&,
+  input:focus:read-only~& {
+    opacity: 0.5;
+  }
 }

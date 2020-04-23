@@ -5,13 +5,12 @@ import form from '../form/form.module.scss';
 import styles from './number-input.module.scss';
 
 interface NumberInputProps {
-  readonly readOnly?: boolean;
   readonly id: string;
   readonly label: string;
   readonly max: number;
   readonly min: number;
   readonly onChange: (event: Event) => void;
-  readonly required?: boolean;
+  readonly readOnly: boolean;
   readonly step: number;
   readonly suffix?: string;
   readonly value: number;
@@ -40,7 +39,7 @@ export const NumberInput: FC<NumberInputProps> = (props): JSX.Element => {
           max={props.max}
           min={props.min}
           step={props.step}
-          required={props.required}
+          required={!props.readOnly}
           onChange={props.onChange}
         />
         {Boolean(props.suffix) && (

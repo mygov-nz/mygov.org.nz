@@ -9,7 +9,6 @@ import { Row } from './row/row';
 import { Value } from './value/value';
 
 interface ColumnProps {
-  className?: string;
   width?: string;
 }
 
@@ -17,14 +16,6 @@ interface ComparisonTableProps {
   a: ElectionResult;
   b: ElectionResult;
 }
-
-/**
- *
- * @param props
- */
-const Column: FC<ColumnProps> = (props): JSX.Element => (
-  <col width="12.5%" {...props} />
-);
 
 /**
  *
@@ -46,12 +37,12 @@ export const ComparisonTable: FC<ComparisonTableProps> = (
   return (
     <table className={styles.comparisonTable}>
       <colgroup>
-        <Column width="35.0%" />
-        <Column width="15.0%" />
-        <Column />
-        <Column />
-        <Column />
-        <Column />
+        <col width="35.0%" />
+        <col width="15.0%" />
+        <col width="12.5%" />
+        <col width="12.5%" />
+        <col width="12.5%" />
+        <col width="12.5%" />
       </colgroup>
       <thead>
         <tr>

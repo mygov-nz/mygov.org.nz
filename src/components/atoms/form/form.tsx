@@ -27,7 +27,9 @@ export const Form: FC<FormProps> = (props): JSX.Element => (
     {props.children}
     <noscript>
       <div className={styles.buttons}>
-        <button type="submit">Update</button>
+        <button type="submit" aria-label="Update">
+          Update
+        </button>
       </div>
     </noscript>
   </form>

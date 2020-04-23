@@ -64,7 +64,8 @@ export async function getMMPReview(
         title: 'MMP Review Tool - MyGov.org.nz'
       },
       tool: {
-        pathname: ctx.url.pathname
+        pathname: ctx.url.pathname,
+        placeholder: ctx.url.pathname === '/tools/mmp-review/placeholder'
       }
     },
     {}

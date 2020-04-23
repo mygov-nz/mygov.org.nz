@@ -9,6 +9,7 @@ interface CheckBoxProps {
   readonly id: string;
   readonly label: string;
   readonly onChange: (event: Event) => void;
+  readonly readOnly: boolean;
 }
 
 /**
@@ -22,6 +23,7 @@ export const CheckBox: FC<CheckBoxProps> = (props): JSX.Element => (
       checked={props.checked}
       name={props.id}
       id={props.id}
+      readOnly={props.readOnly}
       onChange={props.onChange}
     />
     <span>{props.label}</span>

@@ -24,6 +24,8 @@ routes.get(/^\/$/, homepage);
 routes.get(/^\/tools$/, tools);
 routes.get(matchMMPReview, getMMPReview);
 routes.get(matchNonVoters, getNonVoters);
+routes.get(/^\/tools\/mmp-review\/placeholder$/, getMMPReview);
+routes.get(/^\/tools\/non-voters\/placeholder$/, getNonVoters);
 routes.get(/^\/tools\/mmp-review$/, baseMMPReview);
 routes.get(/^\/tools\/non-voters$/, baseNonVoters);
 routes.get(/^\/tools\/mmp-review\/[0-9a-zA-Z/+=]+$/, legacyMMPReview);

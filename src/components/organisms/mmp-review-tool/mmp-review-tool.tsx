@@ -2,7 +2,7 @@ import { FunctionalComponent as FC, Fragment, h, JSX } from 'preact';
 
 import { ElectionYear } from '../../../data/types';
 import { CheckBox, Form, NumberInput } from '../../atoms';
-import { YearSelect } from '../../molecules';
+import { ComparisonTablePlaceholder, YearSelect } from '../../molecules';
 
 import styles from './mmp-review-tool.module.scss';
 import { Results } from './results';
@@ -10,6 +10,7 @@ import { usePathnameState } from './state';
 
 export interface MMPReviewToolProps {
   pathname: string;
+  placeholder: boolean;
 }
 
 /**
@@ -67,14 +68,18 @@ export const MMPReviewTool: FC<MMPReviewToolProps> = (props): JSX.Element => {
     <Fragment>
       <Form action="/tools/mmp-review">
         <div className={styles.form}>
-          <YearSelect value={state.year} onChange={onChangeYear} />
+          <YearSelect
+            value={state.year}
+            readOnly={props.placeholder}
+            onChange={onChangeYear}
+          />
           <NumberInput
             id="threshold"
             label="Party vote threshold"
             min={0}
             max={100}
             step={1}
-            required={true}
+            readOnly={props.placeholder}
             suffix="%"
             value={state.threshold}
             onChange={onChangeThreshold}
@@ -84,27 +89,32 @@ export const MMPReviewTool: FC<MMPReviewToolProps> = (props): JSX.Element => {
             label="Allow overhang seats"
             checked={state.overhang}
             onChange={onChangeOverhang}
+            readOnly={props.placeholder}
           />
           <CheckBox
             id="tagAlong"
             label="Electorate tag-along"
             checked={!!state.tagAlong}
             onChange={onChangeTagAlong}
+            readOnly={props.placeholder}
           />
           <NumberInput
             id="tagAlongSeats"
             label="Seats for tag-along"
-            readOnly={!state.tagAlong}
+            readOnly={props.placeholder || !state.tagAlong}
             min={1}
             max={120}
             step={1}
-            required={true}
             value={state.tagAlong || 1}
             onChange={onChangeTagAlongSeats}
           />
         </div>
       </Form>
-      <Results {...state} />
+      {props.placeholder ? (
+        <ComparisonTablePlaceholder />
+      ) : (
+        <Results {...state} />
+      )}
     </Fragment>
   );
 };

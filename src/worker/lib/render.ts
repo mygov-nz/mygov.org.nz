@@ -101,7 +101,9 @@ export async function render<P>(
     links.push(`<${script.src}>; rel=preload; as=script`);
   }
 
-  defaultHeaders.Link = links.join(', ');
+  if (!props.tool || !props.tool.placeholder) {
+    defaultHeaders.Link = links.join(', ');
+  }
 
   return new Response('<!DOCTYPE html>' + body, {
     headers: {

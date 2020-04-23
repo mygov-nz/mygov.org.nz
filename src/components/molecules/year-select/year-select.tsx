@@ -6,6 +6,7 @@ import { Option, OptType, Select } from '../../atoms';
 
 interface YearSelectProps {
   readonly onChange: (event: Event) => void;
+  readonly readOnly: boolean;
   readonly value: ElectionYear;
 }
 
@@ -23,7 +24,7 @@ export const YearSelect: FC<YearSelectProps> = (props): JSX.Element => (
     id="year"
     label="Election year"
     options={options}
-    required={true}
+    readOnly={props.readOnly}
     value={props.value}
     onChange={props.onChange}
   />

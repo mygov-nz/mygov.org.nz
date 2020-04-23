@@ -59,6 +59,16 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
           <link {...link} key={link.href} href={link.href} />
         )
       )}
+      <link
+        rel="preconnect"
+        href="https://www.googletagmanager.com"
+        crossOrigin="crossorigin"
+      />
+      <link
+        rel="preconnect"
+        href="https://www.google-analytics.com"
+        crossOrigin="crossorigin"
+      />
       <script
         dangerouslySetInnerHTML={{
           __html:

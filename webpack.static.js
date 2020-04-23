@@ -121,9 +121,9 @@ module.exports = merge(common, {
               {
                 replacements: [
                   {
-                    identifierName: "ENVIRONMENT",
+                    identifierName: 'ENVIRONMENT',
                     replacement: {
-                      type: "stringLiteral",
+                      type: 'stringLiteral',
                       value: process.env.NODE_ENV,
                     }
                   }
@@ -222,7 +222,10 @@ module.exports = merge(common, {
       ignore: [ '.DS_Store', '*.scss', '*.ts' ]
     }]),
     new ManifestPlugin({
-      fileName: path.resolve('src/worker/data/assets.json')
+      fileName: path.resolve('src/worker/data/assets.json'),
+      filter: (file) => {
+        return /\.css|js$/.test(file.path) && !/main-[0-9a-z]{4}\.js$/.test(file.path);
+      }
     }),
     new MiniCssExtractPlugin({
       chunkFilename: isDev ? 'css/[id].css' : 'css/[id]-[chunkhash:6].css',
@@ -271,7 +274,7 @@ module.exports = merge(common, {
       name: 'MyGov',
       offline_enabled: true,
       short_name: 'MyGov',
-      start_url: '/?utm_source=homescreen',
+      start_url: 'https://mygov.org.nz/tools?utm_source=homescreen',
       theme_color: '#f89828'
     })
   ],

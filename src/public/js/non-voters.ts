@@ -8,4 +8,13 @@ while (root.firstChild) {
   root.removeChild(root.lastChild as Node);
 }
 
-render(h(NonVotersTool, { pathname: location.pathname }), root);
+const vnode = h(NonVotersTool, {
+  pathname: location.pathname,
+  placeholder: false
+});
+
+render(vnode, root);
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js');
+}

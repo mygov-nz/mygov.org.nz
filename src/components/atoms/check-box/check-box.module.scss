@@ -56,6 +56,11 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
 
+  input:read-only~span::after,
+  input:read-only~span::before {
+    opacity: 0.5;
+  }
+
   @media (min-width: 576px) {
     min-height: 4.1875rem;
 

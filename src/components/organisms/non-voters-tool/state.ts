@@ -30,7 +30,7 @@ const decode = mem(
     if (!bits) {
       return {
         party: '_no',
-        percentage: 100,
+        percentage: 50,
         year: '2017'
       };
     }

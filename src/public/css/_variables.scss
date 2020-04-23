@@ -1,5 +1,5 @@
 :root {
-  --background-color: #fff;
+  --background-colour: #fff;
   --text-colour: #212529;
   --heading-colour: #d43900;
   --link-colour: #d43900;
@@ -21,6 +21,7 @@
   --input-suffix-colour: #e9ecef;
   --input-suffix-background-colour: #e9ecef;
   --input-focused-border-colour: #80bdff;
+  --input-focused-suffix-colour: #bfdeff;
   --input-active-background-colour: #28a745;
   --input-inactive-background-colour: #dee2e6;
 
@@ -30,6 +31,7 @@
   --success-alt-colour: #e7f4ea;
   --negative-difference-colour: #dc3545;
   --positive-difference-colour: #28a745;
+  --swatch: #ccc;
 
   --cta-background-colour: #ffc050;
   --cta-text-colour: #2d292a;

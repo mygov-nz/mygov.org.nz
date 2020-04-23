@@ -34,8 +34,8 @@ interface SelectProps {
   readonly label: string;
   readonly onChange: (event: Event) => void;
   readonly options: ReadonlyArray<OptGroup | Option>;
-  readonly required?: boolean;
-  readonly value?: string;
+  readonly readOnly: boolean;
+  readonly value: string;
 }
 
 /**
@@ -93,7 +93,8 @@ export const Select: FC<SelectProps> = (props): JSX.Element => (
       name={props.id}
       id={props.id}
       onChange={props.onChange}
-      required={props.required}
+      disabled={props.readOnly}
+      required={true}
     >
       {props.options.map((item) => renderItem(item, props.value))}
     </select>

@@ -3,5 +3,6 @@
 /dist
 /node_modules
 /src/worker/lib/css-modules/*.js
+/babel.service-worker.js
 /webpack.*.js
 /*.config.js

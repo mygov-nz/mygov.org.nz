@@ -35,6 +35,8 @@
     border-top: 1px solid var(--border-colour);
   }
 
+  tbody tr:first-child td,
+  tbody tr:first-child th,
   tfoot tr:first-child td,
   tfoot tr:first-child th {
     border-top-width: 2px;
@@ -98,4 +100,28 @@
     }
   }
 
+}
+
+.skeleton {
+  animation: skeleton-glow 1s linear infinite alternate;
+  border-radius: 0.125rem;
+  background-color: var(--text-colour);
+  display: block;
+  height: 1.5rem;
+  opacity: 0.15;
+  pointer-events: none;
+  user-select: none;
+
+  td & {
+    margin-left: auto;
+  }
+}
+
+@keyframes skeleton-glow {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0.1;
+  }
 }

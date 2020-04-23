@@ -64,7 +64,8 @@ export async function getNonVoters(
         title: 'Non-voters Tool - MyGov.org.nz'
       },
       tool: {
-        pathname: ctx.url.pathname
+        pathname: ctx.url.pathname,
+        placeholder: ctx.url.pathname === '/tools/non-voters/placeholder'
       }
     },
     {}

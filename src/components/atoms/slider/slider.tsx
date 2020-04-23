@@ -11,6 +11,7 @@ interface SliderProps {
   readonly min: number;
   readonly max: number;
   readonly onChange: (value: number) => void;
+  readonly readOnly: boolean;
   readonly value: number;
 }
 
@@ -30,6 +31,10 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
         return;
       }
 
+      if (props.readOnly) {
+        return;
+      }
+
       if (![37, 39].includes(event.keyCode)) {
         return;
       }
@@ -42,12 +47,16 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
     return (): void => {
       document.removeEventListener('keydown', keyDownHandler);
     };
-  }, []);
+  }, [props.readOnly]);
 
   const mouseDownHandler = useCallback(
     (event: MouseEvent): void => {
       event.preventDefault();
       event.stopPropagation();
+
+      if (props.readOnly) {
+        return;
+      }
 
       const mouseMoveHandler = (event: MouseEvent): void => {
         event.preventDefault();
@@ -88,7 +97,7 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
       document.addEventListener('mouseup', mouseUpHandler);
       setDragging(true);
     },
-    [slider.current]
+    [slider.current, props.readOnly]
   );
 
   return (
