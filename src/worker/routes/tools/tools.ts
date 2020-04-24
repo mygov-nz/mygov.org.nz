@@ -27,7 +27,7 @@ export async function tools(): Promise<Response> {
         ],
         meta: [],
         scripts: [],
-        title: 'MyGov.org.nz Tools'
+        title: 'Tools - MyGov New Zealand'
       }
     },
     {}

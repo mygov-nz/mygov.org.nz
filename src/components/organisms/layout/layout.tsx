@@ -52,6 +52,11 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
           <meta {...meta} key={meta.name || meta.property} />
         )
       )}
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-touch-fullscreen" content="yes" />
+      <meta name="apple-mobile-web-app-title" content="MyGov NZ" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <link rel="manifest" href="/manifest.webmanifest" />
       <link rel="apple-touch-icon" href="/images/icon-192.png" />
       {props.links.map(

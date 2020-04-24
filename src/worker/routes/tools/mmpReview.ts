@@ -91,7 +91,7 @@ export async function getMMPReview(
           },
           {
             property: 'og:site_name',
-            content: 'MyGov.org.nz'
+            content: 'MyGov New Zealand'
           },
           {
             property: 'twitter:card',
@@ -103,7 +103,7 @@ export async function getMMPReview(
           },
           {
             property: 'twitter:title',
-            content: 'MMP Review Tool — MyGov.org.nz'
+            content: 'MMP Review Tool — MyGov New Zealand'
           },
           {
             property: 'twitter:description',
@@ -126,7 +126,7 @@ export async function getMMPReview(
             src: resolve('mmp-review.js')
           }
         ],
-        title: 'MMP Review Tool - MyGov.org.nz'
+        title: 'MMP Review Tool - MyGov New Zealand'
       },
       tool: {
         pathname: ctx.url.pathname,

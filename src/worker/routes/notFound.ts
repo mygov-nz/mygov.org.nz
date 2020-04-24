@@ -21,7 +21,7 @@ export async function notFound(_req: Request, ctx: Context): Promise<Response> {
         ],
         meta: [],
         scripts: [],
-        title: 'Page not found - MyGov.org.nz'
+        title: 'Page not found - MyGov New Zealand'
       },
       pathname: ctx.url.pathname
     },

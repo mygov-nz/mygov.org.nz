@@ -254,7 +254,7 @@ module.exports = merge(common, {
       crossorigin: null,
       default_locale: 'en_NZ',
       description: 'MyGov.org.nz',
-      display: 'minimal-ui',
+      display: 'standalone',
       filename: 'manifest.webmanifest',
       fingerprints: false,
       icons: [
@@ -278,9 +278,9 @@ module.exports = merge(common, {
         }
       ],
       inject: false,
-      name: 'MyGov',
+      name: 'MyGov New Zealand',
       offline_enabled: true,
-      short_name: 'MyGov',
+      short_name: 'MyGov NZ',
       start_url: 'https://mygov.org.nz/tools?utm_source=homescreen',
       theme_color: '#f89828'
     })

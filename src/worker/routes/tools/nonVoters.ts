@@ -90,7 +90,7 @@ export async function getNonVoters(
           },
           {
             property: 'og:site_name',
-            content: 'MyGov.org.nz'
+            content: 'MyGov New Zealand'
           },
           {
             property: 'twitter:card',
@@ -102,7 +102,7 @@ export async function getNonVoters(
           },
           {
             property: 'twitter:title',
-            content: 'Non-voters Tool — MyGov.org.nz'
+            content: 'Non-voters Tool — MyGov New Zealand'
           },
           {
             property: 'twitter:description',
@@ -125,7 +125,7 @@ export async function getNonVoters(
             src: resolve('non-voters.js')
           }
         ],
-        title: 'Non-voters Tool - MyGov.org.nz'
+        title: 'Non-voters Tool - MyGov New Zealand'
       },
       tool: {
         pathname: ctx.url.pathname,
