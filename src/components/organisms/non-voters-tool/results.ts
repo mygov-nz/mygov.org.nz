@@ -9,8 +9,8 @@ import { NonVotersToolState } from './state';
  *
  */
 export const Results: FC<NonVotersToolState> = (props): JSX.Element => {
-  const current = getData(props);
-  const original = getData({ party: '_no', percentage: 0, year: props.year });
-
-  return <ComparisonTable a={original} b={current} />;
+  return h(ComparisonTable, {
+    a: getData({ party: '_no', percentage: 0, year: props.year }),
+    b: getData(props)
+  });
 };

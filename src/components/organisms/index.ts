@@ -1,4 +1,5 @@
 export { Layout, RenderProps } from './layout/layout';
+export { ActTool, ActToolProps } from './act-tool/act-tool';
 export {
   MMPReviewTool,
   MMPReviewToolProps

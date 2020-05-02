@@ -36,6 +36,7 @@ class CreateHash {
 module.exports = merge(common, {
 
   entry: {
+    'act': path.resolve('src/public/js/act.ts'),
     'main': path.resolve('src/public/js/main.ts'),
     'mmp-review': path.resolve('src/public/js/mmp-review.ts'),
     'non-voters': path.resolve('src/public/js/non-voters.ts')

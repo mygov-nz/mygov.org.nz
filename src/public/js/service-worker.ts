@@ -67,6 +67,13 @@ async function handleFetch(event): Promise<any> {
     }
   }
 
+  if (/\/tools\/act/.test(request.url)) {
+    const cached = await caches.match('/tools/act/placeholder');
+    if (cached) {
+      return cached;
+    }
+  }
+
   const cached = await caches.match(request);
   if (cached) {
     return cached;

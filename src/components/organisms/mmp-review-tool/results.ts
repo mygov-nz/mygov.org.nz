@@ -9,13 +9,13 @@ import { MMPReviewToolState } from './state';
  *
  */
 export const Results: FC<MMPReviewToolState> = (props): JSX.Element => {
-  const current = getData(props);
-  const original = getData({
-    overhang: true,
-    tagAlong: 1,
-    threshold: 5,
-    year: props.year
+  return h(ComparisonTable, {
+    a: getData({
+      overhang: true,
+      tagAlong: 1,
+      threshold: 5,
+      year: props.year
+    }),
+    b: getData(props)
   });
-
-  return <ComparisonTable a={original} b={current} />;
 };
