@@ -42,7 +42,7 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
       setValue((value) => value + (event.keyCode === 39 ? -1 : 1));
     };
 
-    document.addEventListener('keydown', keyDownHandler);
+    document.addEventListener('keydown', keyDownHandler, { passive: true });
 
     return (): void => {
       document.removeEventListener('keydown', keyDownHandler);
@@ -94,7 +94,7 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
       };
 
       document.addEventListener('mousemove', mouseMoveHandler);
-      document.addEventListener('mouseup', mouseUpHandler);
+      document.addEventListener('mouseup', mouseUpHandler, { once: true });
       setDragging(true);
     },
     [slider.current, props.readOnly]

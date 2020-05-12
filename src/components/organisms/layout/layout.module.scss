@@ -35,6 +35,16 @@
     position: static;
     white-space: inherit;
     width: auto;
+
+    @media all and (display-mode: standalone) {
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
   }
 }
 
@@ -72,6 +82,14 @@
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);
     outline: 0;
     text-decoration: none;
+  }
+
+  @media all and (display-mode: standalone) {
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
   }
 }
 
