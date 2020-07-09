@@ -1,9 +1,10 @@
 'use strict';
 
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyPlugin = require('copy-webpack-plugin');
 const crypto = require('crypto');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const os = require('os');
@@ -225,10 +226,16 @@ module.exports = merge(common, {
   },
 
   plugins: [
-    new CopyPlugin([{
-      from: 'src/public',
-      ignore: [ '.DS_Store', '*.scss', '*.ts' ]
-    }]),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'src/public',
+          globOptions: {
+            ignore: [ '.DS_Store', '*.scss', '*.ts' ]
+          }
+        }
+      ]
+    }),
     new ManifestPlugin({
       fileName: path.resolve('src/worker/data/assets.json'),
       filter: (file) => {
@@ -284,6 +291,9 @@ module.exports = merge(common, {
       short_name: 'MyGov NZ',
       start_url: 'https://mygov.org.nz/tools?utm_source=homescreen',
       theme_color: '#f89828'
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static'
     })
   ],
 

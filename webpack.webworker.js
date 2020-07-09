@@ -1,7 +1,7 @@
 'use strict';
 
 const CopyPlugin = require('copy-webpack-plugin');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const os = require('os');
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -134,13 +134,19 @@ module.exports = merge(common, {
   },
 
   plugins: [
-    new CopyPlugin([{
-      from: 'src/worker',
-      ignore: ['.gitignore', 'assets.json', '*.ts'],
-      transformPath(targetPath) {
-        return targetPath.replace('_package', 'package');
-      }
-    }])
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'src/worker',
+          globOptions: {
+            ignore: ['.gitignore', 'assets.json', '*.ts']
+          },
+          transformPath(targetPath) {
+            return targetPath.replace('_package', 'package');
+          }
+        }
+      ]
+    })
   ],
 
   resolve: {
