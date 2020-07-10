@@ -2,6 +2,7 @@ const hashes = require('./src/worker/data/assets.json');
 
 const assets = [
   '/',
+  '/election-results',
   '/tools',
   '/tools/mmp-review/placeholder',
   '/tools/non-voters/placeholder'

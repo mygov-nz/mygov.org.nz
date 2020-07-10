@@ -2,9 +2,10 @@ import { matcher as matchAct } from '../../components/organisms/act-tool/state';
 import { matcher as matchMMPReview } from '../../components/organisms/mmp-review-tool/state';
 import { matcher as matchNonVoters } from '../../components/organisms/non-voters-tool/state';
 
+import { electionResult, electionResults } from './election-results';
 import { error } from './error';
 import { homepage } from './homepage';
-import { notFound } from './notFound';
+import { notFound } from './not-found';
 import { Router } from './router';
 import { baseAct, getAct, postAct } from './tools/act';
 import {
@@ -23,6 +24,8 @@ import { tools } from './tools/tools';
 
 export const routes = new Router({ error, notFound });
 routes.get(/^\/$/, homepage);
+routes.get(/^\/election-results$/, electionResults);
+routes.get(/^\/election-results\/[0-9]{4}$/, electionResult);
 routes.get(/^\/tools$/, tools);
 routes.get(matchMMPReview, getMMPReview);
 routes.get(matchNonVoters, getNonVoters);

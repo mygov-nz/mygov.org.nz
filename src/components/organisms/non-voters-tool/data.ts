@@ -39,13 +39,7 @@ export const getData = mem<[NonVotersToolState], ElectionResult, string>(
       }
     }
 
-    return getResult(data.r, {
-      seats: 120,
-      threshold: 5,
-      overhang: true,
-      tagAlong: true,
-      tagAlongSeats: 1
-    });
+    return getResult(data.r);
   },
   { cacheKey: (args) => encode(args[0]) }
 );

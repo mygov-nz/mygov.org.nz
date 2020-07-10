@@ -34,8 +34,17 @@ export interface ElectionResult {
  */
 export function getResult(
   rows: ReadonlyArray<ElectionDataRow>,
-  options: ElectionOptions
+  options: Partial<ElectionOptions> = {}
 ): ElectionResult {
+  const opts: ElectionOptions = {
+    seats: 120,
+    threshold: 5,
+    overhang: true,
+    tagAlong: true,
+    tagAlongSeats: 1,
+    ...options
+  };
+
   const parties = rows.map((row) => ({
     electorates: row[2] || 0,
     id: row[0],
@@ -44,8 +53,8 @@ export function getResult(
   }));
 
   const results = saintLague(parties, {
-    ...options,
-    threshold: options.threshold / 100
+    ...opts,
+    threshold: opts.threshold / 100
   });
 
   return {

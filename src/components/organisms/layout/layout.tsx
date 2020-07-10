@@ -106,6 +106,9 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
           </a>
           <ul>
             <li>
+              <a href="/election-results">Election results</a>
+            </li>
+            <li>
               <a href="/tools">Tools</a>
             </li>
           </ul>

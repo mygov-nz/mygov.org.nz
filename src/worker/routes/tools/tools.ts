@@ -5,7 +5,7 @@ import { render } from '../../lib/render';
 /**
  *
  */
-export async function tools(): Promise<Response> {
+export function tools(): Promise<Response> {
   return render(
     Tools,
     {

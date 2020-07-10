@@ -1,4 +1,4 @@
-.toolList {
+.linkList {
   margin: 0;
   padding: 0;
 
@@ -34,19 +34,19 @@
 }
 
 @media (min-width: 768px) {
-  .toolList {
-    display: flex;
+  .linkList {
+    // display: flex;
 
-    li {
-      flex: 1;
-      margin-bottom: 1.5rem;
-      padding-left: 1.5rem;
-    }
+    // li {
+    //   flex: 1;
+    //   margin-bottom: 1.5rem;
+    //   padding-left: 1.5rem;
+    // }
 
     a {
       font-size: 1.875rem;
-      text-align: center;
-      padding: 3.75rem 0.3125rem;
+      // text-align: center;
+      // padding: 3.75rem 0.3125rem;
     }
   }
 }

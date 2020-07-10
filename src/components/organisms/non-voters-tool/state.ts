@@ -69,12 +69,14 @@ export function usePathnameState(
     return decode(initialPathname);
   });
 
-  const history = createBrowserHistory<NonVotersToolState>();
+  const history = createBrowserHistory();
   const urls = getUrlMeta();
 
   useEffect(() => {
-    const unlisten = history.listen((location): void => {
-      setState(location.state || decode(location.pathname));
+    const unlisten = history.listen(({ location }): void => {
+      setState(
+        (location.state as NonVotersToolState) || decode(location.pathname)
+      );
     });
 
     for (const url of urls) {

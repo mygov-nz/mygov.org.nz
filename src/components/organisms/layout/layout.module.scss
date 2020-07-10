@@ -60,6 +60,7 @@
   }
 
   ul {
+    display: flex;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -72,6 +73,7 @@
     font-size: 0.875rem;
     letter-spacing: 0.02857em;
     line-height: 1.75;
+    margin: 0 0 0 1rem;
     padding: 0.375rem 0.5rem;
     text-transform: uppercase;
   }

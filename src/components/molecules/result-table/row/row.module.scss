@@ -1,0 +1,11 @@
+.hasSeats {
+  html table tbody & td,
+  html table tbody & th {
+    background-color: var(--success-colour);
+  }
+
+  html table tbody &:nth-child(odd) td,
+  html table tbody &:nth-child(odd) th {
+    background-color: var(--success-alt-colour);
+  }
+}
