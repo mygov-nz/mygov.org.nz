@@ -7,7 +7,6 @@ import '../../components/atoms/number-input/number-input.module.scss';
 import '../../components/atoms/page-header/page-header.module.scss';
 import '../../components/atoms/select/select.module.scss';
 import '../../components/atoms/slider/slider.module.scss';
-import '../../components/molecules/comparison-table/comparison-table.module.scss';
 import '../../components/molecules/comparison-table/difference/difference.module.scss';
 import '../../components/molecules/link-list/link-list.module.scss';
 import '../../components/molecules/result-table/result-table.module.scss';

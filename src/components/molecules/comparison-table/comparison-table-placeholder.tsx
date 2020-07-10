@@ -7,16 +7,12 @@ import {
   Row as BaseRow,
   rows
 } from '../result-table/result-table-placeholder';
-import resultTableStyles from '../result-table/result-table.module.scss';
-
-import styles from './comparison-table.module.scss';
+import styles from '../result-table/result-table.module.scss';
 
 interface RowProps {
   success: boolean;
   widths: number[];
 }
-
-const classNames = [resultTableStyles.resultTable, styles.comparisonTable];
 
 /**
  *
@@ -33,7 +29,7 @@ const Row: FC<RowProps> = (props): JSX.Element => (
  */
 export const ComparisonTablePlaceholder: FC = mem(
   (): JSX.Element => (
-    <table className={classNames.join(' ')}>
+    <table className={styles.resultTable}>
       <colgroup>
         <col width="35.0%" />
         <col width="15.0%" />

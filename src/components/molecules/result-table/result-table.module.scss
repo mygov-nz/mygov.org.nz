@@ -77,6 +77,29 @@
     }
   }
 
+  col:nth-child(2),
+  col:nth-child(3) {
+    display: none;
+
+    @media (min-width: 576px) {
+      display: table-column;
+    }
+  }
+
+  thead tr th:nth-child(2),
+  thead tr th:nth-child(3),
+  tbody tr td:nth-child(2),
+  tbody tr td:nth-child(3),
+  tfoot tr:first-child td:nth-child(2),
+  tfoot tr:first-child td:nth-child(3),
+  tfoot tr:nth-child(2) td:first-child {
+    display: none;
+
+    @media (min-width: 576px) {
+      display: table-cell;
+    }
+  }
+
 }
 
 .skeleton {

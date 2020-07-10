@@ -2,11 +2,10 @@ import { FunctionalComponent as FC, h, JSX } from 'preact';
 
 import { ElectionResult } from '../../../lib/election';
 import { Header } from '../result-table/header/header';
-import resultTableStyles from '../result-table/result-table.module.scss';
+import styles from '../result-table/result-table.module.scss';
 import { Value } from '../result-table/value/value';
 
 import { compare } from './compare';
-import styles from './comparison-table.module.scss';
 import { Difference } from './difference/difference';
 import { Row } from './row/row';
 
@@ -14,8 +13,6 @@ interface ComparisonTableProps {
   a: ElectionResult;
   b: ElectionResult;
 }
-
-const classNames = [resultTableStyles.resultTable, styles.comparisonTable];
 
 /**
  *
@@ -28,7 +25,7 @@ export const ComparisonTable: FC<ComparisonTableProps> = (
   const seatDiff = data.totalSeatDiff;
 
   return (
-    <table className={classNames.join(' ')}>
+    <table className={styles.resultTable}>
       <colgroup>
         <col width="35.0%" />
         <col width="15.0%" />
