@@ -64,12 +64,12 @@ export async function render<P>(
             "magnetometer 'none'",
             "microphone 'none'",
             "midi 'none'",
-            "notifications 'none'",
+            // "notifications 'none'",
             "payment 'none'",
-            "push 'none'",
-            "speaker 'none'",
-            "sync-xhr 'none'",
-            "vibrate 'none'"
+            // "push 'none'",
+            // "speaker 'none'",
+            "sync-xhr 'none'"
+            // "vibrate 'none'"
           ].join('; '),
           'Referrer-Policy': 'no-referrer-when-downgrade',
           'Strict-Transport-Security': [

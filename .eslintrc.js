@@ -4,6 +4,7 @@ module.exports = {
 
   env: {
     browser: true,
+    ENVIRONMENT: true,
     es2020: true,
     'jest/globals': true,
     node: false

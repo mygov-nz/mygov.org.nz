@@ -6,3 +6,4 @@
 /babel.service-worker.js
 /webpack.*.js
 /*.config.js
+/.eslintrc.js
