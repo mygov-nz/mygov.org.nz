@@ -38,7 +38,7 @@ module.exports = merge(common, {
                 extensions: [ '.module.scss', '.scss' ],
                 generateScopedName: isDev
                   ? '[local]_[md5:hash:base62:4]'
-                  : '_[md5:hash:base62:4]',
+                  : '[md5:hash:base62:4]',
                 preprocessCss: './src/worker/lib/css-modules/preprocess.js'
               }
             ],

@@ -86,7 +86,7 @@ module.exports = merge(common, {
               modules: {
                 localIdentName: isDev
                   ? '[local]_[md5:hash:base62:4]'
-                  : '_[md5:hash:base62:4]'
+                  : '[md5:hash:base62:4]'
               },
               sourceMap: isDev
             }
@@ -97,6 +97,16 @@ module.exports = merge(common, {
               implementation: require('node-sass'),
               sourceMap: isDev
             }
+          }
+        ]
+      },
+      {
+        exclude: /node_modules/,
+        sideEffects: true,
+        test: /\.woff2$/,
+        use: [
+          {
+            loader: 'file-loader'
           }
         ]
       },
@@ -231,7 +241,7 @@ module.exports = merge(common, {
         {
           from: 'src/public',
           globOptions: {
-            ignore: [ '.DS_Store', '*.scss', '*.ts' ]
+            ignore: [ '.DS_Store', '*.scss', '*.ts', '*.woff2' ]
           }
         }
       ]

@@ -1,2 +1,3 @@
-User-agent: *
-Disallow:
+user-agent: *
+disallow:
+sitemap: https://mygov.org.nz/sitemap.xml
