@@ -6,7 +6,8 @@ import { election2008 } from './election-2008';
 import { election2011 } from './election-2011';
 import { election2014 } from './election-2014';
 import { election2017 } from './election-2017';
-import { ElectionData, ElectionYear } from './types';
+import { election2020 } from './election-2020';
+import type { ElectionData, ElectionYear } from './types';
 
 export const elections: Record<ElectionYear, ElectionData> = {
   '1996': election1996,
@@ -16,5 +17,6 @@ export const elections: Record<ElectionYear, ElectionData> = {
   '2008': election2008,
   '2011': election2011,
   '2014': election2014,
-  '2017': election2017
+  '2017': election2017,
+  '2020': election2020
 };

@@ -17,7 +17,8 @@
     width: 100%;
   }
 
-  input:focus {
+  input:focus,
+  input:hover {
     border-color: var(--input-focused-border-colour);
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     outline: 0;

@@ -15,7 +15,7 @@
     "url": "https://github.com/mygov-nz/mygov.org.nz/issues"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=16.0.0"
   },
   "sideEffects": false,
   "scripts": {
@@ -32,12 +32,12 @@
     "test:type-check": "tsc"
   },
   "dependencies": {
-    "@cloudflare/kv-asset-handler": "0.0.11",
+    "@cloudflare/kv-asset-handler": "^0.1.3",
     "gallagher": "^1.1.0",
-    "history": "^5.0.0",
-    "mem": "^6.1.0",
-    "preact": "^10.4.7",
-    "preact-render-to-string": "^5.1.10",
+    "history": "^5.0.1",
+    "mem": "^9.0.1",
+    "preact": "^10.5.14",
+    "preact-render-to-string": "^5.1.19",
     "saintelague": "^1.0.0"
   },
   "devDependencies": {
@@ -49,68 +49,51 @@
     "@babel/preset-typescript": "^7.10.4",
     "@cloudflare/workers-types": "^2.0.0",
     "@types/history": "^4.7.7",
-    "@types/jest": "^26.0.10",
-    "@types/node": "^14.6.0",
-    "@typescript-eslint/eslint-plugin": "^3.10.0",
-    "@typescript-eslint/parser": "^3.10.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.9.4",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-console-source": "^2.0.5",
     "babel-plugin-css-modules-transform": "^1.6.2",
     "babel-plugin-minify-replace": "^0.5.0",
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
     "babel-preset-minify": "^0.5.1",
-    "compression-webpack-plugin": "^5.0.1",
-    "copy-webpack-plugin": "^6.0.3",
-    "css-loader": "^3.6.0",
-    "cssnano": "^4.1.10",
+    "compression-webpack-plugin": "^9.0.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.3.0",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "cssnano": "^5.0.8",
     "eslint": "^7.7.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-loader": "^4.0.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-jest": "^24.4.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-security": "^1.4.0",
-    "eslint-plugin-standard": "^4.0.1",
     "faster.js": "^1.1.1",
     "fibers": "^5.0.0",
     "file-loader": "^6.0.0",
-    "husky": "^4.2.5",
-    "jest": "^26.4.2",
-    "lint-staged": "^10.2.11",
-    "mini-css-extract-plugin": "^0.10.0",
-    "node-sass": "^4.14.1",
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "postcss": "^7.0.32",
+    "jest": "^27.2.0",
+    "mini-css-extract-plugin": "^2.3.0",
+    "postcss": "^8.3.6",
     "prettier": "^2.1.0",
-    "sass-loader": "^10.0.0",
-    "style-loader": "^1.2.1",
-    "terser-webpack-plugin": "^4.1.0",
-    "ts-jest": "^26.2.0",
-    "typed-scss-modules": "^2.0.1",
+    "sass": "^1.41.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "terser-webpack-plugin": "^5.2.4",
+    "ts-jest": "^27.0.5",
+    "typed-scss-modules": "^4.1.1",
     "types-cloudflare-worker": "^1.2.0",
     "typescript": "^4.0.2",
-    "webpack": "^4.44.1",
-    "webpack-bundle-analyzer": "^3.8.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-manifest-plugin": "^2.2.0",
+    "webpack": "^5.53.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.8.0",
+    "webpack-manifest-plugin": "^4.0.2",
     "webpack-merge": "^5.1.2",
     "webpack-pwa-manifest": "^4.2.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.scss": [
-      "prettier --write"
-    ],
-    "*.{ts,tsx}": [
-      "eslint --fix"
-    ]
   }
 }

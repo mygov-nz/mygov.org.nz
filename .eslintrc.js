@@ -105,14 +105,14 @@ module.exports = {
     'node/no-unsupported-features/es-builtins': [
       'error',
       {
-        version: '>=12.0.0'
+        version: '>=16.0.0'
       }
     ],
     'node/no-unsupported-features/es-syntax': 'off',
     'node/no-unsupported-features/node-builtins': [
       'error',
       {
-        version: '>=12.0.0'
+        version: '>=16.0.0'
       }
     ],
     'react/prop-types': 'off',

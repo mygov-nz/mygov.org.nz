@@ -10,6 +10,7 @@ export interface ElectionData {
 }
 
 export type ElectionYear =
+  | '2020'
   | '2017'
   | '2014'
   | '2011'

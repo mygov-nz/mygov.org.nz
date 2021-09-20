@@ -25,6 +25,7 @@ export const swatches: Readonly<Record<string, string>> = {
   frm: 'eee',
   grn: '098137',
   grs: '366',
+  hnz: '1a5632',
   ima: '872850',
   int: '662c92',
   jim: '9e9e9e',
@@ -38,6 +39,7 @@ export const swatches: Readonly<Record<string, string>> = {
   msp: 'ffc0cb',
   nal: '336',
   nat: '00529f',
+  ncn: '03a5e9',
   nmp: 'ffffc0',
   nnm: 'ffc0cb',
   nze: 'd0ba42',
@@ -54,8 +56,12 @@ export const swatches: Readonly<Record<string, string>> = {
   rnz: '84c6c6',
   say: 'abc',
   sip: '090',
+  soc: 'cbe800',
+  snz: '008080',
+  tea: '5a276c',
   tet: 'c96',
   top: '00ffb6',
   uni: '501557',
+  vnz: '095b7e',
   wop: 'f06'
 };

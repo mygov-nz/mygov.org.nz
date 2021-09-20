@@ -5,8 +5,8 @@ type = "webpack"
 workers_dev = true
 
 [site]
-bucket = "./build/public"
-entry-point = "./build/worker"
+bucket = "build/public"
+entry-point = "build/worker"
 
 [env.production]
 route = "mygov.org.nz/*"

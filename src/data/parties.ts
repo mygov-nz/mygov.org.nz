@@ -25,6 +25,7 @@ export const names: Readonly<Record<string, string>> = {
   frm: 'Freedom Movement',
   grn: 'Green Party',
   grs: 'Green Society',
+  hnz: 'HeartlandNZ',
   ima: 'Internet MANA',
   int: 'Internet Party',
   jim: "Jim Anderton's Progressive",
@@ -38,6 +39,7 @@ export const names: Readonly<Record<string, string>> = {
   msp: 'McGillicuddy Serious Party',
   nal: 'Natural Law',
   nat: 'National Party',
+  ncn: 'New Conservative Party',
   nmp: 'NMP',
   nnm: '99 MP Party',
   nze: "New Zealand People's Party",
@@ -54,8 +56,12 @@ export const names: Readonly<Record<string, string>> = {
   rnz: 'The Republic of New Zealand Party',
   say: 'Superannuitants and Youth',
   sip: 'South Island Party',
+  soc: 'Social Credit',
+  snz: 'Sustainable New Zealand Party',
+  tea: 'TEA Party',
   tet: 'Te Tawharau',
   top: 'The Opportunities Party',
   uni: 'United Future',
+  vnz: 'Vision New Zealand',
   wop: 'Workers Party'
 };

@@ -1,16 +1,17 @@
 'use strict';
 
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 const CopyPlugin = require('copy-webpack-plugin');
 const crypto = require('crypto');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const { merge } = require('webpack-merge');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const os = require('os');
 const path = require('path');
-const PWAManifestPlugin = require('webpack-pwa-manifest');
 const TerserPlugin = require('terser-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const { merge } = require('webpack-merge');
+const PWAManifestPlugin = require('webpack-pwa-manifest');
 
 const common = require('./webpack.common.js');
 
@@ -68,7 +69,7 @@ module.exports = merge(common, {
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('node-sass'),
+              implementation: require('sass'),
               sourceMap: isDev
             }
           }
@@ -94,7 +95,7 @@ module.exports = merge(common, {
           {
             loader: 'sass-loader',
             options: {
-              implementation: require('node-sass'),
+              implementation: require('sass'),
               sourceMap: isDev
             }
           }
@@ -188,11 +189,12 @@ module.exports = merge(common, {
   },
 
   optimization: {
+    minimize: true,
     minimizer: [
+      new CssMinimizerPlugin(),
       new TerserPlugin({
         extractComments: false,
         parallel: os.cpus().length,
-        sourceMap: isDev,
         terserOptions: {
           ecma: 5,
           ie8: false,
@@ -221,8 +223,7 @@ module.exports = merge(common, {
             );
           }
         }
-      },
-      name: true
+      }
     },
     usedExports: true
   },
@@ -230,7 +231,6 @@ module.exports = merge(common, {
   output: {
     filename: isDev ? 'js/[name].js' : 'js/[name]-[chunkhash].js',
     hashFunction: CreateHash,
-    jsonpFunction: '_wp',
     path: path.resolve('build/public'),
     publicPath: '/'
   },
@@ -246,7 +246,7 @@ module.exports = merge(common, {
         }
       ]
     }),
-    new ManifestPlugin({
+    new WebpackManifestPlugin({
       fileName: path.resolve('src/worker/data/assets.json'),
       filter: (file) => {
         return /\.css|js$/.test(file.path) && !/main-[0-9a-z]{4}\.js$/.test(file.path);
@@ -255,17 +255,6 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       chunkFilename: isDev ? 'css/[id].css' : 'css/[id]-[chunkhash:6].css',
       filename: isDev ? 'css/[name].css' : 'css/[name]-[chunkhash:6].css'
-    }),
-    new OptimizeCssAssetsPlugin({
-      cssProcessor: require('cssnano'),
-      cssProcessorPluginOptions: {
-        preset: [
-          'default',
-          {
-            discardComments: { removeAll: true }
-          }
-        ]
-      }
     }),
     new PWAManifestPlugin({
       background_color: '#fff',

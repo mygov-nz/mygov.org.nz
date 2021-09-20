@@ -1,17 +1,16 @@
 'use strict';
 
 const CopyPlugin = require('copy-webpack-plugin');
-const { merge } = require('webpack-merge');
 const os = require('os');
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const { merge } = require('webpack-merge');
 
 const common = require('./webpack.common.js');
 
 const isDev = common.mode === 'development';
 
 module.exports = merge(common, {
-
   bail: true,
 
   cache: false,
@@ -24,22 +23,19 @@ module.exports = merge(common, {
         exclude: /\/node_modules\//,
         loader: 'babel-loader',
         options: {
-          ignore: [
-            /__mocks__/,
-            /__tests__/,
-            /node_modules/
-          ],
+          ignore: [/__mocks__/, /__tests__/, /node_modules/],
           plugins: [
             [
               'babel-plugin-css-modules-transform',
               {
                 camelCase: true,
                 devMode: isDev,
-                extensions: [ '.module.scss', '.scss' ],
+                extensions: ['.module.scss', '.scss'],
                 generateScopedName: isDev
                   ? '[local]_[md5:hash:base62:4]'
                   : '[md5:hash:base62:4]',
-                preprocessCss: './src/worker/lib/css-modules/preprocess.js'
+                preprocessCss:
+                  __dirname + '/src/worker/lib/css-modules/preprocess.js'
               }
             ],
             [
@@ -55,10 +51,10 @@ module.exports = merge(common, {
               {
                 replacements: [
                   {
-                    identifierName: "ENVIRONMENT",
+                    identifierName: 'ENVIRONMENT',
                     replacement: {
-                      type: "stringLiteral",
-                      value: process.env.NODE_ENV,
+                      type: 'stringLiteral',
+                      value: process.env.NODE_ENV
                     }
                   },
                   {
@@ -88,14 +84,11 @@ module.exports = merge(common, {
                 bugfixes: true,
                 corejs: 3,
                 debug: false,
-                exclude: [
-                  /generator|runtime/,
-                  /web\.dom/
-                ],
+                exclude: [/generator|runtime/, /web\.dom/],
                 loose: true,
                 modules: false,
                 targets: {
-                  browsers: 'last 1 Chrome versions',
+                  browsers: 'last 1 Chrome versions'
                 },
                 useBuiltIns: 'usage'
               }
@@ -113,7 +106,6 @@ module.exports = merge(common, {
       new TerserPlugin({
         extractComments: false,
         parallel: os.cpus().length,
-        sourceMap: isDev,
         terserOptions: {
           ecma: 10,
           ie8: false,
@@ -130,7 +122,7 @@ module.exports = merge(common, {
   },
 
   performance: {
-    hints: false,
+    hints: false
   },
 
   plugins: [
@@ -151,11 +143,13 @@ module.exports = merge(common, {
 
   resolve: {
     alias: {
-      'history': path.resolve(__dirname, 'src/worker/lib/alias/history.ts'),
-      'preact/hooks': path.resolve(__dirname, 'src/worker/lib/alias/preact-hooks.ts')
+      history: path.resolve(__dirname, 'src/worker/lib/alias/history.ts'),
+      'preact/hooks': path.resolve(
+        __dirname,
+        'src/worker/lib/alias/preact-hooks.ts'
+      )
     }
   },
 
   target: 'webworker'
-
 });
