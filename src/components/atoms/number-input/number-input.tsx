@@ -1,8 +1,8 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
-import form from '../form/form.module.scss';
+import '../form/form.scss';
 
-import styles from './number-input.module.scss';
+import './number-input.scss';
 
 interface NumberInputProps {
   readonly id: string;
@@ -20,14 +20,14 @@ interface NumberInputProps {
  *
  */
 export const NumberInput: FC<NumberInputProps> = (props): JSX.Element => {
-  const classNames = [styles.numberInput];
+  const classNames = ['mg-number-input'];
 
   if (props.suffix) {
-    classNames.push(styles.withSuffix);
+    classNames.push('mg-number-input--with-suffix');
   }
 
   return (
-    <label className={form.field} htmlFor={props.id}>
+    <label className="mg-field" htmlFor={props.id}>
       <span>{props.label}</span>
       <div className={classNames.join(' ')}>
         <input
@@ -43,7 +43,7 @@ export const NumberInput: FC<NumberInputProps> = (props): JSX.Element => {
           onChange={props.onChange}
         />
         {Boolean(props.suffix) && (
-          <div className={styles.suffix}>{props.suffix}</div>
+          <div className="mg-number-input__suffix">{props.suffix}</div>
         )}
       </div>
     </label>

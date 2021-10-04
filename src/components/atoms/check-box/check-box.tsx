@@ -1,8 +1,8 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
-import form from '../form/form.module.scss';
+import '../form/form.scss';
 
-import styles from './check-box.module.scss';
+import './check-box.scss';
 
 interface CheckBoxProps {
   readonly checked: boolean;
@@ -16,7 +16,7 @@ interface CheckBoxProps {
  *
  */
 export const CheckBox: FC<CheckBoxProps> = (props): JSX.Element => (
-  <label className={form.field + ' ' + styles.checkBox} htmlFor={props.id}>
+  <label className="mg-field mg-checkbox" htmlFor={props.id}>
     <input
       type="checkbox"
       value="on"

@@ -1,22 +1,17 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
-import form from '../form/form.module.scss';
+import '../form/form.scss';
 
-import styles from './select.module.scss';
-
-export enum OptType {
-  OPTGROUP,
-  OPTION
-}
+import './select.scss';
 
 export interface OptGroup {
-  readonly type: OptType.OPTGROUP;
+  readonly type: 'OPTGROUP';
   readonly label: string;
   readonly options: ReadonlyArray<Option>;
 }
 
 export interface Option {
-  readonly type: OptType.OPTION;
+  readonly type: 'OPTION';
   readonly label: string;
   readonly value: string;
 }
@@ -62,7 +57,7 @@ const Option: FC<OptionProps> = (props): JSX.Element => (
  * @param value
  */
 function renderItem(item: OptGroup | Option, value?: string): JSX.Element {
-  if (item.type === OptType.OPTION) {
+  if (item.type === 'OPTION') {
     return (
       <option
         key={item.value}
@@ -86,10 +81,10 @@ function renderItem(item: OptGroup | Option, value?: string): JSX.Element {
  * @param props
  */
 export const Select: FC<SelectProps> = (props): JSX.Element => (
-  <label className={form.field} htmlFor={props.id}>
+  <label className="mg-field" htmlFor={props.id}>
     <span>{props.label}</span>
     <select
-      className={styles.select}
+      className="mg-select"
       name={props.id}
       id={props.id}
       onChange={props.onChange}

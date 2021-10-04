@@ -12,7 +12,7 @@ type DataRow = [string, number, number];
  *
  * @param state
  */
-export const getData = mem<[NonVotersToolState], ElectionResult, string>(
+export const getData = mem(
   (state: NonVotersToolState): ElectionResult => {
     /* eslint-disable security/detect-object-injection */
 

@@ -2,7 +2,7 @@ import { FunctionalComponent as FC, h, JSX } from 'preact';
 
 import { ElectionYear } from '../../../data/types';
 import { years } from '../../../data/years';
-import { Option, OptType, Select } from '../../atoms';
+import { Option, Select } from '../../atoms';
 
 interface YearSelectProps {
   readonly onChange: (event: Event) => void;
@@ -12,7 +12,7 @@ interface YearSelectProps {
 
 const options: ReadonlyArray<Option> = years.map((year) => ({
   label: year,
-  type: OptType.OPTION,
+  type: 'OPTION',
   value: year
 }));
 

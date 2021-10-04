@@ -1,4 +1,4 @@
-.form {
+.mg-form {
   background-color: var(--form-background-colour);
   border: 1px solid var(--border-colour);
   border-radius: 0.25rem;
@@ -16,7 +16,7 @@
   }
 }
 
-.buttons {
+.mg-buttons {
   display: flex;
   justify-content: flex-end;
   padding: 0 0.5rem 1rem;
@@ -58,7 +58,7 @@
   }
 }
 
-.field {
+.mg-field {
   box-sizing: border-box;
   display: block;
   margin: 0;

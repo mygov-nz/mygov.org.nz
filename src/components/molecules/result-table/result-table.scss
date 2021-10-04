@@ -1,4 +1,4 @@
-.resultTable {
+.mg-result-table {
   border-collapse: collapse;
   max-width: 100%;
   width: 100%;
@@ -102,7 +102,7 @@
 
 }
 
-.skeleton {
+.mg-skeleton {
   animation: skeleton-glow 1s linear infinite alternate;
   border-radius: 0.125rem;
   background-color: var(--text-colour);

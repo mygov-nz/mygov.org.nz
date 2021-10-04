@@ -2,8 +2,8 @@ import mem from 'mem';
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
 import { Header } from './header/header';
-import styles from './result-table.module.scss';
-import rowStyles from './row/row.module.scss';
+import './result-table.scss';
+import './row/row.scss';
 
 interface CellProps {
   width: number;
@@ -40,7 +40,7 @@ export const Cell: FC<CellProps> = mem(
   (props): JSX.Element => (
     <td>
       <span
-        className={styles.skeleton}
+        className="mg-skeleton"
         style={{ width: props.width + 'rem' }}
       />
     </td>
@@ -53,34 +53,34 @@ export const Cell: FC<CellProps> = mem(
  * @param props
  */
 export const Row: FC<RowProps> = (props): JSX.Element => (
-  <tr className={props.success ? rowStyles.hasSeats : ''}>
+  <tr className={props.success ? 'mg-has-seats' : ''}>
     <th>
       <span
-        className={styles.skeleton}
+        className="mg-skeleton"
         style={{ width: props.widths[0] + 'rem' }}
       />
     </th>
     <td>
       <span
-        className={styles.skeleton}
+        className="mg-skeleton"
         style={{ width: (props.widths[1] || 2.5) + 'rem' }}
       />
     </td>
     <td>
       <span
-        className={styles.skeleton}
+        className="mg-skeleton"
         style={{ width: (props.widths[2] || 0.5) + 'rem' }}
       />
     </td>
     <td>
       <span
-        className={styles.skeleton}
+        className="mg-skeleton"
         style={{ width: (props.widths[3] || 0.5) + 'rem' }}
       />
     </td>
     <td>
       <span
-        className={styles.skeleton}
+        className="mg-skeleton"
         style={{ width: (props.widths[4] || 0.5) + 'rem' }}
       />
     </td>
@@ -93,7 +93,7 @@ export const Row: FC<RowProps> = (props): JSX.Element => (
  */
 export const ResultTablePlaceholder: FC = mem(
   (): JSX.Element => (
-    <table className={styles.resultTable}>
+    <table className="mg-result-table">
       <colgroup>
         <col width="37.5%" />
         <col width="17.5%" />

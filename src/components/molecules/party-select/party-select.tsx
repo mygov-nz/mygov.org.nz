@@ -4,7 +4,7 @@ import { FunctionalComponent as FC, h, JSX } from 'preact';
 import { elections } from '../../../data/elections';
 import { names } from '../../../data/parties';
 import { ElectionDataRow, ElectionYear } from '../../../data/types';
-import { OptGroup, Option, OptType, Select } from '../../atoms';
+import { OptGroup, Option, Select } from '../../atoms';
 
 interface PartySelectProps {
   readonly id: string;
@@ -23,7 +23,7 @@ const getOptions = mem(
       .map(
         (row: ElectionDataRow): Option => ({
           label: names[row[0]],
-          type: OptType.OPTION,
+          type: 'OPTION',
           value: row[0]
         })
       )
@@ -32,10 +32,10 @@ const getOptions = mem(
       });
 
     return [
-      { label: 'Nobody', type: OptType.OPTION, value: '_no' },
-      { label: names._nw, type: OptType.OPTION, value: '_nw' },
-      { label: names._nn, type: OptType.OPTION, value: '_nn' },
-      { label: 'Political parties', options: parties, type: OptType.OPTGROUP }
+      { label: 'Nobody', type: 'OPTION', value: '_no' },
+      { label: names._nw, type: 'OPTION', value: '_nw' },
+      { label: names._nn, type: 'OPTION', value: '_nn' },
+      { label: 'Political parties', options: parties, type: 'OPTGROUP' }
     ];
   }
 );

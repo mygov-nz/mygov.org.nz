@@ -8,7 +8,7 @@ import {
   YearSelect
 } from '../../molecules';
 
-import styles from './non-voters-tool.module.scss';
+import './non-voters-tool.scss';
 import { Results } from './results';
 import { usePathnameState } from './state';
 
@@ -52,7 +52,7 @@ export const NonVotersTool: FC<NonVotersToolProps> = (props): JSX.Element => {
   return (
     <Fragment>
       <Form action="/tools/non-voters">
-        <div className={styles.form}>
+        <div className="mg-non-voters-tool__form">
           <YearSelect
             value={state.year}
             readOnly={props.placeholder}

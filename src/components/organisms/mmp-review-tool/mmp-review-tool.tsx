@@ -4,7 +4,7 @@ import { ElectionYear } from '../../../data/types';
 import { CheckBox, Form, NumberInput } from '../../atoms';
 import { ComparisonTablePlaceholder, YearSelect } from '../../molecules';
 
-import styles from './mmp-review-tool.module.scss';
+import './mmp-review-tool.scss';
 import { Results } from './results';
 import { usePathnameState } from './state';
 
@@ -67,7 +67,7 @@ export const MMPReviewTool: FC<MMPReviewToolProps> = (props): JSX.Element => {
   return (
     <Fragment>
       <Form action="/tools/mmp-review">
-        <div className={styles.form}>
+        <div className='mg-mmp-review-tool__form'>
           <YearSelect
             value={state.year}
             readOnly={props.placeholder}

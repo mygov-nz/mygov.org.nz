@@ -7,7 +7,7 @@ import {
   Row as BaseRow,
   rows
 } from '../result-table/result-table-placeholder';
-import styles from '../result-table/result-table.module.scss';
+import '../result-table/result-table.scss';
 
 interface RowProps {
   success: boolean;
@@ -29,7 +29,7 @@ const Row: FC<RowProps> = (props): JSX.Element => (
  */
 export const ComparisonTablePlaceholder: FC = mem(
   (): JSX.Element => (
-    <table className={styles.resultTable}>
+    <table className="mg-result-table">
       <colgroup>
         <col width="35.0%" />
         <col width="15.0%" />

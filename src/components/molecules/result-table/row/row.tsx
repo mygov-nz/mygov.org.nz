@@ -4,7 +4,7 @@ import { ElectionResultRow } from '../../../../lib/election';
 import { Name } from '../../result-table/name/name';
 import { Value } from '../../result-table/value/value';
 
-import styles from './row.module.scss';
+import './row.scss';
 
 interface RowAttributes {
   className?: string;
@@ -18,7 +18,7 @@ export const Row: FC<ElectionResultRow> = (props): JSX.Element => {
   const attributes: RowAttributes = {};
 
   if (props.electorates || props.lists) {
-    attributes.className = styles.hasSeats;
+    attributes.className = 'mg-has-seats';
   }
 
   return (

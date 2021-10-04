@@ -1,8 +1,6 @@
 'use strict';
 
-
 const CopyPlugin = require('copy-webpack-plugin');
-const crypto = require('crypto');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const os = require('os');
@@ -15,25 +13,7 @@ const PWAManifestPlugin = require('webpack-pwa-manifest');
 
 const common = require('./webpack.common.js');
 
-const isDev = common.mode === 'development';
-
-class CreateHash {
-
-  constructor () {
-    this.hash = crypto.createHash('sha1');
-  }
-
-  digest () {
-    return this.hash.digest('base64')
-      .replace(/\W/gi, '')
-      .slice(0, 4);
-  }
-
-  update (data, inputEncoding) {
-    this.hash.update(data, inputEncoding);
-  }
-
-}
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = merge(common, {
 
@@ -51,10 +31,7 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        exclude: [
-          /\.module\.scss$/,
-          /node_modules/
-        ],
+        exclude: /\/node_modules\//,
         sideEffects: true,
         test: /\.scss$/,
         use: [
@@ -76,40 +53,13 @@ module.exports = merge(common, {
         ]
       },
       {
-        exclude: /node_modules/,
-        sideEffects: true,
-        test: /\.module\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: isDev
-                  ? '[local]_[md5:hash:base62:4]'
-                  : '[md5:hash:base62:4]'
-              },
-              sourceMap: isDev
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require('sass'),
-              sourceMap: isDev
-            }
-          }
-        ]
-      },
-      {
-        exclude: /node_modules/,
+        exclude: /\/node_modules\//,
         sideEffects: true,
         test: /\.woff2$/,
-        use: [
-          {
-            loader: 'file-loader'
-          }
-        ]
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name]-[contenthash:8][ext]'
+        }
       },
       {
         exclude: /\/node_modules\//,
@@ -229,8 +179,7 @@ module.exports = merge(common, {
   },
 
   output: {
-    filename: isDev ? 'js/[name].js' : 'js/[name]-[chunkhash].js',
-    hashFunction: CreateHash,
+    filename: isDev ? 'js/[name].js' : 'js/[name]-[contenthash:8].js',
     path: path.resolve('build/public'),
     publicPath: '/'
   },
@@ -253,8 +202,8 @@ module.exports = merge(common, {
       }
     }),
     new MiniCssExtractPlugin({
-      chunkFilename: isDev ? 'css/[id].css' : 'css/[id]-[chunkhash:6].css',
-      filename: isDev ? 'css/[name].css' : 'css/[name]-[chunkhash:6].css'
+      chunkFilename: isDev ? 'css/[id].css' : 'css/[id]-[contenthash:8].css',
+      filename: isDev ? 'css/[name].css' : 'css/[name]-[contenthash:8].css'
     }),
     new PWAManifestPlugin({
       background_color: '#fff',
@@ -292,7 +241,8 @@ module.exports = merge(common, {
       theme_color: '#f89828'
     }),
     new BundleAnalyzerPlugin({
-      analyzerMode: 'static'
+      analyzerMode: 'static',
+      openAnalyzer: false
     })
   ],
 

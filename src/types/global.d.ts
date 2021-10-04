@@ -6,6 +6,7 @@ declare module 'assets.json' {
   export = value;
 }
 
-declare const ENVIRONMENT: string;
-
-declare const RELEASE: string;
+declare global {
+  const ENVIRONMENT: string;
+  const RELEASE: string;
+}

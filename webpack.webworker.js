@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const os = require('os');
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const { IgnorePlugin } = require('webpack');
 const { merge } = require('webpack-merge');
 
 const common = require('./webpack.common.js');
@@ -21,23 +22,15 @@ module.exports = merge(common, {
     rules: [
       {
         exclude: /\/node_modules\//,
+        test: /\.scss$/,
+        use: 'null-loader'
+      },
+      {
+        exclude: /\/node_modules\//,
         loader: 'babel-loader',
         options: {
           ignore: [/__mocks__/, /__tests__/, /node_modules/],
           plugins: [
-            [
-              'babel-plugin-css-modules-transform',
-              {
-                camelCase: true,
-                devMode: isDev,
-                extensions: ['.module.scss', '.scss'],
-                generateScopedName: isDev
-                  ? '[local]_[md5:hash:base62:4]'
-                  : '[md5:hash:base62:4]',
-                preprocessCss:
-                  __dirname + '/src/worker/lib/css-modules/preprocess.js'
-              }
-            ],
             [
               '@babel/plugin-transform-react-jsx',
               {

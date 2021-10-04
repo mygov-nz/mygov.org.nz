@@ -1,6 +1,7 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
+import { JSXInternal } from 'preact/src/jsx';
 
-import styles from './layout.module.scss';
+import './layout.scss';
 
 interface Link {
   as?: 'script' | 'style' | 'worker';
@@ -32,9 +33,11 @@ interface LayoutProps {
   title: string;
 }
 
-export type RenderProps<T = { [key: string]: any }> = T & {
-  layout: LayoutProps;
-};
+export type RenderProps<T extends Record<string, any> = Record<string, any>> =
+  JSXInternal.HTMLAttributes &
+  JSXInternal.SVGAttributes &
+  T &
+  { layout: LayoutProps };
 
 /**
  *
@@ -96,12 +99,12 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
       ></script>
     </head>
     <body>
-      <a href="#content" className={styles.skipToContent}>
+      <a href="#content" className="mg-skip-to-content">
         Skip to the content
       </a>
-      <header className={styles.header}>
-        <nav className={styles.container}>
-          <a href="/" className={styles.brand} rel="home">
+      <header className="mg-site-header">
+        <nav className="mg-container">
+          <a href="/" className="mg-site-brand" rel="home">
             MyGov
           </a>
           <ul>
@@ -114,10 +117,10 @@ export const Layout: FC<LayoutProps> = (props): JSX.Element => (
           </ul>
         </nav>
       </header>
-      <main id="content" className={styles.container} role="main">
+      <main id="content" className="mg-container" role="main">
         {props.children}
       </main>
-      <footer className={styles.footer}>
+      <footer className="mg-site-footer">
         <a href="https://mygov.org.nz">mygov.org.nz</a>
       </footer>
     </body>

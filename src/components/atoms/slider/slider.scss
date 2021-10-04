@@ -1,4 +1,4 @@
-.slider {
+.mg-slider {
   align-items: center;
   display: flex;
   height: 2.25rem;
@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.knob {
+.mg-slider__knob {
   background-color: var(--input-active-background-colour);
   border-radius: 50%;
   box-sizing: border-box;
@@ -27,7 +27,7 @@
   }
 }
 
-.label {
+.mg-slider__label {
   background-color: var(--input-background-colour);
   border: 1px solid var(--input-border-colour);
   border-radius: 0.25rem;
@@ -45,18 +45,18 @@
   user-select: none;
   width: 2.75rem;
 
-  .dragging & {
+  .mg-slider--dragging & {
     opacity: 1;
   }
 }
 
-.left {
+.mg-slider__left {
   background-color: var(--input-active-background-colour);
   border-radius: 1px 0 0 1px;
   height: 0.125rem;
 }
 
-.right {
+.mg-slider__right {
   background-color: var(--input-border-colour);
   border-radius: 0 1px 1px 0;
   flex: 1;

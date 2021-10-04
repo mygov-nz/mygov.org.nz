@@ -1,6 +1,6 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 
-import styles from './link-list.module.scss';
+import './link-list.scss';
 
 interface LinkListItem {
   label: string;
@@ -26,7 +26,7 @@ export const LinkListItem: FC<LinkListItem> = (props): JSX.Element => (
  * @param props
  */
 export const LinkList: FC<LinkListProps> = (props): JSX.Element => (
-  <ul className={styles.linkList}>
+  <ul className="mg-link-list">
     {props.items.map(({ label, url }) => (
       <LinkListItem key={url} label={label} url={url} />
     ))}

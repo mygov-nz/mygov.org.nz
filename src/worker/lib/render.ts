@@ -19,7 +19,7 @@ const statusText: Record<number, string> = {
  */
 export async function render<P>(
   type: ComponentType<P>,
-  props: RenderProps,
+  props: RenderProps<P>,
   headers: Record<string, string> = {},
   statusCode = 200
 ): Promise<Response> {
@@ -101,7 +101,7 @@ export async function render<P>(
     links.push(`<${script.src}>; rel=preload; as=script`);
   }
 
-  if (!props.tool || !props.tool.placeholder) {
+  if (!props.tool?.placeholder) {
     defaultHeaders.Link = links.join(', ');
   }
 

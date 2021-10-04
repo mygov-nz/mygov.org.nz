@@ -9,7 +9,7 @@ import { encode, MMPReviewToolState } from './state';
  *
  * @param state
  */
-export const getData = mem<[MMPReviewToolState], ElectionResult, string>(
+export const getData = mem(
   (state: MMPReviewToolState): ElectionResult => {
     return getResult(elections[state.year].r, {
       seats: 120,

@@ -1,9 +1,9 @@
 import { FunctionalComponent as FC, h, JSX } from 'preact';
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
 
-import form from '../form/form.module.scss';
+import '../form/form.scss';
 
-import styles from './slider.module.scss';
+import './slider.scss';
 
 interface SliderProps {
   readonly id: string;
@@ -165,11 +165,11 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
   );
 
   return (
-    <label className={form.field} htmlFor={props.id}>
+    <label className="mg-field" htmlFor={props.id}>
       <input type="hidden" name={props.id} id={props.id} value={props.value} />
       <span>{props.label}</span>
       <div
-        className={styles.slider + ' ' + (dragging ? styles.dragging : '')}
+        className={'mg-slider ' + (dragging ? 'mg-slider--dragging' : '')}
         aria-orientation="horizontal"
         aria-valuemax={props.max}
         aria-valuemin={props.min}
@@ -178,15 +178,15 @@ export const Slider: FC<SliderProps> = (props): JSX.Element => {
         onTouchStart={touchStartHandler}
         ref={slider}
       >
-        <div className={styles.left} style={{ width: value + '%' }} />
-        <div className={styles.right} />
+        <div className="mg-slider__left" style={{ width: value + '%' }} />
+        <div className="mg-slider__right" />
         <div
-          className={styles.knob}
+          className="mg-slider__knob"
           style={{ left: value + '%' }}
           tabIndex={0}
           ref={knob}
         />
-        <div className={styles.label} style={{ left: value + '%' }}>
+        <div className="mg-slider__label" style={{ left: value + '%' }}>
           {value + '%'}
         </div>
       </div>

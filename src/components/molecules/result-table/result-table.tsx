@@ -3,7 +3,7 @@ import { FunctionalComponent as FC, h, JSX } from 'preact';
 import { ElectionResult } from '../../../lib/election';
 
 import { Header } from './header/header';
-import styles from './result-table.module.scss';
+import './result-table.scss';
 import { Row } from './row/row';
 import { Value } from './value/value';
 
@@ -13,7 +13,7 @@ import { Value } from './value/value';
  */
 export const ResultTable: FC<ElectionResult> = (props): JSX.Element => {
   return (
-    <table className={styles.resultTable}>
+    <table className="mg-result-table">
       <colgroup>
         <col width="37.5%" />
         <col width="17.5%" />

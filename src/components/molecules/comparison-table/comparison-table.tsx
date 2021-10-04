@@ -2,7 +2,7 @@ import { FunctionalComponent as FC, h, JSX } from 'preact';
 
 import { ElectionResult } from '../../../lib/election';
 import { Header } from '../result-table/header/header';
-import styles from '../result-table/result-table.module.scss';
+import '../result-table/result-table.scss';
 import { Value } from '../result-table/value/value';
 
 import { compare } from './compare';
@@ -25,7 +25,7 @@ export const ComparisonTable: FC<ComparisonTableProps> = (
   const seatDiff = data.totalSeatDiff;
 
   return (
-    <table className={styles.resultTable}>
+    <table className="mg-result-table">
       <colgroup>
         <col width="35.0%" />
         <col width="15.0%" />
